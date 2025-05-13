@@ -1,0 +1,122 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  background: #f4f8fb;
+  color: #222;
+}
+header {
+  background: linear-gradient(90deg, #004080 60%, #0074d9 100%);
+  color: #fff;
+  padding: 1.5em 2em 1em 2em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+header h1 {
+  margin: 0 0 0.5em 0;
+  font-size: 2.2em;
+  letter-spacing: 1px;
+}
+nav {
+  margin-bottom: 0.5em;
+}
+nav a {
+  color: #fff;
+  margin: 0 1.2em 0 0;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1em;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #ffd700;
+  text-decoration: underline;
+}
+main {
+  padding: 2.5em 1.5em;
+  background: #fff;
+  margin: 2.5em auto;
+  max-width: 900px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+}
+section {
+  margin-bottom: 2.5em;
+  padding: 1.5em 1em 1em 1em;
+  border-radius: 8px;
+  background: #f7fbff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+section h2 {
+  margin-top: 0;
+  color: #004080;
+  font-size: 1.3em;
+  margin-bottom: 1em;
+}
+form {
+  margin-top: 1em;
+}
+input[type="text"], input[type="file"], textarea {
+  padding: 0.6em;
+  margin: 0.5em 0 1em 0;
+  width: 100%;
+  border: 1px solid #b0c4de;
+  border-radius: 4px;
+  font-size: 1em;
+  background: #fafdff;
+  transition: border 0.2s;
+}
+input[type="text"]:focus, input[type="file"]:focus, textarea:focus {
+  border: 1.5px solid #0074d9;
+  outline: none;
+}
+input[type="checkbox"] {
+  margin-right: 0.5em;
+  accent-color: #0074d9;
+}
+label {
+  font-weight: 500;
+  font-size: 1em;
+}
+button {
+  background: linear-gradient(90deg, #0074d9 60%, #004080 100%);
+  color: #fff;
+  border: none;
+  padding: 0.7em 2em;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  margin-top: 0.5em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: background 0.2s, transform 0.1s;
+}
+button:hover {
+  background: linear-gradient(90deg, #005fa3 60%, #003366 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+a {
+  color: #0074d9;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #004080;
+}
+video {
+  display: block;
+  margin: 1em 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+@media (max-width: 600px) {
+  main {
+    padding: 1em 0.2em;
+    margin: 1em 0.2em;
+    max-width: 100%;
+  }
+  section {
+    padding: 1em 0.2em 0.5em 0.2em;
+  }
+  header {
+    padding: 1em 0.5em 0.7em 0.5em;
+  }
+}
