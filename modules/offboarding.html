@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offboarding - Employee Lifecycle Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/offboarding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="module-container">
+        <h2>Employee Offboarding</h2>
+        
+        <!-- Progress Tracking -->
+        <div class="offboarding-progress">
+            <div class="progress-header">
+                <h3>Offboarding Progress</h3>
+                <span class="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Offboarding Steps -->
+        <div class="offboarding-steps">
+            <!-- Step 1: Initiation -->
+            <div class="step-container" data-step="1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-info">
+                        <h3>Initiation</h3>
+                        <p>Offboarding Request Initiated</p>
+                    </div>
+                    <div class="step-status">
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <form id="offboarding-request-form" class="offboarding-form">
+                        <div class="form-group">
+                            <label>Last Working Day</label>
+                            <input type="date" name="lastWorkingDay" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Reason for Leaving</label>
+                            <select name="reason" required>
+                                <option value="">Select Reason</option>
+                                <option value="resignation">Resignation</option>
+                                <option value="retirement">Retirement</option>
+                                <option value="end_of_contract">End of Contract</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Additional Comments</label>
+                            <textarea name="comments" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 2: Notification -->
+            <div class="step-container" data-step="2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-info">
+                        <h3>Notification</h3>
+                        <p>Department Head & Admin Notification</p>
+                    </div>
+                    <div class="step-status">
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <div class="notification-status">
+                        <div class="status-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>Department Head Notification</span>
+                            <span class="status pending">Pending</span>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>Admin Notification</span>
+                            <span class="status pending">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Asset Return -->
+            <div class="step-container" data-step="3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-info">
+                        <h3>Asset Return</h3>
+                        <p>Return Company Assets</p>
+                    </div>
+                    <div class="step-status">
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <div class="asset-checklist">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="asset1" name="assets" value="laptop">
+                            <label for="asset1">Laptop</label>
+                            <div class="asset-details">
+                                <span class="asset-id">ID: LAP-12345</span>
+                                <span class="asset-status">Status: Assigned</span>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="asset2" name="assets" value="id_card">
+                            <label for="asset2">ID Card</label>
+                            <div class="asset-details">
+                                <span class="asset-id">ID: ID-67890</span>
+                                <span class="asset-status">Status: Active</span>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="asset3" name="assets" value="access_card">
+                            <label for="asset3">Access Card</label>
+                            <div class="asset-details">
+                                <span class="asset-id">ID: ACC-54321</span>
+                                <span class="asset-status">Status: Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-primary" id="submit-assets">Submit Asset Return</button>
+                </div>
+            </div>
+
+            <!-- Step 4: System Access -->
+            <div class="step-container" data-step="4">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-info">
+                        <h3>System Access</h3>
+                        <p>Revoke System & Software Access</p>
+                    </div>
+                    <div class="step-status">
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <div class="system-access-list">
+                        <div class="access-item">
+                            <i class="fas fa-desktop"></i>
+                            <span>GMOS Access</span>
+                            <span class="status pending">Pending</span>
+                        </div>
+                        <div class="access-item">
+                            <i class="fas fa-server"></i>
+                            <span>OSM Access</span>
+                            <span class="status pending">Pending</span>
+                        </div>
+                        <div class="access-item">
+                            <i class="fas fa-database"></i>
+                            <span>ERP Access</span>
+                            <span class="status pending">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: Exit Interview -->
+            <div class="step-container" data-step="5">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <div class="step-info">
+                        <h3>Exit Interview</h3>
+                        <p>Complete Exit Interview & Feedback</p>
+                    </div>
+                    <div class="step-status">
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <form id="exit-interview-form" class="offboarding-form">
+                        <div class="form-group">
+                            <label>How would you rate your overall experience?</label>
+                            <select name="experience_rating" required>
+                                <option value="">Select Rating</option>
+                                <option value="5">Excellent</option>
+                                <option value="4">Very Good</option>
+                                <option value="3">Good</option>
+                                <option value="2">Fair</option>
+                                <option value="1">Poor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>What did you enjoy most about working here?</label>
+                            <textarea name="positive_feedback" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>What could be improved?</label>
+                            <textarea name="improvement_feedback" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Would you recommend this company to others?</label>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="recommend" value="yes" required> Yes
+                                </label>
+                                <label>
+                                    <input type="radio" name="recommend" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Submit Exit Interview</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 6: Financial Settlement -->
+            <div class="step-container" data-step="6">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <div class="step-info">
+                        <h3>Financial Settlement</h3>
+                        <p>Payroll & Financial Settlement</p>
+                    </div>
+                    <div class="step-status">
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <div class="financial-checklist">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="finance1" disabled>
+                            <label for="finance1">Final Salary Processing</label>
+                            <span class="status pending">Pending</span>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="finance2" disabled>
+                            <label for="finance2">Bonus/Incentive Settlement</label>
+                            <span class="status pending">Pending</span>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="finance3" disabled>
+                            <label for="finance3">Reimbursement Processing</label>
+                            <span class="status pending">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 7: Completion -->
+            <div class="step-container" data-step="7">
+                <div class="step-header">
+                    <div class="step-number">7</div>
+                    <div class="step-info">
+                        <h3>Completion</h3>
+                        <p>Offboarding Completion</p>
+                    </div>
+                    <div class="step-status">
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <div class="completion-status">
+                        <div class="status-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>HR Clearance</span>
+                            <span class="status pending">Pending</span>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>IT Clearance</span>
+                            <span class="status pending">Pending</span>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Finance Clearance</span>
+                            <span class="status pending">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/offboarding.js"></script>
+</body>
+</html> 

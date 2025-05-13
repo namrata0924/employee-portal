@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding - Employee Lifecycle Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/onboarding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="module-container">
+        <h2>Employee Onboarding</h2>
+        <div class="progress-bar">
+            <div class="progress" style="width: 0%"></div>
+        </div>
+        <div class="onboarding-steps">
+            <!-- Induction Stage -->
+            <div class="step-group">
+                <h3 class="stage-title">Induction</h3>
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h4>Company Overview Video</h4>
+                    </div>
+                    <div class="step-content">
+                        <div class="video-container">
+                            <video id="company-video" controls>
+                                <source src="../assets/videos/company-overview.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="completion-status">
+                            <label>
+                                <input type="checkbox" class="completion-checkbox" data-step="1">
+                                I have watched the complete video
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h4>Company Policies Document</h4>
+                    </div>
+                    <div class="step-content">
+                        <div class="document-viewer">
+                            <iframe src="../assets/documents/company-policies.pdf" width="100%" height="400px"></iframe>
+                        </div>
+                        <div class="completion-status">
+                            <label>
+                                <input type="checkbox" class="completion-checkbox" data-step="2">
+                                I have read and understood the company policies
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <h4>Employee Handbook</h4>
+                    </div>
+                    <div class="step-content">
+                        <div class="document-viewer">
+                            <iframe src="../assets/documents/employee-handbook.pdf" width="100%" height="400px"></iframe>
+                        </div>
+                        <div class="completion-status">
+                            <label>
+                                <input type="checkbox" class="completion-checkbox" data-step="3">
+                                I have read and understood the employee handbook
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms Stage -->
+            <div class="step-group">
+                <h3 class="stage-title">Forms</h3>
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">4</div>
+                        <h4>Personal Information</h4>
+                    </div>
+                    <div class="step-content">
+                        <form id="personal-info-form" class="onboarding-form">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="tel" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <textarea name="address" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Emergency Contact</label>
+                                <input type="text" name="emergencyContact" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Save Information</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">5</div>
+                        <h4>Employment Details</h4>
+                    </div>
+                    <div class="step-content">
+                        <form id="employment-form" class="onboarding-form">
+                            <div class="form-group">
+                                <label>Department</label>
+                                <select name="department" required>
+                                    <option value="">Select Department</option>
+                                    <option value="hr">Human Resources</option>
+                                    <option value="it">Information Technology</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="operations">Operations</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Position</label>
+                                <input type="text" name="position" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <input type="date" name="startDate" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Save Details</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training Stage -->
+            <div class="step-group">
+                <h3 class="stage-title">Training</h3>
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">7</div>
+                        <h4>Required Training</h4>
+                    </div>
+                    <div class="step-content">
+                        <div class="training-materials">
+                            <div class="training-item">
+                                <h5>Safety Training</h5>
+                                <div class="video-container">
+                                    <video controls>
+                                        <source src="../assets/videos/safety-training.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="quiz-section">
+                                    <h6>Training Quiz</h6>
+                                    <form class="quiz-form">
+                                        <!-- Quiz questions will be dynamically loaded -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Documents Stage -->
+            <div class="step-group">
+                <h3 class="stage-title">Process Documents</h3>
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">9</div>
+                        <h4>Required Documents</h4>
+                    </div>
+                    <div class="step-content">
+                        <div class="document-upload">
+                            <div class="upload-item">
+                                <label>ID Proof</label>
+                                <input type="file" accept=".pdf,.jpg,.png">
+                            </div>
+                            <div class="upload-item">
+                                <label>Educational Certificates</label>
+                                <input type="file" accept=".pdf">
+                            </div>
+                            <div class="upload-item">
+                                <label>Previous Employment Documents</label>
+                                <input type="file" accept=".pdf">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/onboarding.js"></script>
+</body>
+</html> 

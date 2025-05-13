@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Employee Lifecycle Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="module-container">
+        <h2>Employee Dashboard</h2>
+        
+        <!-- Overall Progress -->
+        <div class="dashboard-progress">
+            <div class="progress-header">
+                <h3>Overall Progress</h3>
+                <span class="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Activity Cards -->
+        <div class="dashboard-grid">
+            <!-- Process Documents -->
+            <div class="activity-card" data-activity="process-docs">
+                <div class="card-header">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Process Documents</h3>
+                </div>
+                <div class="card-content">
+                    <p>View and complete required process documents</p>
+                    <div class="progress-indicator">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <button class="btn-primary start-activity">Start Activity</button>
+                </div>
+            </div>
+
+            <!-- Department Training -->
+            <div class="activity-card" data-activity="dept-training">
+                <div class="card-header">
+                    <i class="fas fa-video"></i>
+                    <h3>Department Training</h3>
+                </div>
+                <div class="card-content">
+                    <p>Complete department-specific training videos</p>
+                    <div class="progress-indicator">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <button class="btn-primary start-activity">Start Activity</button>
+                </div>
+            </div>
+
+            <!-- 360 Degree Feedback -->
+            <div class="activity-card" data-activity="feedback">
+                <div class="card-header">
+                    <i class="fas fa-comments"></i>
+                    <h3>360° Feedback</h3>
+                </div>
+                <div class="card-content">
+                    <p>Complete the 360-degree feedback form</p>
+                    <div class="progress-indicator">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <button class="btn-primary start-activity">Start Activity</button>
+                </div>
+            </div>
+
+            <!-- KPI & KRI -->
+            <div class="activity-card" data-activity="kpi-kri">
+                <div class="card-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>KPI & KRI</h3>
+                </div>
+                <div class="card-content">
+                    <p>Submit your KPI and KRI assessments</p>
+                    <div class="progress-indicator">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <button class="btn-primary start-activity">Start Activity</button>
+                </div>
+            </div>
+
+            <!-- Brand Survey -->
+            <div class="activity-card" data-activity="brand-survey">
+                <div class="card-header">
+                    <i class="fas fa-poll"></i>
+                    <h3>Brand Survey</h3>
+                </div>
+                <div class="card-content">
+                    <p>Complete the brand perception survey</p>
+                    <div class="progress-indicator">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <button class="btn-primary start-activity">Start Activity</button>
+                </div>
+            </div>
+
+            <!-- Grievance Form -->
+            <div class="activity-card" data-activity="grievance">
+                <div class="card-header">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Grievance Form</h3>
+                </div>
+                <div class="card-content">
+                    <p>Submit anonymous grievances</p>
+                    <div class="progress-indicator">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <button class="btn-primary start-activity">Start Activity</button>
+                </div>
+            </div>
+
+            <!-- POSH Complaint -->
+            <div class="activity-card" data-activity="posh">
+                <div class="card-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>POSH Complaint</h3>
+                </div>
+                <div class="card-content">
+                    <p>Submit POSH-related complaints</p>
+                    <div class="progress-indicator">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <button class="btn-primary start-activity">Start Activity</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Modal -->
+        <div id="activity-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Activity Title</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html> 
