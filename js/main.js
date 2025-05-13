@@ -632,4 +632,93 @@ const offboardingModule = {
 // Initialize offboarding module
 document.addEventListener('DOMContentLoaded', () => {
     offboardingModule.init();
-}); 
+});
+
+// Main JavaScript
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize navigation
+    initializeNavigation();
+    
+    // Initialize notifications
+    initializeNotifications();
+});
+
+// Navigation Functions
+function initializeNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+            // Add active class to clicked link
+            e.currentTarget.classList.add('active');
+        });
+    });
+}
+
+// Notification Functions
+function initializeNotifications() {
+    // Create notification container if it doesn't exist
+    if (!document.querySelector('.notification-container')) {
+        const container = document.createElement('div');
+        container.className = 'notification-container';
+        document.body.appendChild(container);
+    }
+}
+
+function showNotification(message, type = 'info') {
+    const container = document.querySelector('.notification-container');
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    container.appendChild(notification);
+    
+    // Remove notification after 3 seconds
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+            container.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// Module Card Functions
+function initializeModuleCards() {
+    const cards = document.querySelectorAll('.module-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const module = card.dataset.module;
+            if (module) {
+                window.location.href = `modules/${module}.html`;
+            }
+        });
+    });
+}
+
+// Utility Functions
+function formatDate(date) {
+    return new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+}
+
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    }).format(amount);
+}
+
+// Export functions for use in other modules
+window.appUtils = {
+    showNotification,
+    formatDate,
+    formatCurrency
+}; 
