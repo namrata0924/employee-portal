@@ -1,51 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Employee Portal</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #007bff;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    main {
-      padding: 20px;
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Lifecycle Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <header>
-    <h1>Employee Portal</h1>
-    <nav>
-      <a href="modules/onboarding.html">Onboarding</a>
-      <!-- <a href="modules/dashboard.html">Dashboard</a> -->
-      <a href="modules/existing.html">Existing Employee</a>
-      <a href="modules/offboarding.html">Offboarding</a>
-      <a href="modules/admin.html">Admin Panel</a>
-    </nav>
-  </header>
-  <main>
-    <h2>Welcome to the Employee Portal</h2>
-    <p>Select a module from the navigation above.</p>
-  </main>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>EMP Portal</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-module="onboarding">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Onboarding</span>
+                </li>
+                <li data-module="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li data-module="offboarding">
+                    <i class="fas fa-user-minus"></i>
+                    <span>Offboarding</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="user-info">
+                    <img src="assets/avatar.png" alt="User Avatar" class="avatar">
+                    <span class="user-name">John Doe</span>
+                </div>
+            </header>
+
+            <!-- Module Content -->
+            <div class="module-content">
+                <!-- Onboarding Module -->
+                <section id="onboarding" class="module active">
+                    <h2>Employee Onboarding</h2>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                    <div class="onboarding-steps">
+                        <!-- Induction Stage -->
+                        <div class="step-group">
+                            <h3 class="stage-title">Induction</h3>
+                            <div class="step">
+                                <div class="step-header">
+                                    <div class="step-number">1</div>
+                                    <h4>Company Overview Video</h4>
+                                </div>
+                                <div class="step-content">
+                                    <div class="video-container">
+                                        <video id="company-video" controls>
+                                            <source src="assets/videos/company-overview.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                    <div class="completion-status">
+                                        <label>
+                                            <input type="checkbox" class="completion-checkbox" data-step="1">
+                                            I have watched the complete video
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step">
+                                <div class="step-header">
+                                    <div class="step-number">2</div>
+                                    <h4>Company Policies Document</h4>
+                                </div>
+                                <div class="step-content">
+                                    <div class="document-viewer">
+                                        <iframe src="assets/documents/company-policies.pdf" width="100%" height="400px"></iframe>
+                                    </div>
+                                    <div class="completion-status">
+                                        <label>
+                                            <input type="checkbox" class="completion-checkbox" data-step="2">
+                                            I have read and understood the company policies
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step">
+                                <div class="step-header">
+                                    <div class="step-number">3</div>
+                                    <h4>Employee Handbook</h4>
+                                </div>
+                                <div class="step-content">
+                                    <div class="document-viewer">
+                                        <iframe src="assets/documents/employee-handbook.pdf" width="100%" height="400px"></iframe>
+                                    </div>
+                                    <div class="completion-status">
+                                        <label>
+                                            <input type="checkbox" class="completion-checkbox" data-step="3">
+                                            I have read and understood the employee handbook
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Forms Stage -->
+                        <div class="step-group">
+                            <h3 class="stage-title">Forms</h3>
+                            <div class="step">
+                                <div class="step-header">
+                                    <div class="step-number">4</div>
+                                    <h4>Personal Information</h4>
+                                </div>
+                                <div class="step-content">
+                                    <form id="personal-info-form" class="onboarding-form">
+                                        <div class="form-group">
+                                            <label>Full Name</label>
+                                            <input type="text" name="fullName" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" name="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Phone</label>
+                                            <input type="tel" name="phone" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <textarea name="address" required></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Emergency Contact</label>
+                                            <input type="text" name="emergencyContact" required>
+                                        </div>
+                                        <button type="submit" class="btn-primary">Save Information</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="step">
+                                <div class="step-header">
+                                    <div class="step-number">5</div>
+                                    <h4>Employment Details</h4>
+                                </div>
+                                <div class="step-content">
+                                    <form id="employment-form" class="onboarding-form">
+                                        <div class="form-group">
+                                            <label>Department</label>
+                                            <select name="department" required>
+                                                <option value="">Select Department</option>
+                                                <option value="hr">Human Resources</option>
+                                                <option value="it">Information Technology</option>
+                                                <option value="finance">Finance</option>
+                                                <option value="operations">Operations</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Position</label>
+                                            <input type="text" name="position" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Start Date</label>
+                                            <input type="date" name="startDate" required>
+                                        </div>
+                                        <button type="submit" class="btn-primary">Save Details</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Training Stage -->
+                        <div class="step-group">
+                            <h3 class="stage-title">Training</h3>
+                            <div class="step">
+                                <div class="step-header">
+                                    <div class="step-number">7</div>
+                                    <h4>Required Training</h4>
+                                </div>
+                                <div class="step-content">
+                                    <div class="training-materials">
+                                        <div class="training-item">
+                                            <h5>Safety Training</h5>
+                                            <div class="video-container">
+                                                <video controls>
+                                                    <source src="assets/videos/safety-training.mp4" type="video/mp4">
+                                                </video>
+                                            </div>
+                                            <div class="quiz-section">
+                                                <h6>Training Quiz</h6>
+                                                <form class="quiz-form">
+                                                    <!-- Quiz questions will be dynamically loaded -->
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Process Documents Stage -->
+                        <div class="step-group">
+                            <h3 class="stage-title">Process Documents</h3>
+                            <div class="step">
+                                <div class="step-header">
+                                    <div class="step-number">9</div>
+                                    <h4>Required Documents</h4>
+                                </div>
+                                <div class="step-content">
+                                    <div class="document-upload">
+                                        <div class="upload-item">
+                                            <label>ID Proof</label>
+                                            <input type="file" accept=".pdf,.jpg,.png">
+                                        </div>
+                                        <div class="upload-item">
+                                            <label>Educational Certificates</label>
+                                            <input type="file" accept=".pdf">
+                                        </div>
+                                        <div class="upload-item">
+                                            <label>Previous Employment Documents</label>
+                                            <input type="file" accept=".pdf">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dashboard Module -->
+                <section id="dashboard" class="module">
+                    <h2>Employee Dashboard</h2>
+                    
+                    <!-- Overall Progress -->
+                    <div class="dashboard-progress">
+                        <div class="progress-header">
+                            <h3>Overall Progress</h3>
+                            <span class="progress-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Cards -->
+                    <div class="dashboard-grid">
+                        <!-- Process Documents -->
+                        <div class="activity-card" data-activity="process-docs">
+                            <div class="card-header">
+                                <i class="fas fa-file-alt"></i>
+                                <h3>Process Documents</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>View and complete required process documents</p>
+                                <div class="progress-indicator">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <button class="btn-primary start-activity">Start Activity</button>
+                            </div>
+                        </div>
+
+                        <!-- Department Training -->
+                        <div class="activity-card" data-activity="dept-training">
+                            <div class="card-header">
+                                <i class="fas fa-video"></i>
+                                <h3>Department Training</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Complete department-specific training videos</p>
+                                <div class="progress-indicator">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <button class="btn-primary start-activity">Start Activity</button>
+                            </div>
+                        </div>
+
+                        <!-- 360 Degree Feedback -->
+                        <div class="activity-card" data-activity="feedback">
+                            <div class="card-header">
+                                <i class="fas fa-comments"></i>
+                                <h3>360° Feedback</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Complete the 360-degree feedback form</p>
+                                <div class="progress-indicator">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <button class="btn-primary start-activity">Start Activity</button>
+                            </div>
+                        </div>
+
+                        <!-- KPI & KRI -->
+                        <div class="activity-card" data-activity="kpi-kri">
+                            <div class="card-header">
+                                <i class="fas fa-chart-line"></i>
+                                <h3>KPI & KRI</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Submit your KPI and KRI assessments</p>
+                                <div class="progress-indicator">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <button class="btn-primary start-activity">Start Activity</button>
+                            </div>
+                        </div>
+
+                        <!-- Brand Survey -->
+                        <div class="activity-card" data-activity="brand-survey">
+                            <div class="card-header">
+                                <i class="fas fa-poll"></i>
+                                <h3>Brand Survey</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Complete the brand perception survey</p>
+                                <div class="progress-indicator">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <button class="btn-primary start-activity">Start Activity</button>
+                            </div>
+                        </div>
+
+                        <!-- Grievance Form -->
+                        <div class="activity-card" data-activity="grievance">
+                            <div class="card-header">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <h3>Grievance Form</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Submit anonymous grievances</p>
+                                <div class="progress-indicator">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <button class="btn-primary start-activity">Start Activity</button>
+                            </div>
+                        </div>
+
+                        <!-- POSH Complaint -->
+                        <div class="activity-card" data-activity="posh">
+                            <div class="card-header">
+                                <i class="fas fa-shield-alt"></i>
+                                <h3>POSH Complaint</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Submit POSH-related complaints</p>
+                                <div class="progress-indicator">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <button class="btn-primary start-activity">Start Activity</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Modal -->
+                    <div id="activity-modal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 id="modal-title">Activity Title</h3>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Dynamic content will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Offboarding Module -->
+                <section id="offboarding" class="module">
+                    <h2>Employee Offboarding</h2>
+                    
+                    <!-- Progress Tracking -->
+                    <div class="offboarding-progress">
+                        <div class="progress-header">
+                            <h3>Offboarding Progress</h3>
+                            <span class="progress-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Offboarding Steps -->
+                    <div class="offboarding-steps">
+                        <!-- Step 1: Initiation -->
+                        <div class="step-container" data-step="1">
+                            <div class="step-header">
+                                <div class="step-number">1</div>
+                                <div class="step-info">
+                                    <h3>Initiation</h3>
+                                    <p>Offboarding Request Initiated</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <form id="offboarding-request-form" class="offboarding-form">
+                                    <div class="form-group">
+                                        <label>Last Working Day</label>
+                                        <input type="date" name="lastWorkingDay" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Reason for Leaving</label>
+                                        <select name="reason" required>
+                                            <option value="">Select Reason</option>
+                                            <option value="resignation">Resignation</option>
+                                            <option value="retirement">Retirement</option>
+                                            <option value="end_of_contract">End of Contract</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Additional Comments</label>
+                                        <textarea name="comments" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn-primary">Submit Request</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Notification -->
+                        <div class="step-container" data-step="2">
+                            <div class="step-header">
+                                <div class="step-number">2</div>
+                                <div class="step-info">
+                                    <h3>Notification</h3>
+                                    <p>Department Head & Admin Notification</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <div class="notification-status">
+                                    <div class="status-item">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Department Head Notification</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Admin Notification</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Asset Return -->
+                        <div class="step-container" data-step="3">
+                            <div class="step-header">
+                                <div class="step-number">3</div>
+                                <div class="step-info">
+                                    <h3>Asset Return</h3>
+                                    <p>Return Company Assets</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <div class="asset-checklist">
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="asset1" name="assets" value="laptop">
+                                        <label for="asset1">Laptop</label>
+                                        <div class="asset-details">
+                                            <span class="asset-id">ID: LAP-12345</span>
+                                            <span class="asset-status">Status: Assigned</span>
+                                        </div>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="asset2" name="assets" value="id_card">
+                                        <label for="asset2">ID Card</label>
+                                        <div class="asset-details">
+                                            <span class="asset-id">ID: ID-67890</span>
+                                            <span class="asset-status">Status: Active</span>
+                                        </div>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="asset3" name="assets" value="access_card">
+                                        <label for="asset3">Access Card</label>
+                                        <div class="asset-details">
+                                            <span class="asset-id">ID: ACC-54321</span>
+                                            <span class="asset-status">Status: Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn-primary" id="submit-assets">Submit Asset Return</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: System Access -->
+                        <div class="step-container" data-step="4">
+                            <div class="step-header">
+                                <div class="step-number">4</div>
+                                <div class="step-info">
+                                    <h3>System Access</h3>
+                                    <p>Revoke System & Software Access</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <div class="system-access-list">
+                                    <div class="access-item">
+                                        <i class="fas fa-desktop"></i>
+                                        <span>GMOS Access</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="access-item">
+                                        <i class="fas fa-server"></i>
+                                        <span>OSM Access</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="access-item">
+                                        <i class="fas fa-database"></i>
+                                        <span>ERP Access</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Exit Interview -->
+                        <div class="step-container" data-step="5">
+                            <div class="step-header">
+                                <div class="step-number">5</div>
+                                <div class="step-info">
+                                    <h3>Exit Interview</h3>
+                                    <p>Complete Exit Interview & Feedback</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <form id="exit-interview-form" class="offboarding-form">
+                                    <div class="form-group">
+                                        <label>How would you rate your overall experience?</label>
+                                        <select name="experience_rating" required>
+                                            <option value="">Select Rating</option>
+                                            <option value="5">Excellent</option>
+                                            <option value="4">Very Good</option>
+                                            <option value="3">Good</option>
+                                            <option value="2">Fair</option>
+                                            <option value="1">Poor</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>What did you enjoy most about working here?</label>
+                                        <textarea name="positive_feedback" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>What could be improved?</label>
+                                        <textarea name="improvement_feedback" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Would you recommend this company to others?</label>
+                                        <div class="radio-group">
+                                            <label>
+                                                <input type="radio" name="recommend" value="yes" required> Yes
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="recommend" value="no"> No
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn-primary">Submit Exit Interview</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Financial Settlement -->
+                        <div class="step-container" data-step="6">
+                            <div class="step-header">
+                                <div class="step-number">6</div>
+                                <div class="step-info">
+                                    <h3>Financial Settlement</h3>
+                                    <p>Payroll & Financial Settlement</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <div class="financial-checklist">
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="finance1" disabled>
+                                        <label for="finance1">Final Salary Processing</label>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="finance2" disabled>
+                                        <label for="finance2">Bonus/Incentive Settlement</label>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="finance3" disabled>
+                                        <label for="finance3">Reimbursement Processing</label>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 7: Completion -->
+                        <div class="step-container" data-step="7">
+                            <div class="step-header">
+                                <div class="step-number">7</div>
+                                <div class="step-info">
+                                    <h3>Completion</h3>
+                                    <p>Offboarding Completion</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <div class="completion-status">
+                                    <div class="status-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>HR Clearance</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>IT Clearance</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Finance Clearance</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="js/main.js"></script>
 </body>
-</html>
+</html> 
