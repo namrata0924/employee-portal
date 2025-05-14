@@ -14,23 +14,55 @@
         <main class="main-content">
             <div class="module-container">
                 <h2>Employee Onboarding</h2>
+                
+                <!-- Stage Progress Bar -->
+                <div class="stage-progress">
+                    <div class="stage-indicator" data-stage="1">
+                        <div class="stage-number">1</div>
+                        <span>Induction</span>
+                    </div>
+                    <div class="stage-indicator" data-stage="2">
+                        <div class="stage-number">2</div>
+                        <span>Forms</span>
+                    </div>
+                    <div class="stage-indicator" data-stage="3">
+                        <div class="stage-number">3</div>
+                        <span>Training</span>
+                    </div>
+                    <div class="stage-indicator" data-stage="4">
+                        <div class="stage-number">4</div>
+                        <span>Process Documents</span>
+                    </div>
+                </div>
+
+                <!-- Overall Progress -->
                 <div class="onboarding-progress">
                     <div class="progress-header">
-                        <h3>Onboarding Progress</h3>
+                        <h3>Overall Progress</h3>
                         <span class="progress-percentage">0%</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress" style="width: 0%"></div>
                     </div>
                 </div>
+
+                <!-- Onboarding Steps -->
                 <div class="onboarding-steps">
-                    <!-- Induction Stage -->
-                    <div class="step-group">
-                        <h3 class="stage-title">Induction</h3>
-                        <div class="step">
+                    <!-- Stage 1: Induction -->
+                    <div class="step-group" data-stage="1">
+                        <h3 class="stage-title">Stage 1: Induction</h3>
+                        
+                        <!-- Step 1 -->
+                        <div class="step" data-step="1">
                             <div class="step-header">
                                 <div class="step-number">1</div>
-                                <h4>Company Overview Video</h4>
+                                <div class="step-info">
+                                    <h4>Company Overview Video</h4>
+                                    <p>Watch the company introduction video</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
                             </div>
                             <div class="step-content">
                                 <div class="video-container">
@@ -41,17 +73,24 @@
                                 </div>
                                 <div class="completion-status">
                                     <label>
-                                        <input type="checkbox" class="completion-checkbox" data-step="1">
+                                        <input type="checkbox" class="completion-checkbox" data-step="1" disabled>
                                         I have watched the complete video
                                     </label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="step">
+                        <!-- Step 2 -->
+                        <div class="step" data-step="2">
                             <div class="step-header">
                                 <div class="step-number">2</div>
-                                <h4>Company Policies Document</h4>
+                                <div class="step-info">
+                                    <h4>Company Policies Document</h4>
+                                    <p>Review and acknowledge company policies</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
                             </div>
                             <div class="step-content">
                                 <div class="document-viewer">
@@ -66,10 +105,17 @@
                             </div>
                         </div>
 
-                        <div class="step">
+                        <!-- Step 3 -->
+                        <div class="step" data-step="3">
                             <div class="step-header">
                                 <div class="step-number">3</div>
-                                <h4>Employee Handbook</h4>
+                                <div class="step-info">
+                                    <h4>Employee Handbook-HR</h4>
+                                    <p>Review and acknowledge the employee handbook</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
                             </div>
                             <div class="step-content">
                                 <div class="document-viewer">
@@ -85,13 +131,21 @@
                         </div>
                     </div>
 
-                    <!-- Forms Stage -->
-                    <div class="step-group">
-                        <h3 class="stage-title">Forms</h3>
-                        <div class="step">
+                    <!-- Stage 2: Forms -->
+                    <div class="step-group" data-stage="2">
+                        <h3 class="stage-title">Stage 2: Forms</h3>
+                        
+                        <!-- Step 4 -->
+                        <div class="step" data-step="4">
                             <div class="step-header">
                                 <div class="step-number">4</div>
-                                <h4>Personal Information</h4>
+                                <div class="step-info">
+                                    <h4>Personal Information Form</h4>
+                                    <p>Complete your personal information</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
                             </div>
                             <div class="step-content">
                                 <form id="personal-info-form" class="onboarding-form">
@@ -111,98 +165,44 @@
                                         <label>Address</label>
                                         <textarea name="address" required></textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Emergency Contact</label>
-                                        <input type="text" name="emergencyContact" required>
-                                    </div>
-                                    <button type="submit" class="btn-primary">Save Information</button>
+                                    <button type="submit" class="btn-primary">Submit Information</button>
                                 </form>
                             </div>
                         </div>
 
-                        <div class="step">
+                        <!-- Step 5: Employment Details -->
+                        <div class="step" data-step="5">
                             <div class="step-header">
                                 <div class="step-number">5</div>
-                                <h4>Employment Details</h4>
-                            </div>
-                            <div class="step-content">
-                                <form id="employment-form" class="onboarding-form">
-                                    <div class="form-group">
-                                        <label>Department</label>
-                                        <select name="department" required>
-                                            <option value="">Select Department</option>
-                                            <option value="hr">Human Resources</option>
-                                            <option value="it">Information Technology</option>
-                                            <option value="finance">Finance</option>
-                                            <option value="operations">Operations</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Position</label>
-                                        <input type="text" name="position" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Start Date</label>
-                                        <input type="date" name="startDate" required>
-                                    </div>
-                                    <button type="submit" class="btn-primary">Save Details</button>
-                                </form>
-                            </div>
-                        </div>
+                                <div class="step-info">
+                        <!-- Steps 5-6 for additional forms -->
                     </div>
 
-                    <!-- Training Stage -->
-                    <div class="step-group">
-                        <h3 class="stage-title">Training</h3>
-                        <div class="step">
-                            <div class="step-header">
-                                <div class="step-number">7</div>
-                                <h4>Required Training</h4>
-                            </div>
-                            <div class="step-content">
-                                <div class="training-materials">
-                                    <div class="training-item">
-                                        <h5>Safety Training</h5>
-                                        <div class="video-container">
-                                            <video controls>
-                                                <source src="../assets/videos/safety-training.mp4" type="video/mp4">
-                                            </video>
-                                        </div>
-                                        <div class="quiz-section">
-                                            <h6>Training Quiz</h6>
-                                            <form class="quiz-form">
-                                                <!-- Quiz questions will be dynamically loaded -->
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Stage 3: Training -->
+                    <div class="step-group" data-stage="3">
+                        <h3 class="stage-title">Stage 3: Training</h3>
+                        
+                        <!-- Steps 7-8 for training -->
                     </div>
 
-                    <!-- Process Documents Stage -->
-                    <div class="step-group">
-                        <h3 class="stage-title">Process Documents</h3>
-                        <div class="step">
+                    <!-- Stage 4: Process Documents -->
+                    <div class="step-group" data-stage="4">
+                        <h3 class="stage-title">Stage 4: Process Documents</h3>
+                        
+                        <!-- Step 9 -->
+                        <div class="step" data-step="9">
                             <div class="step-header">
                                 <div class="step-number">9</div>
-                                <h4>Required Documents</h4>
+                                <div class="step-info">
+                                    <h4>Document Processing</h4>
+                                    <p>Review final documentation</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
                             </div>
                             <div class="step-content">
-                                <div class="document-upload">
-                                    <div class="upload-item">
-                                        <label>ID Proof</label>
-                                        <input type="file" accept=".pdf,.jpg,.png">
-                                    </div>
-                                    <div class="upload-item">
-                                        <label>Educational Certificates</label>
-                                        <input type="file" accept=".pdf">
-                                    </div>
-                                    <div class="upload-item">
-                                        <label>Previous Employment Documents</label>
-                                        <input type="file" accept=".pdf">
-                                    </div>
-                                </div>
+                                <!-- Document content here -->
                             </div>
                         </div>
                     </div>
