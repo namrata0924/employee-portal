@@ -1,21 +1,43 @@
-/* Onboarding Styles */
+/* Onboarding Module Styles */
 
-/* Progress Bar */
+.module-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Progress Bar Styles */
 .onboarding-progress {
     background: #fff;
-    padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
     margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.progress-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.progress-percentage {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2196F3;
 }
 
 .progress-bar {
-    width: 100%;
     height: 8px;
-    background: #E3F2FD;
+    background: #E0E0E0;
     border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 1rem;
 }
 
 .progress {
@@ -24,13 +46,13 @@
     transition: width 0.3s ease;
 }
 
-.progress-percentage {
-    text-align: right;
-    color: #2196F3;
-    font-weight: 500;
+/* Step Groups */
+.onboarding-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-/* Step Groups */
 .step-group {
     margin-bottom: 2.5rem;
 }
@@ -55,9 +77,9 @@
 .step-header {
     display: flex;
     align-items: center;
-    padding: 1.25rem;
-    background: #f8f9fa;
-    border-bottom: 1px solid #E3F2FD;
+    padding: 1.5rem;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .step-number {
@@ -69,11 +91,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
+    font-weight: bold;
     margin-right: 1rem;
 }
 
-.step-header h4 {
+.step-info {
+    flex: 1;
+}
+
+.step-info h4 {
     margin: 0;
     color: #333;
 }
