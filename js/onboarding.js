@@ -1,20 +1,93 @@
 // Onboarding Module
 const onboardingModule = {
     init() {
-        this.currentStage = 1;
-        this.progressBar = document.querySelector('.onboarding-progress .progress');
-        this.progressPercentage = document.querySelector('.onboarding-progress .progress-percentage');
+        this.stages = document.querySelectorAll('.stage');
         this.stageIndicators = document.querySelectorAll('.stage-indicator');
-        this.stepGroups = document.querySelectorAll('.step-group');
+        this.progressBar = document.querySelector('.stage-progress-bar .progress');
         this.steps = document.querySelectorAll('.step');
         this.forms = document.querySelectorAll('.onboarding-form');
         this.videos = document.querySelectorAll('video');
         this.fileInputs = document.querySelectorAll('input[type="file"]');
         this.quizForms = document.querySelectorAll('.quiz-form');
         
+        this.currentStage = 1;
+        this.totalStages = this.stages.length;
+        this.completedStages = new Set();
+        
         this.bindEvents();
-        this.initializeStage();
+        this.initializeStages();
         this.updateProgress();
+    },
+
+    initializeStages() {
+        // Add click events to stage indicators
+        this.stageIndicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                const stageNumber = index + 1;
+                if (this.canAccessStage(stageNumber)) {
+                    this.navigateToStage(stageNumber);
+                } else {
+                    this.showNotification('Please complete the previous stages first', 'error');
+                }
+            });
+        });
+
+        // Initialize navigation buttons
+        document.querySelectorAll('.navigation-buttons').forEach(nav => {
+            const prevBtn = nav.querySelector('.btn-prev');
+            const nextBtn = nav.querySelector('.btn-next');
+            
+            if (prevBtn) {
+                prevBtn.disabled = this.currentStage === 1;
+            }
+            if (nextBtn) {
+                nextBtn.disabled = !this.canAccessStage(this.currentStage + 1);
+            }
+        });
+    },
+
+    canAccessStage(stageNumber) {
+        if (stageNumber === 1) return true;
+        if (stageNumber <= this.currentStage) return true;
+        return this.completedStages.has(stageNumber - 1);
+    },
+
+// Update the navigateToStage method in onboarding.js
+navigateToStage(stageNumber) {
+    if (!this.canAccessStage(stageNumber)) return;
+
+    // Hide all stages
+    this.stages.forEach(stage => stage.classList.remove('active'));
+    
+    // Show new stage
+    const newStage = document.querySelector(`.stage[data-stage="${stageNumber}"]`);
+    newStage.classList.add('active');
+    
+    // Update current stage
+    this.currentStage = stageNumber;
+    
+    // Update navigation buttons
+    this.updateNavigationButtons();
+    
+    // Scroll to top of the new stage
+    newStage.scrollIntoView({ behavior: 'smooth' });
+},
+
+    updateNavigationButtons() {
+        const currentStageElement = document.querySelector(`.stage[data-stage="${this.currentStage}"]`);
+        const nav = currentStageElement.querySelector('.navigation-buttons');
+        
+        if (nav) {
+            const prevBtn = nav.querySelector('.btn-prev');
+            const nextBtn = nav.querySelector('.btn-next');
+            
+            if (prevBtn) {
+                prevBtn.disabled = this.currentStage === 1;
+            }
+            if (nextBtn) {
+                nextBtn.disabled = !this.canAccessStage(this.currentStage + 1);
+            }
+        }
     },
 
     bindEvents() {
@@ -48,147 +121,79 @@ const onboardingModule = {
             });
         });
 
-        // Checkbox Events
+        // Checkbox completion
         document.querySelectorAll('.completion-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', (e) => {
+                this.handleCheckboxChange(e.target);
                 if (e.target.checked) {
                     this.handleStepCompletion(e.target.closest('.step'));
                 }
             });
         });
-
-        // Navigation Buttons
-        document.querySelectorAll('.prev-step').forEach(button => {
-            button.addEventListener('click', () => {
-                const currentStep = button.closest('.step');
-                const prevStep = currentStep.previousElementSibling;
-                if (prevStep && prevStep.classList.contains('step')) {
-                    this.activateStep(prevStep);
-                }
-            });
-        });
-
-        document.querySelectorAll('.next-step').forEach(button => {
-            button.addEventListener('click', () => {
-                const currentStep = button.closest('.step');
-                const nextStep = currentStep.nextElementSibling;
-                if (nextStep && nextStep.classList.contains('step')) {
-                    this.activateStep(nextStep);
-                }
-            });
-        });
-
-        // Document submission
-        document.querySelector('.submit-documents')?.addEventListener('click', () => {
-            const fileInputs = document.querySelectorAll('.document-upload input[type="file"]');
-            let allFilesUploaded = true;
-            
-            fileInputs.forEach(input => {
-                if (!input.files || input.files.length === 0) {
-                    allFilesUploaded = false;
-                    this.showNotification('Please upload all required documents', 'error');
-                }
-            });
-
-            if (allFilesUploaded) {
-                this.handleStepCompletion(document.querySelector('.step[data-step="9"]'));
-            }
-        });
     },
-
-    initializeStage() {
-        // Show first stage and its first step
-        this.showStage(1);
-        this.updateStageIndicators();
+    handleCheckboxChange(checkbox) {
+        const allCheckboxes = document.querySelectorAll('.completion-checkbox');
+        const nextBtn = document.querySelector('.btn-next'); // Adjust selector if necessary
+    
+        // Check if all checkboxes are checked
+        const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
+    
+        // Enable or disable the Next button based on checkbox state
+        if (nextBtn) {
+            nextBtn.disabled = !allChecked; // Disable if not all checked
+        }
     },
-
-    showStage(stageNumber) {
-        this.stepGroups.forEach(group => {
-            if (parseInt(group.dataset.stage) === stageNumber) {
-                group.classList.add('active');
-                // Activate first incomplete step in this stage
-                const firstIncompleteStep = group.querySelector('.step:not(.completed)');
-                if (firstIncompleteStep) {
-                    this.activateStep(firstIncompleteStep);
-                }
-            } else {
-                group.classList.remove('active');
-            }
-        });
-    },
-
-    updateStageIndicators() {
-        this.stageIndicators.forEach(indicator => {
-            const stage = parseInt(indicator.dataset.stage);
-            indicator.classList.remove('active', 'completed', 'disabled');
-            
-            if (stage < this.currentStage) {
-                indicator.classList.add('completed');
-            } else if (stage === this.currentStage) {
-                indicator.classList.add('active');
-            } else {
-                indicator.classList.add('disabled');
-            }
-        });
-    },
-
-    activateStep(step) {
-        if (!step) return;
-
-        const currentStageSteps = step.closest('.step-group').querySelectorAll('.step');
-        currentStageSteps.forEach(s => s.classList.remove('active'));
-        
-        step.classList.add('active');
-        
-        // Scroll step into view
-        step.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    },
-
     handleStepCompletion(step) {
-        if (!step) return;
+        const stepStatus = step.querySelector('.step-status');
+        stepStatus.textContent = 'Completed';
+        stepStatus.classList.remove('pending');
+        stepStatus.classList.add('completed');
 
-        const stepNumber = parseInt(step.dataset.step);
-        const stageNumber = parseInt(step.closest('.step-group').dataset.stage);
+        this.checkStageCompletion(step.closest('.stage'));
+    },
+
+    checkStageCompletion(stage) {
+        const steps = stage.querySelectorAll('.step');
+        const completedSteps = stage.querySelectorAll('.step-status.completed');
+
+        if (steps.length === completedSteps.length) {
+            this.completeStage(stage);
+        }
+    },
+
+    completeStage(stage) {
+        const stageNumber = parseInt(stage.dataset.stage);
+        const stageStatus = stage.querySelector('.stage-status');
+        stageStatus.textContent = 'Completed';
         
-        // Update step status
-        step.classList.add('completed');
-        step.querySelector('.status-badge').textContent = 'Completed';
-        step.querySelector('.status-badge').classList.remove('pending');
-        step.querySelector('.status-badge').classList.add('completed');
-
-        // Find next step in current stage
-        const nextStep = step.nextElementSibling;
-        if (nextStep && nextStep.classList.contains('step')) {
-            this.activateStep(nextStep);
-        } else {
-            // If no more steps in current stage, move to next stage
-            if (this.isStageCompleted(stageNumber)) {
-                this.moveToNextStage();
-            }
+        // Update stage indicator
+        this.stageIndicators[stageNumber - 1].classList.add('completed');
+        this.completedStages.add(stageNumber);
+        
+        // Unlock next stage if available
+        if (stageNumber < this.totalStages) {
+            const nextStage = document.querySelector(`.stage[data-stage="${stageNumber + 1}"]`);
+            const nextStageStatus = nextStage.querySelector('.stage-status');
+            // nextStage.classList.add('active');
+            nextStageStatus.textContent = 'In Progress';
+            
+            // Enable next stage navigation
+            this.updateNavigationButtons();
         }
-
+        
         this.updateProgress();
-    },
-
-    isStageCompleted(stageNumber) {
-        const stageGroup = document.querySelector(`.step-group[data-stage="${stageNumber}"]`);
-        const stageSteps = stageGroup.querySelectorAll('.step');
-        return Array.from(stageSteps).every(step => step.classList.contains('completed'));
-    },
-
-    moveToNextStage() {
-        if (this.currentStage < 4) {
-            this.currentStage++;
-            this.showStage(this.currentStage);
-            this.updateStageIndicators();
-        } else {
-            this.handleOnboardingCompletion();
-        }
+        this.showNotification('Stage completed successfully!', 'success');
     },
 
     handleFormSubmission(form) {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
+        
+        // Validate form
+        if (!this.validateForm(form)) {
+            this.showNotification('Please fill in all required fields', 'error');
+            return;
+        }
         
         // Simulate API call
         setTimeout(() => {
@@ -197,12 +202,17 @@ const onboardingModule = {
         }, 1000);
     },
 
+    validateForm(form) {
+        const requiredFields = form.querySelectorAll('[required]');
+        return Array.from(requiredFields).every(field => field.value.trim() !== '');
+    },
+
     handleVideoCompletion(video) {
         const step = video.closest('.step');
         const checkbox = step.querySelector('.completion-checkbox');
         
-        if (checkbox && !checkbox.checked) {
-            checkbox.disabled = false;
+        if (checkbox) {
+            // checkbox.disabled = false;
             this.showNotification('Video completed. Please check the acknowledgment box to proceed.');
         }
     },
@@ -210,6 +220,12 @@ const onboardingModule = {
     handleFileUpload(input) {
         const files = input.files;
         if (files.length > 0) {
+            // Validate file type and size
+            if (!this.validateFile(files[0])) {
+                this.showNotification('Invalid file type or size', 'error');
+                return;
+            }
+            
             // Simulate file upload
             setTimeout(() => {
                 this.handleStepCompletion(input.closest('.step'));
@@ -218,10 +234,16 @@ const onboardingModule = {
         }
     },
 
+    validateFile(file) {
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+        return file.size <= maxSize && allowedTypes.includes(file.type);
+    },
+
     handleQuizSubmission(form) {
         const formData = new FormData(form);
         const answers = Array.from(formData.entries());
-        const correctAnswers = this.getCorrectAnswers(form);
+        const correctAnswers = this.getCorrectAnswers();
         
         let score = 0;
         answers.forEach(([question, answer]) => {
@@ -235,19 +257,11 @@ const onboardingModule = {
             this.handleStepCompletion(form.closest('.step'));
             this.showNotification('Quiz completed successfully!');
         } else {
-            this.showNotification('Please review the material and try again', 'error');
+            this.showNotification('Please review the material and try again. Required score: 80%', 'error');
         }
     },
 
-    handleOnboardingCompletion() {
-        // Notify admin and trigger final processes
-        this.showNotification('Onboarding completed! Notifying admin...', 'success');
-        // Here you would typically make an API call to notify admin
-    },
-
-    getCorrectAnswers(form) {
-        // This would typically come from your backend
-        // For now, we'll use a simple object
+    getCorrectAnswers() {
         return {
             'q1': '2',
             'q2': '1',
@@ -256,19 +270,37 @@ const onboardingModule = {
     },
 
     updateProgress() {
-        const completedSteps = document.querySelectorAll('.step.completed').length;
-        const totalSteps = this.steps.length;
-        const progress = (completedSteps / totalSteps) * 100;
-
+        const completedStages = this.completedStages.size;
+        const progress = (completedStages / this.totalStages) * 100;
         this.progressBar.style.width = `${progress}%`;
-        this.progressPercentage.textContent = `${Math.round(progress)}%`;
     },
 
     showNotification(message, type = 'success') {
-        if (window.appUtils && window.appUtils.showNotification) {
-            window.appUtils.showNotification(message, type);
-        } else {
-            console.log(`${type.toUpperCase()}: ${message}`);
+        const notification = document.createElement('div');
+        notification.className = `notification ${type} show`; // Add 'show' class
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        // Remove the notification after a delay
+        setTimeout(() => {
+            notification.classList.remove('show'); // Fade out
+            setTimeout(() => {
+                notification.remove(); // Remove from DOM after fade out
+            }, 300); // Match the duration of the fade out
+        }, 3000); // Show for 3 seconds
+    },
+
+    nextStage() {
+        // Navigate to the next stage regardless of current stage completion
+        if (this.currentStage < this.totalStages) {
+            this.navigateToStage(this.currentStage + 1);
+        }
+    },
+
+    previousStage() {
+        if (this.currentStage > 1) {
+            this.navigateToStage(this.currentStage - 1);
         }
     }
 };

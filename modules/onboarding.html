@@ -12,198 +12,648 @@
     <div class="app-container">
         <!-- Sidebar will be injected here -->
         <main class="main-content">
-            <div class="module-container">
-                <h2>Employee Onboarding</h2>
+    <div class="module-container">
+        <h2>Employee Onboarding</h2>
                 
                 <!-- Stage Progress Bar -->
                 <div class="stage-progress">
-                    <div class="stage-indicator" data-stage="1">
-                        <div class="stage-number">1</div>
-                        <span>Induction</span>
+                    <div class="stage-indicators">
+                        <div class="stage-indicator active" data-stage="1">
+                            <div class="stage-number">1</div>
+                            <span>Induction</span>
+                        </div>
+                        <div class="stage-indicator" data-stage="2">
+                            <div class="stage-number">2</div>
+                            <span>Forms</span>
+                        </div>
+                        <div class="stage-indicator" data-stage="3">
+                            <div class="stage-number">3</div>
+                            <span>Training</span>
+                        </div>
+                        <div class="stage-indicator" data-stage="4">
+                            <div class="stage-number">4</div>
+                            <span>Process Documents</span>
+                        </div>
+                        <div class="stage-indicator" data-stage="5">
+                            <div class="stage-number">5</div>
+                            <span>Completion</span>
+                        </div>
+                        <div class="stage-indicator" data-stage="6">
+                            <div class="stage-number">6</div>
+                            <span>Access Provisioning</span>
+                        </div>
+                        <div class="stage-indicator" data-stage="7">
+                            <div class="stage-number">7</div>
+                            <span>SSO Integration</span>
+                        </div>
                     </div>
-                    <div class="stage-indicator" data-stage="2">
-                        <div class="stage-number">2</div>
-                        <span>Forms</span>
-                    </div>
-                    <div class="stage-indicator" data-stage="3">
-                        <div class="stage-number">3</div>
-                        <span>Training</span>
-                    </div>
-                    <div class="stage-indicator" data-stage="4">
-                        <div class="stage-number">4</div>
-                        <span>Process Documents</span>
-                    </div>
+                    <div class="stage-progress-bar">
+            <div class="progress" style="width: 0%"></div>
+        </div>
                 </div>
 
-                <!-- Overall Progress -->
-                <div class="onboarding-progress">
-                    <div class="progress-header">
-                        <h3>Overall Progress</h3>
-                        <span class="progress-percentage">0%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 0%"></div>
-                    </div>
-                </div>
-
-                <!-- Onboarding Steps -->
-                <div class="onboarding-steps">
+                <!-- Stages Container -->
+                <div class="stages-container">
                     <!-- Stage 1: Induction -->
-                    <div class="step-group" data-stage="1">
-                        <h3 class="stage-title">Stage 1: Induction</h3>
-                        
-                        <!-- Step 1 -->
-                        <div class="step" data-step="1">
-                            <div class="step-header">
-                                <div class="step-number">1</div>
-                                <div class="step-info">
-                                    <h4>Company Overview Video</h4>
-                                    <p>Watch the company introduction video</p>
-                                </div>
-                                <div class="step-status">
-                                    <span class="status-badge pending">Pending</span>
-                                </div>
-                            </div>
-                            <div class="step-content">
-                                <div class="video-container">
-                                    <video id="company-video" controls>
-                                        <source src="../assets/videos/company-overview.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                                <div class="completion-status">
-                                    <label>
-                                        <input type="checkbox" class="completion-checkbox" data-step="1" disabled>
-                                        I have watched the complete video
-                                    </label>
-                                </div>
-                            </div>
+                    <div class="stage active" data-stage="1">
+                        <div class="stage-header">
+                            <h3>Stage 1: Induction</h3>
+                            <span class="stage-status">In Progress</span>
                         </div>
-
-                        <!-- Step 2 -->
-                        <div class="step" data-step="2">
-                            <div class="step-header">
-                                <div class="step-number">2</div>
-                                <div class="step-info">
-                                    <h4>Company Policies Document</h4>
-                                    <p>Review and acknowledge company policies</p>
-                                </div>
-                                <div class="step-status">
-                                    <span class="status-badge pending">Pending</span>
-                                </div>
-                            </div>
-                            <div class="step-content">
-                                <div class="document-viewer">
-                                    <iframe src="../assets/documents/company-policies.pdf" width="100%" height="400px"></iframe>
-                                </div>
-                                <div class="completion-status">
-                                    <label>
-                                        <input type="checkbox" class="completion-checkbox" data-step="2">
-                                        I have read and understood the company policies
-                                    </label>
-                                </div>
-                            </div>
+                        <div class="steps">
+                            <!-- Step 1.1 -->
+                            <div class="step" data-step="1">
+                    <div class="step-header">
+                                    <div class="step-number">1.1</div>
+                        <h4>Company Overview Video</h4>
+                                    <div class="step-status pending">Pending</div>
+                    </div>
+                    <div class="step-content">
+                        <div class="video-container">
+                            <video id="company-video" controls>
+                                <source src="../assets/videos/company-overview.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
+                        <div class="completion-status">
+                            <label>
+                                <input type="checkbox" class="completion-checkbox" data-step="1.1">
+                                I have watched the complete video
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Step 3 -->
-                        <div class="step" data-step="3">
-                            <div class="step-header">
-                                <div class="step-number">3</div>
-                                <div class="step-info">
+                            <!-- Step 1.2 -->
+                            <div class="step" data-step="2">
+                    <div class="step-header">
+                                    <div class="step-number">1.2</div>
+                        <h4>Company Policies Document</h4>
+                                    <div class="step-status pending">Pending</div>
+                    </div>
+                    <div class="step-content">
+                        <div class="document-viewer">
+                            <iframe src="../assets/documents/company-policies.pdf" width="100%" height="400px"></iframe>
+                        </div>
+                        <div class="completion-status">
+                            <label>
+                                            <input type="checkbox" class="completion-checkbox" data-step="1.2">
+                                I have read and understood the company policies
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                            <!-- Step 1.3 -->
+                            <div class="step" data-step="3">
+                    <div class="step-header">
+                                    <div class="step-number">1.3</div>
                                     <h4>Employee Handbook-HR</h4>
-                                    <p>Review and acknowledge the employee handbook</p>
-                                </div>
-                                <div class="step-status">
-                                    <span class="status-badge pending">Pending</span>
-                                </div>
-                            </div>
-                            <div class="step-content">
-                                <div class="document-viewer">
-                                    <iframe src="../assets/documents/employee-handbook.pdf" width="100%" height="400px"></iframe>
-                                </div>
-                                <div class="completion-status">
-                                    <label>
-                                        <input type="checkbox" class="completion-checkbox" data-step="3">
-                                        I have read and understood the employee handbook
-                                    </label>
-                                </div>
-                            </div>
+                                    <div class="step-status pending">Pending</div>
+                    </div>
+                    <div class="step-content">
+                        <div class="document-viewer">
+                            <iframe src="../assets/documents/employee-handbook.pdf" width="100%" height="400px"></iframe>
+                        </div>
+                        <div class="completion-status">
+                            <label>
+                                            <input type="checkbox" class="completion-checkbox" data-step="1.3">
+                                I have read and understood the employee handbook
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        <div class="navigation-buttons">
+                            <button class="btn-prev" onclick="onboardingModule.previousStage()">Previous</button>
+                            <button class="btn-next" onclick="onboardingModule.nextStage()">Next</button>
                         </div>
                     </div>
 
                     <!-- Stage 2: Forms -->
-                    <div class="step-group" data-stage="2">
-                        <h3 class="stage-title">Stage 2: Forms</h3>
-                        
-                        <!-- Step 4 -->
-                        <div class="step" data-step="4">
-                            <div class="step-header">
-                                <div class="step-number">4</div>
-                                <div class="step-info">
-                                    <h4>Personal Information Form</h4>
-                                    <p>Complete your personal information</p>
-                                </div>
-                                <div class="step-status">
-                                    <span class="status-badge pending">Pending</span>
-                                </div>
-                            </div>
-                            <div class="step-content">
-                                <form id="personal-info-form" class="onboarding-form">
-                                    <div class="form-group">
-                                        <label>Full Name</label>
-                                        <input type="text" name="fullName" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="email" name="email" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Phone</label>
-                                        <input type="tel" name="phone" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <textarea name="address" required></textarea>
-                                    </div>
-                                    <button type="submit" class="btn-primary">Submit Information</button>
-                                </form>
-                            </div>
+                    <div class="stage" data-stage="2">
+                        <div class="stage-header">
+                            <h3>Stage 2: Forms</h3>
+                            <span class="stage-status">Locked</span>
                         </div>
+                        <div class="steps stage-2-form">
+                            <!-- Step 2.1 -->
+                            <div class="step" data-step="4">
+                                <div class="step-header">
+                                    <div class="step-number">2.1</div>
+                                    <h4>Personal Information Form</h4>
+                                    <div class="step-status pending">Pending</div>
+                                </div>
+                                <div class="step-content">
+                                    <form id="personal-info-form" class="onboarding-form">
+                                        <div class="form-section">
+                                            <h5 class="form-section-title">Basic Information</h5>
+                                            <div class="form-row">
+                                                <div class="form-group required">
+                                                    <label for="consultantId">Consultant ID</label>
+                                                    <input type="text" id="consultantId" name="consultantId" required>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="sex">Sex</label>
+                                                    <select id="sex" name="sex" required>
+                                                        <option value="">Select Gender</option>
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="dateOfJoining">Date of Joining</label>
+                                                    <input type="date" id="dateOfJoining" name="dateOfJoining" required>
+                                                </div>
+                                            </div>
+                            
+                                            <div class="form-row">
+                                                <div class="form-group required">
+                                                    <label for="consultantName">Name of Consultant</label>
+                                                    <input type="text" id="consultantName" name="consultantName" required>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="dateOfBirth">Date of Birth</label>
+                                                    <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                                                </div>
+                                            </div>
+                            
+                                            <div class="form-row">
+                                                <div class="form-group required">
+                                                    <label for="maritalStatus">Marital Status</label>
+                                                    <select id="maritalStatus" name="maritalStatus" required>
+                                                        <option value="">Select Status</option>
+                                                        <option value="single">Single</option>
+                                                        <option value="married">Married</option>
+                                                        <option value="divorced">Divorced</option>
+                                                        <option value="widowed">Widowed</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="bloodGroup">Blood Group</label>
+                                                    <select id="bloodGroup" name="bloodGroup" required>
+                                                        <option value="">Select Blood Group</option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="A-">A-</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="B-">B-</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="O-">O-</option>
+                                                        <option value="AB+">AB+</option>
+                                                        <option value="AB-">AB-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="form-section">
+                                            <h5 class="form-section-title">Current Address</h5>
+                                            <div class="form-group required">
+                                                <label for="currentAddress">Address</label>
+                                                <textarea id="currentAddress" name="currentAddress" rows="3" required></textarea>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group required">
+                                                    <label for="currentState">State</label>
+                                                    <input type="text" id="currentState" name="currentState" required>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="currentCity">City</label>
+                                                    <input type="text" id="currentCity" name="currentCity" required>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="currentPincode">Pin-code</label>
+                                                    <input type="text" id="currentPincode" name="currentPincode" pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="form-section">
+                                            <h5 class="form-section-title">Permanent Address</h5>
+                                            <div class="form-group required">
+                                                <label for="permanentAddress">Address</label>
+                                                <textarea id="permanentAddress" name="permanentAddress" rows="3" required></textarea>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group required">
+                                                    <label for="permanentState">State</label>
+                                                    <input type="text" id="permanentState" name="permanentState" required>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="permanentCity">City</label>
+                                                    <input type="text" id="permanentCity" name="permanentCity" required>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="permanentPincode">Pin-code</label>
+                                                    <input type="text" id="permanentPincode" name="permanentPincode" pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="form-section">
+                                            <h5 class="form-section-title">Contact Information</h5>
+                                            <div class="form-row">
+                                                <div class="form-group required">
+                                                    <label for="email">Email ID</label>
+                                                    <input type="email" id="email" name="email" required>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="panCard">PAN Card No</label>
+                                                    <input type="text" id="panCard" name="panCard" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" title="Please enter a valid PAN number" required>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="aadhar">Aadhar No</label>
+                                                    <input type="text" id="aadhar" name="aadhar" pattern="[0-9]{12}" title="Please enter a valid 12-digit Aadhar number" required>
+                                                </div>
+                                            </div>
+                            
+                                            <div class="form-row">
+                                                <div class="form-group required">
+                                                    <label for="mobile">Mobile Number</label>
+                                                    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" required>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="emergencyContact">Emergency Contact No & Relations</label>
+                                                    <input type="text" id="emergencyContact" name="emergencyContact" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="form-actions">
+                                            <button type="button" class="btn-cancel">Cancel</button>
+                                            <button type="submit" class="btn-save">Save Information</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
 
-                        <!-- Step 5: Employment Details -->
-                        <div class="step" data-step="5">
-                            <div class="step-header">
-                                <div class="step-number">5</div>
-                                <div class="step-info">
-                        <!-- Steps 5-6 for additional forms -->
+                            <!-- Step 2.2 -->
+                            <div class="step" data-step="5">
+                    <div class="step-header">
+                                    <div class="step-number">2.2</div>
+                        <h4>Employment Details</h4>
+                                    <div class="step-status pending">Pending</div>
+                    </div>
+                    <div class="step-content">
+                        <form id="family-info-form" class="onboarding-form">
+                            <div class="family-members">
+                                <!-- Father Information -->
+                                <div class="family-member-section">
+                                    <h5>Father</h5>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="fatherName">Name</label>
+                                            <input type="text" id="fatherName" name="fatherName" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fatherDOB">Date of Birth</label>
+                                            <input type="date" id="fatherDOB" name="fatherDOB" required>
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label>
+                                                <input type="checkbox" id="fatherResiding" name="fatherResiding">
+                                                Residing with Self
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <!-- Mother Information -->
+                                <div class="family-member-section">
+                                    <h5>Mother</h5>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="motherName">Name</label>
+                                            <input type="text" id="motherName" name="motherName" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="motherDOB">Date of Birth</label>
+                                            <input type="date" id="motherDOB" name="motherDOB" required>
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label>
+                                                <input type="checkbox" id="motherResiding" name="motherResiding">
+                                                Residing with Self
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <!-- Spouse Information -->
+                                <div class="family-member-section">
+                                    <h5>Spouse</h5>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="spouseName">Name</label>
+                                            <input type="text" id="spouseName" name="spouseName">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="spouseDOB">Date of Birth</label>
+                                            <input type="date" id="spouseDOB" name="spouseDOB">
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label>
+                                                <input type="checkbox" id="spouseResiding" name="spouseResiding">
+                                                Residing with Self
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <!-- Children Information -->
+                                <div class="family-member-section">
+                                    <h5>Son/Daughter 1</h5>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="child1Name">Name</label>
+                                            <input type="text" id="child1Name" name="child1Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="child1DOB">Date of Birth</label>
+                                            <input type="date" id="child1DOB" name="child1DOB">
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label>
+                                                <input type="checkbox" id="child1Residing" name="child1Residing">
+                                                Residing with Self
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="family-member-section">
+                                    <h5>Son/Daughter 2</h5>
+                                    <div class="form-row">
+                            <div class="form-group">
+                                            <label for="child2Name">Name</label>
+                                            <input type="text" id="child2Name" name="child2Name">
+                            </div>
+                            <div class="form-group">
+                                            <label for="child2DOB">Date of Birth</label>
+                                            <input type="date" id="child2DOB" name="child2DOB">
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label>
+                                                <input type="checkbox" id="child2Residing" name="child2Residing">
+                                                Residing with Self
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Save Family Information</button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+
+                            <!-- Step 2.3 -->
+                            <div class="step" data-step="6">
+                    <div class="step-header">
+                                    <div class="step-number">2.3</div>
+                                    <h4>Additional Documents</h4>
+                                    <div class="step-status pending">Pending</div>
+                                </div>
+                                <div class="step-content">
+                                    <form id="work-experience-form" class="onboarding-form">
+                                        <!-- First Organization -->
+                                        <div class="work-experience-section">
+                                            <h5>Organization 1</h5>
+                                            <div class="form-group">
+                                                <label for="org1Name">Organization Name</label>
+                                                <input type="text" id="org1Name" name="org1Name" required>
+                                            </div>
+                                            
+                                            <div class="experience-details">
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="org1Designation1">Designation</label>
+                                                        <input type="text" id="org1Designation1" name="org1Designation1" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="org1From1">From</label>
+                                                        <input type="date" id="org1From1" name="org1From1" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="org1To1">To</label>
+                                                        <input type="date" id="org1To1" name="org1To1" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                            
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="org1ContactNo">Contact No.</label>
+                                                    <input type="tel" id="org1ContactNo" name="org1ContactNo" pattern="[0-9]{10}" title="Please enter a valid 10-digit contact number">
+                                                </div>
+                                            </div>
+                            
+                                            <div class="form-group">
+                                                <label for="org1JobDescription">Job Description</label>
+                                                <textarea id="org1JobDescription" name="org1JobDescription" rows="3" required></textarea>
+                                            </div>
+                                        </div>
+                            
+                                        <!-- Second Organization -->
+                                        <div class="work-experience-section">
+                                            <h5>Organization 2</h5>
+                                            <div class="form-group">
+                                                <label for="org2Name">Organization Name</label>
+                                                <input type="text" id="org2Name" name="org2Name">
+                                            </div>
+                                            
+                                            <div class="experience-details">
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="org2Designation1">Designation</label>
+                                                        <input type="text" id="org2Designation1" name="org2Designation1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="org2From1">From</label>
+                                                        <input type="date" id="org2From1" name="org2From1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="org2To1">To</label>
+                                                        <input type="date" id="org2To1" name="org2To1">
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="org2Designation2">Designation</label>
+                                                        <input type="text" id="org2Designation2" name="org2Designation2">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="org2From2">From</label>
+                                                        <input type="date" id="org2From2" name="org2From2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                            
+                                            <div class="form-group">
+                                                <label for="org2JobDescription">Job Description</label>
+                                                <textarea id="org2JobDescription" name="org2JobDescription" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn-primary">Save Work Experience</button>
+                                        </div>
+                                    </form>
+                                </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button class="btn-prev" onclick="onboardingModule.previousStage()">Previous</button>
+                            <button class="btn-next" onclick="onboardingModule.nextStage()">Next</button>
+                        </div>
                     </div>
 
                     <!-- Stage 3: Training -->
-                    <div class="step-group" data-stage="3">
-                        <h3 class="stage-title">Stage 3: Training</h3>
-                        
-                        <!-- Steps 7-8 for training -->
+                    <div class="stage" data-stage="3">
+                        <div class="stage-header">
+                            <h3>Stage 3: Training</h3>
+                            <span class="stage-status">Locked</span>
+                        </div>
+                        <div class="steps">
+                            <!-- Step 3.1 -->
+                            <div class="step" data-step="7">
+                                <div class="step-header">
+                                    <div class="step-number">3.1</div>
+                                    <h4>Safety Training</h4>
+                                    <div class="step-status pending">Pending</div>
+                    </div>
+                    <div class="step-content">
+                                <div class="video-container">
+                                    <video controls>
+                                        <source src="../assets/videos/safety-training.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="quiz-section">
+                                        <h6>Safety Training Quiz</h6>
+                                    <form class="quiz-form">
+                                        <!-- Quiz questions will be dynamically loaded -->
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3.2 -->
+                            <div class="step" data-step="8">
+                                <div class="step-header">
+                                    <div class="step-number">3.2</div>
+                                    <h4>Department Training</h4>
+                                    <div class="step-status pending">Pending</div>
+                                </div>
+                                <div class="step-content">
+                                    <div class="training-materials">
+                                        <!-- Training content will be dynamically loaded based on department -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button class="btn-prev" onclick="onboardingModule.previousStage()">Previous</button>
+                            <button class="btn-next" onclick="onboardingModule.nextStage()">Next</button>
+                        </div>
                     </div>
 
                     <!-- Stage 4: Process Documents -->
-                    <div class="step-group" data-stage="4">
-                        <h3 class="stage-title">Stage 4: Process Documents</h3>
-                        
-                        <!-- Step 9 -->
-                        <div class="step" data-step="9">
-                            <div class="step-header">
-                                <div class="step-number">9</div>
-                                <div class="step-info">
-                                    <h4>Document Processing</h4>
-                                    <p>Review final documentation</p>
+                    <div class="stage" data-stage="4">
+                        <div class="stage-header">
+                            <h3>Stage 4: Process Documents</h3>
+                            <span class="stage-status">Locked</span>
+                        </div>
+                        <div class="steps">
+                            <div class="step" data-step="9">
+                                <div class="step-header">
+                                    <div class="step-number">4.1</div>
+                                    <h4>Process Documentation Review</h4>
+                                    <div class="step-status pending">Pending</div>
                                 </div>
-                                <div class="step-status">
-                                    <span class="status-badge pending">Pending</span>
+                                <div class="step-content">
+                                    <!-- Process documentation content -->
+                    </div>
+                </div>
+            </div>
+                        <div class="navigation-buttons">
+                            <button class="btn-prev" onclick="onboardingModule.previousStage()">Previous</button>
+                            <button class="btn-next" onclick="onboardingModule.nextStage()">Next</button>
+                </div>
+            </div>
+
+                    <!-- Stage 5: Completion Notification -->
+                    <div class="stage" data-stage="5">
+                        <div class="stage-header">
+                            <h3>Stage 5: Completion</h3>
+                            <span class="stage-status">Locked</span>
+                        </div>
+                        <div class="steps">
+                            <div class="step" data-step="10">
+                    <div class="step-header">
+                                    <div class="step-number">5.1</div>
+                                    <h4>Completion Review</h4>
+                                    <div class="step-status pending">Pending</div>
+                    </div>
+                    <div class="step-content">
+                                    <div class="completion-summary">
+                                        <!-- Summary will be dynamically generated -->
+                                    </div>
                                 </div>
                             </div>
-                            <div class="step-content">
-                                <!-- Document content here -->
+                        </div>
+                        <div class="navigation-buttons">
+                            <button class="btn-prev" onclick="onboardingModule.previousStage()">Previous</button>
+                            <button class="btn-next" onclick="onboardingModule.nextStage()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Stage 6: Access Provisioning -->
+                    <div class="stage" data-stage="6">
+                        <div class="stage-header">
+                            <h3>Stage 6: Access Provisioning</h3>
+                            <span class="stage-status">Locked</span>
+                        </div>
+                        <div class="steps">
+                            <div class="step" data-step="11">
+                                <div class="step-header">
+                                    <div class="step-number">6.1</div>
+                                    <h4>Department Head Consultation</h4>
+                                    <div class="step-status pending">Pending</div>
+                                </div>
+                                <div class="step-content">
+                                    <!-- Access provisioning content -->
+                                </div>
                             </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button class="btn-prev" onclick="onboardingModule.previousStage()">Previous</button>
+                            <button class="btn-next" onclick="onboardingModule.nextStage()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Stage 7: SSO Integration -->
+                    <div class="stage" data-stage="7">
+                        <div class="stage-header">
+                            <h3>Stage 7: SSO Integration</h3>
+                            <span class="stage-status">Locked</span>
+                        </div>
+                        <div class="steps">
+                            <div class="step" data-step="12">
+                                <div class="step-header">
+                                    <div class="step-number">7.1</div>
+                                    <h4>System Access Setup</h4>
+                                    <div class="step-status pending">Pending</div>
+                                </div>
+                                <div class="step-content">
+                                    <!-- SSO integration content -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button class="btn-prev" onclick="onboardingModule.previousStage()">Previous</button>
+                            <button class="btn-next" onclick="onboardingModule.nextStage()">Next</button>
                         </div>
                     </div>
                 </div>
