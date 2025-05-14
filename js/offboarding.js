@@ -14,28 +14,62 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         // Initialize the module
+        currentStep: 1,
+        totalSteps: 7,
+
         init: function() {
             this.bindEvents();
+            this.showCurrentStep();
+            this.updateNavigationButtons();
             this.updateProgress();
+        },
+
+        showCurrentStep: function() {
+            const steps = document.querySelectorAll('.step-container');
+            steps.forEach((step, index) => {
+                step.style.display = (index + 1 === this.currentStep) ? 'block' : 'none';
+            });
+
+            // Update circle indicators
+            const circles = document.querySelectorAll('.circle');
+            circles.forEach((circle, index) => {
+                circle.classList.remove('active');
+                if (index < this.currentStep) {
+                    circle.classList.add('active');
+                }
+            });
         },
 
         // Bind event listeners
         bindEvents: function() {
-            // Offboarding request form submission
             this.elements.offboardingRequestForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 this.handleOffboardingRequest(e.target);
             });
 
-            // Exit interview form submission
             this.elements.exitInterviewForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 this.handleExitInterview(e.target);
             });
 
-            // Asset return submission
             this.elements.submitAssetsButton.addEventListener('click', () => {
                 this.handleAssetReturn();
+            });
+
+            document.getElementById('next-step').addEventListener('click', () => {
+                if (this.currentStep < this.totalSteps) {
+                    this.currentStep++;
+                    this.showCurrentStep();
+                    this.updateNavigationButtons();
+                }
+            });
+
+            document.getElementById('prev-step').addEventListener('click', () => {
+                if (this.currentStep > 1) {
+                    this.currentStep--;
+                    this.showCurrentStep();
+                    this.updateNavigationButtons();
+                }
             });
         },
 
@@ -141,6 +175,11 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 notification.remove();
             }, 3000);
+        },
+
+        updateNavigationButtons: function() {
+            document.getElementById('prev-step').disabled = this.currentStep === 1;
+            document.getElementById('next-step').textContent = this.currentStep === this.totalSteps ? 'Finish' : 'Next';
         }
     };
 

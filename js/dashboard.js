@@ -1,85 +1,15 @@
-// Dashboard Module
 const dashboardModule = {
     init() {
-        this.activityCards = document.querySelectorAll('.activity-card');
-        this.modal = document.getElementById('activity-modal');
-        this.modalTitle = document.getElementById('modal-title');
-        this.modalBody = document.querySelector('.modal-body');
-        this.closeModal = document.querySelector('.close-modal');
-        this.overallProgress = document.querySelector('.dashboard-progress .progress');
-        this.progressPercentage = document.querySelector('.progress-percentage');
-        
-        this.completedActivities = 0;
-        this.totalActivities = this.activityCards.length;
-        
-        this.bindEvents();
-        this.updateOverallProgress();
-    },
+        this.currentStep = 1;
+        this.totalSteps = 7;
 
-    bindEvents() {
-        // Activity Card Clicks
-        this.activityCards.forEach(card => {
-            const startButton = card.querySelector('.start-activity');
-            startButton.addEventListener('click', () => {
-                const activityType = card.getAttribute('data-activity');
-                const activityTitle = card.querySelector('h3').textContent;
-                this.openActivityModal(activityType, activityTitle);
-            });
-        });
+        this.processDocsContent = `
+            <p><strong>Document/Form:</strong> PDF/Video</p>
+            <p><button class="btn-primary">View Process Documents</button></p>
+        `;
 
-        // Close Modal
-        this.closeModal.addEventListener('click', () => {
-            this.closeActivityModal();
-        });
-
-        // Close modal when clicking outside
-        this.modal.addEventListener('click', (e) => {
-            if (e.target === this.modal) {
-                this.closeActivityModal();
-            }
-        });
-    },
-
-    openActivityModal(activityType, activityTitle) {
-        this.modalTitle.textContent = activityTitle;
-        this.modalBody.innerHTML = this.getActivityContent(activityType);
-        this.modal.classList.add('active');
-
-        // Initialize form handlers
-        const form = this.modalBody.querySelector('form');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.handleFormSubmission(activityType, form);
-            });
-        }
-    },
-
-    closeActivityModal() {
-        this.modal.classList.remove('active');
-    },
-
-    getActivityContent(activityType) {
-        const contentTemplates = {
-            'process-docs': `
-                <div class="document-viewer">
-                    <h4>Process Documents</h4>
-                    <div class="document-list">
-                        <div class="document-item">
-                            <i class="fas fa-file-pdf"></i>
-                            <span>Company Process Guide</span>
-                            <button class="btn-primary">View</button>
-                        </div>
-                        <div class="document-item">
-                            <i class="fas fa-file-pdf"></i>
-                            <span>Department Guidelines</span>
-                            <button class="btn-primary">View</button>
-                        </div>
-                    </div>
-                </div>
-            `,
-            'dept-training': `
-                <div class="training-section">
+        this.deptTrainingContent = `
+               <div class="training-section">
                     <h4>Department Training Videos</h4>
                     <div class="video-list">
                         <div class="video-item">
@@ -93,9 +23,11 @@ const dashboardModule = {
                         </div>
                     </div>
                 </div>
-            `,
-            'feedback': `
-                <form class="modal-form" id="feedback-form">
+        `;
+
+        this.feedbackContent = `
+            <p><strong>Document/Form:</strong> Microsoft Form</p>
+             <form class="modal-form" id="feedback-form">
                     <div class="form-group">
                         <label>How would you rate your team collaboration?</label>
                         <select required>
@@ -117,9 +49,11 @@ const dashboardModule = {
                     </div>
                     <button type="submit" class="btn-primary">Submit Feedback</button>
                 </form>
-            `,
-            'kpi-kri': `
-                <form class="modal-form" id="kpi-form">
+        `;
+
+        this.kpiKriContent = `
+            <p><strong>Document/Form:</strong> Microsoft Form</p>
+             <form class="modal-form" id="kpi-form">
                     <div class="form-group">
                         <label>Select KPI Category</label>
                         <select required>
@@ -139,9 +73,11 @@ const dashboardModule = {
                     </div>
                     <button type="submit" class="btn-primary">Submit KPI</button>
                 </form>
-            `,
-            'brand-survey': `
-                <form class="modal-form" id="brand-survey-form">
+        `;
+
+        this.brandSurveyContent = `
+            <p><strong>Document/Form:</strong> Microsoft Form</p>
+             <form class="modal-form" id="brand-survey-form">
                     <div class="form-group">
                         <label>How would you rate our brand reputation?</label>
                         <select required>
@@ -159,9 +95,11 @@ const dashboardModule = {
                     </div>
                     <button type="submit" class="btn-primary">Submit Survey</button>
                 </form>
-            `,
-            'grievance': `
-                <form class="modal-form" id="grievance-form">
+        `;
+
+        this.grievanceContent = `
+            <p><strong>Document/Form:</strong> HTML Form/Anonymous</p>
+           <form class="modal-form" id="grievance-form">
                     <div class="form-group">
                         <label>Grievance Type</label>
                         <select required>
@@ -189,9 +127,11 @@ const dashboardModule = {
                     </div>
                     <button type="submit" class="btn-primary">Submit Grievance</button>
                 </form>
-            `,
-            'posh': `
-                <form class="modal-form" id="posh-form">
+        `;
+
+        this.poshContent = `
+            <p><strong>Document/Form:</strong> HTML Form inside step-card</p>
+            <form class="modal-form" id="posh-form">
                     <div class="form-group">
                         <label>Incident Date</label>
                         <input type="date" required>
@@ -210,49 +150,127 @@ const dashboardModule = {
                     </div>
                     <button type="submit" class="btn-primary">Submit Complaint</button>
                 </form>
-            `
-        };
+        `;
 
-        return contentTemplates[activityType] || '<p>Content not available</p>';
+        this.bindEvents();
+        this.updateStepContent();
     },
 
-    handleFormSubmission(activityType, form) {
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        
-        // Simulate API call
-        setTimeout(() => {
-            this.updateActivityProgress(activityType);
-            this.closeActivityModal();
-            this.showNotification('Form submitted successfully');
-        }, 1000);
+    bindEvents() {
+        document.getElementById('next-step').addEventListener('click', () => {
+            if (this.currentStep < this.totalSteps) {
+                this.currentStep++;
+                this.updateStepContent();
+                this.updateNavigationButtons();
+            }
+        });
+
+        document.getElementById('prev-step').addEventListener('click', () => {
+            if (this.currentStep > 1) {
+                this.currentStep--;
+                this.updateStepContent();
+                this.updateNavigationButtons();
+            }
+        });
     },
 
-    updateActivityProgress(activityType) {
-        const card = document.querySelector(`[data-activity="${activityType}"]`);
-        const progressBar = card.querySelector('.progress-indicator .progress');
-        progressBar.style.width = '100%';
-        
-        this.completedActivities++;
-        this.updateOverallProgress();
-    },
+    updateStepContent() {
+        // Hide all steps
+        const steps = document.querySelectorAll('.step');
+        steps.forEach(step => step.style.display = 'none');
 
-    updateOverallProgress() {
-        const progress = (this.completedActivities / this.totalActivities) * 100;
-        this.overallProgress.style.width = `${progress}%`;
-        this.progressPercentage.textContent = `${Math.round(progress)}%`;
-    },
+        // Show the current step
+        const currentStepElement = document.querySelector(`.step[data-step="${this.currentStep}"]`);
+        currentStepElement.style.display = 'block';
 
-    showNotification(message, type = 'success') {
-        if (window.appUtils && window.appUtils.showNotification) {
-            window.appUtils.showNotification(message, type);
-        } else {
-            console.log(`${type.toUpperCase()}: ${message}`);
+        // Inject content based on the current step
+        switch (this.currentStep) {
+            case 1:
+                document.getElementById('process-docs-content').innerHTML = this.processDocsContent;
+                break;
+            case 2:
+                document.getElementById('dept-training-content').innerHTML = this.deptTrainingContent;
+                break;
+            case 3:
+                document.getElementById('feedback-content').innerHTML = this.feedbackContent;
+                break;
+            case 4:
+                document.getElementById('kpi-kri-content').innerHTML = this.kpiKriContent;
+                break;
+            case 5:
+                document.getElementById('brand-survey-content').innerHTML = this.brandSurveyContent;
+                break;
+            case 6:
+                document.getElementById('grievance-content').innerHTML = this.grievanceContent;
+                break;
+            case 7:
+                document.getElementById('posh-content').innerHTML = this.poshContent;
+                break;
+            default:
+                break;
         }
+    },
+
+    updateNavigationButtons() {
+        document.getElementById('prev-step').disabled = this.currentStep === 1;
+        document.getElementById('next-step').textContent = this.currentStep === this.totalSteps ? 'Finish' : 'Next';
+
+        // Update circle indicators
+        const circles = document.querySelectorAll('.circle');
+        circles.forEach((circle, index) => {
+            circle.classList.remove('active');
+            if (index < this.currentStep) {
+                circle.classList.add('active');
+            }
+        });
     }
 };
 
 // Initialize dashboard module
 document.addEventListener('DOMContentLoaded', () => {
     dashboardModule.init();
-}); 
+});
+
+
+let currentStep = 1;
+const totalSteps = 7;
+
+document.getElementById('next-step').addEventListener('click', () => {
+    if (currentStep < totalSteps) {
+        document.querySelector(`.step[data-step="${currentStep}"]`).style.display = 'none';
+        currentStep++;
+        document.querySelector(`.step[data-step="${currentStep}"]`).style.display = 'block';
+        updateNavigationButtons();
+        updateProgressBar();
+    }
+});
+
+document.getElementById('prev-step').addEventListener('click', () => {
+    if (currentStep > 1) {
+        document.querySelector(`.step[data-step="${currentStep}"]`).style.display = 'none';
+        currentStep--;
+        document.querySelector(`.step[data-step="${currentStep}"]`).style.display = 'block';
+        updateNavigationButtons();
+        updateProgressBar();
+    }
+});
+
+function updateNavigationButtons() {
+    document.getElementById('prev-step').disabled = currentStep === 1;
+    document.getElementById('next-step').textContent = currentStep === totalSteps ? 'Finish' : 'Next';
+
+    // Update circle indicators
+    const circles = document.querySelectorAll('.circle');
+    circles.forEach((circle, index) => {
+        circle.classList.remove('active');
+        if (index < currentStep) {
+            circle.classList.add('active');
+        }
+    });
+}
+
+function updateProgressBar() {
+    const progressPercentage = (currentStep / totalSteps) * 100;
+    document.getElementById('progress').style.width = `${progressPercentage}%`;
+    document.querySelector('.progress-percentage').textContent = `${Math.round(progressPercentage)}%`;
+}
