@@ -17,14 +17,37 @@
                 
                 <!-- Offboarding Steps -->
                 <div class="offboarding-steps">
-                    <div class="progress_container">
-                        <div class="circle active">1</div>
-                        <div class="circle">2</div>
-                        <div class="circle">3</div>
-                        <div class="circle">4</div>
-                        <div class="circle">5</div>
-                        <div class="circle">6</div>
-                        <div class="circle">7</div>
+                    <div class="progress-card">
+                        <div class="progress_container">
+                            <div class="progress-step">
+                                <div class="circle active">1</div>
+                                <span class="step-label">Initiation</span>
+                            </div>
+                            <div class="progress-step">
+                                <div class="circle">2</div>
+                                <span class="step-label">Notification</span>
+                            </div>
+                            <div class="progress-step">
+                                <div class="circle">3</div>
+                                <span class="step-label">Clearance</span>
+                            </div>
+                            <div class="progress-step">
+                                <div class="circle">4</div>
+                                <span class="step-label">Clearance</span>
+                            </div>
+                            <div class="progress-step">
+                                <div class="circle">5</div>
+                                <span class="step-label">Documentation</span>
+                            </div>
+                            <div class="progress-step">
+                                <div class="circle">6</div>
+                                <span class="step-label">Final Clearance</span>
+                            </div>
+                            <div class="progress-step">
+                                <div class="circle">7</div>
+                                <span class="step-label">Notification</span>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Step 1: Initiation -->
@@ -41,25 +64,29 @@
                         </div>
                         <div class="step-content">
                             <form id="offboarding-request-form" class="offboarding-form">
-                                <div class="form-group">
-                                    <label>Last Working Day</label>
-                                    <input type="date" name="lastWorkingDay" required>
+                                <div class="form-section">
+                                    <div class="form-group">
+                                        <label>Last Working Day</label>
+                                        <input type="date" name="lastWorkingDay" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Reason for Leaving</label>
+                                        <select name="reason" required>
+                                            <option value="">Select Reason</option>
+                                            <option value="resignation">Resignation</option>
+                                            <option value="retirement">Retirement</option>
+                                            <option value="end_of_contract">End of Contract</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Additional Comments</label>
+                                        <textarea name="comments" rows="3"></textarea>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="btn-primary">Submit Request</button>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Reason for Leaving</label>
-                                    <select name="reason" required>
-                                        <option value="">Select Reason</option>
-                                        <option value="resignation">Resignation</option>
-                                        <option value="retirement">Retirement</option>
-                                        <option value="end_of_contract">End of Contract</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Additional Comments</label>
-                                    <textarea name="comments" rows="3"></textarea>
-                                </div>
-                                <button type="submit" class="btn-primary">Submit Request</button>
                             </form>
                         </div>
                     </div>
@@ -88,6 +115,12 @@
                                     <span>Admin Notification</span>
                                     <span class="status pending">Pending</span>
                                 </div>
+                            </div>
+                            <div class="completion-checkbox">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="notification-complete">
+                                    I confirm that I have reviewed all notifications
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -164,6 +197,12 @@
                                     <span>ERP Access</span>
                                     <span class="status pending">Pending</span>
                                 </div>
+                            </div>
+                            <div class="completion-checkbox">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="system-access-complete">
+                                    I confirm that I have reviewed all system access revocations
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -519,6 +558,12 @@
                                     <span class="status pending">Pending</span>
                                 </div>
                             </div>
+                            <div class="completion-checkbox">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="financial-complete">
+                                    I confirm that I have reviewed all financial settlements
+                                </label>
+                            </div>
                         </div>
                     </div>
 
@@ -551,6 +596,12 @@
                                     <span>Finance Clearance</span>
                                     <span class="status pending">Pending</span>
                                 </div>
+                            </div>
+                            <div class="completion-checkbox">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="completion-complete">
+                                    I confirm that I have reviewed all clearances
+                                </label>
                             </div>
                         </div>
                     </div>

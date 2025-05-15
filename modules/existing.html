@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Existing - Employee Lifecycle Management</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/existing.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar will be injected here -->
+        <main class="main-content">
+            <div class="module-container">
+                <h2>Existing Employee</h2>
+
+                <!-- Multi-Step Section -->
+                <div class="multi-step-section">
+                    <div class="progress_container">
+                        <div class="progress-step">
+                            <div class="circle active">1</div>
+                            <span class="step-label">Process Documents</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="circle">2</div>
+                            <span class="step-label">Training Videos</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="circle">3</div>
+                            <span class="step-label">Feedback Form</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="circle">4</div>
+                            <span class="step-label">KPI, KRI</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="circle">5</div>
+                            <span class="step-label">Brand Survey</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="circle">6</div>
+                            <span class="step-label">Grievance Form</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="circle">7</div>
+                            <span class="step-label">POSH Complaint</span>
+                        </div>
+                    </div>
+
+                    <div class="step-content" id="step-content">
+                        <!-- Step 1 -->
+                        <div class="step card" data-step="1">
+                            <h4>Step 1: View Process Documents</h4>
+                            <div class="step-content">
+                                <form class="modal-form" id="process-docs-form">
+                                    <div class="form-group">
+                                        <label>Document Type</label>
+                                        <select name="documentType" id="process-doc-type" required>
+                                            <option value="">Select Document Type</option>
+                                            <option value="pdf">PDF</option>
+                                            <option value="video">Video</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group pdf-upload" style="display: none;">
+                                        <label>Choose PDF Document</label>
+                                        <input type="file" name="pdfDocument" accept=".pdf" class="file-input">
+                                    </div>
+                                    <div class="form-group video-upload" style="display: none;">
+                                        <label>Video Link</label>
+                                        <input type="url" name="videoLink" placeholder="Enter video URL">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Comments</label>
+                                        <textarea name="comments" placeholder="Any additional comments..."></textarea>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="step card" data-step="2" style="display: none;">
+                            <h4>Step 2: Department Training Videos</h4>
+                            <div class="training-section">
+                                <form class="modal-form" id="training-form">
+                                    <div class="form-group">
+                                        <label>Content Type</label>
+                                        <select name="contentType" id="training-content-type" required>
+                                            <option value="">Select Content Type</option>
+                                            <option value="pdf">PDF</option>
+                                            <option value="video">Video</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group pdf-upload" style="display: none;">
+                                        <label>Choose Training PDF</label>
+                                        <input type="file" name="trainingPdf" accept=".pdf" class="file-input">
+                                    </div>
+                                    <div class="form-group video-upload" style="display: none;">
+                                        <label>Training Video Link</label>
+                                        <input type="url" name="trainingVideoLink" placeholder="Enter video URL">
+                                    </div>
+                                    <div class="form-group video-completion">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="video-watched" name="videoWatched">
+                                            I confirm that I have reviewed the complete content
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                       
+
+                        <!-- Step 3 -->
+                        <div class="step card" data-step="3" style="display: none;">
+                            <h4>Step 3: 360 Degree Feedback Form</h4>
+                            <form class="modal-form" id="feedback-form">
+                                <div class="form-group">
+                                    <label>How would you rate your team collaboration?</label>
+                                    <select name="rating" required>
+                                        <option value="">Select Rating</option>
+                                        <option value="5">Excellent</option>
+                                        <option value="4">Very Good</option>
+                                        <option value="3">Good</option>
+                                        <option value="2">Fair</option>
+                                        <option value="1">Poor</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>What are your team's strengths?</label>
+                                    <textarea name="strengths" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>What areas need improvement?</label>
+                                    <textarea name="improvements" required></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                      
+
+                        <!-- Step 4 -->
+                        <div class="step card" data-step="4" style="display: none;">
+                            <h4>Step 4: KPI, KRI</h4>
+                            <form class="modal-form" id="kpi-form">
+                                <div class="form-group">
+                                    <label>Select KPI Category</label>
+                                    <select name="category" required>
+                                        <option value="">Select Category</option>
+                                        <option value="performance">Performance</option>
+                                        <option value="quality">Quality</option>
+                                        <option value="efficiency">Efficiency</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>KPI Score (1-10)</label>
+                                    <input type="number" name="score" min="1" max="10" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Comments</label>
+                                    <textarea name="comments" required></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                       
+
+                        <!-- Step 5 -->
+                        <div class="step card" data-step="5" style="display: none;">
+                            <h4>Step 5: Brand Survey</h4>
+                            <form class="modal-form" id="brand-survey-form">
+                                <div class="form-group">
+                                    <label>How would you rate our brand reputation?</label>
+                                    <select name="rating" required>
+                                        <option value="">Select Rating</option>
+                                        <option value="5">Excellent</option>
+                                        <option value="4">Very Good</option>
+                                        <option value="3">Good</option>
+                                        <option value="2">Fair</option>
+                                        <option value="1">Poor</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>What aspects of our brand could be improved?</label>
+                                    <textarea name="improvements" required></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                      
+
+                        <!-- Step 6 -->
+                        <div class="step card" data-step="6" style="display: none;">
+                            <h4>Step 6: Grievance Form</h4>
+                            <form class="modal-form" id="grievance-form">
+                                <div class="form-group">
+                                    <label>Grievance Type</label>
+                                    <select name="type" required>
+                                        <option value="">Select Type</option>
+                                        <option value="workplace">Workplace Environment</option>
+                                        <option value="colleague">Colleague Behavior</option>
+                                        <option value="management">Management Issues</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" required placeholder="Please describe your grievance in detail"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Would you like to remain anonymous?</label>
+                                    <div class="radio-group">
+                                        <label>
+                                            <input type="radio" name="anonymous" value="yes" checked> Yes
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="anonymous" value="no"> No
+                                        </label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+
+                        <!-- Step 7 -->
+                        <div class="step card" data-step="7" style="display: none;">
+                            <h4>Step 7: POSH Complaint</h4>
+                            <form class="modal-form" id="posh-form">
+                                <div class="form-group">
+                                    <label>Incident Date</label>
+                                    <input type="date" name="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Incident Location</label>
+                                    <input type="text" name="location" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description of Incident</label>
+                                    <textarea name="description" required placeholder="Please provide detailed information about the incident"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Witnesses (if any)</label>
+                                    <textarea name="witnesses" placeholder="Please list any witnesses to the incident"></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                          <div class="step-navigation">
+                                <button type="button" class="btn-secondary" id="prev-step" disabled>Back</button>
+                                <button type="button" class="btn-primary" id="next-step" disabled>Next</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/components/sidebar.js"></script>
+    <script src="../js/existing.js"></script>
+</body>
+</html>

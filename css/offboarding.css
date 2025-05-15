@@ -1,25 +1,106 @@
 /* Offboarding Module Styles */
 
 .module-container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 2rem;
 }
 
-
-/* Step Container Styles */
-.offboarding-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+/* Progress Card Styles */
+.progress-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2.5rem 2rem 2rem 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.progress_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0 2rem;
+    width: 100%;
+    background: transparent;
+}
+
+.progress_container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 70px;
+    right: 70px;
+    height: 5px;
+    background: #E0E0E0;
+    z-index: 0;
+    border-radius: 3px;
+    transform: translateY(-50%);
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    min-width: 110px;
+}
+
+.circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #E0E0E0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-weight: bold;
+    font-size: 1.4rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    border: 3px solid #fff;
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+
+.circle.active {
+    background: #2196F3;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.circle.completed {
+    background: #4CAF50;
+    color: #fff;
+    transform: scale(1.1);
+}
+.circle.completed::after {
+    content: '✓';
+    position: absolute;
+    font-size: 1.2rem;
+}
+.step-label {
+    margin-top: 0.7rem;
+    font-size: 1.05rem;
+    color: #444;
+    text-align: center;
+    max-width: 110px;
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+/* Step Container Styles */
 .step-container {
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     margin-bottom: 1.5rem;
+    width: 100%;
 }
 
 .step-header {
@@ -62,31 +143,22 @@
     margin-left: 1rem;
 }
 
-.status-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 16px;
-    font-size: 0.875rem;
-    font-weight: 500;
-}
-
-.status-badge.pending {
-    background: #FFF3E0;
-    color: #F57C00;
-}
-
-.status-badge.completed {
-    background: #E8F5E9;
-    color: #2E7D32;
-}
-
-/* Step Content Styles */
 .step-content {
-    padding: 1.5rem;
+    padding: 2rem;
 }
 
 /* Form Styles */
 .offboarding-form {
-    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.form-section {
+    background: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
 }
 
 .form-group {
@@ -109,6 +181,15 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="date"]:focus,
+.form-group input[type="text"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2196F3;
+    outline: none;
 }
 
 .form-group textarea {
@@ -116,16 +197,102 @@
     min-height: 100px;
 }
 
-.radio-group {
-    display: flex;
-    gap: 1.5rem;
+/* Button Styles */
+.btn-primary {
+    background: #2196F3;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto;
+    min-width: 120px;
 }
 
-.radio-group label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.btn-primary:hover {
+    background: #1976D2;
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto;
+    min-width: 120px;
+}
+
+.btn-secondary:hover {
+    background: #d0d0d0;
+}
+
+/* Status Badge Styles */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-badge.pending {
+    background: #FFF3E0;
+    color: #F57C00;
+}
+
+.status-badge.completed {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+/* Navigation Buttons */
+.step-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0;
+}
+
+.step-navigation button {
+    font-size: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+    .progress-card {
+        padding: 1.2rem 0.5rem 1rem 0.5rem;
+        max-width: 100vw;
+    }
+    .progress_container {
+        padding: 0 0.5rem;
+    }
+    .progress-step {
+        min-width: 60px;
+    }
+    .step-label {
+        font-size: 0.8rem;
+        max-width: 60px;
+    }
+    .circle {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+    .progress_container::before {
+        left: 20px;
+        right: 20px;
+    }
 }
 
 /* Checklist Styles */
@@ -210,115 +377,6 @@
     color: #2E7D32;
 }
 
-/* Button Styles */
-.btn-primary {
-    background: #2196F3;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background: #1976D2;
-}
-
-.btn-secondary {
-    background: #e0e0e0;
-    color: #333;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.btn-secondary:hover {
-    background: #d0d0d0;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .module-container {
-        padding: 1rem;
-    }
-
-    .step-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-    }
-
-    .step-number {
-        margin-right: 0;
-    }
-
-    .step-status {
-        margin-left: 0;
-    }
-
-    .asset-details {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .radio-group {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-}
-
-.progress_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    margin: 2rem 0;
-    padding: 0 1rem;
-}
-
-.progress_container::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    right: 1rem;
-    height: 4px;
-    background-color: #E0E0E0;
-    z-index: 0;
-    transform: translateY(-50%);
-}
-
-.circle {
-    position: relative;
-    z-index: 1;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #E0E0E0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.3s;
-    flex-shrink: 0;
-}
-
-.circle.active {
-    background: #2196F3;
-    transform: scale(1.1);
-}
-
-.circle.completed {
-    background: #4CAF50; /* Optional: Green for completed steps */
-}
-
 .card {
     background: #fff;
     border-radius: 8px;
@@ -342,44 +400,7 @@
     margin: 0;
 }
 
-.step-navigation {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.btn-secondary, .btn-primary {
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.btn-secondary {
-    background: #e0e0e0;
-    color: #333;
-}
-
-.btn-primary {
-    background: #2196F3;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #1976D2;
-}
-
 /* Form Section Styles */
-.form-section {
-    background: #fff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
 .form-section h4 {
     color: #333;
     margin: 0 0 1rem;
@@ -504,4 +525,32 @@ input[type="datetime-local"] {
     .rating-scale {
         flex-wrap: wrap;
     }
+}
+
+/* Completion Checkbox Styles */
+.completion-checkbox {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.checkbox-label:hover {
+    color: #2196F3;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #2196F3;
 } 
