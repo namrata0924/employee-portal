@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding Management - Admin Dashboard</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <img src="../../assets/images/logo.png" alt="Company Logo">
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="onboarding.html" class="active"><i class="fas fa-user-plus"></i> Onboarding</a></li>
+                    <li><a href="employees.html"><i class="fas fa-users"></i> Employees</a></li>
+                  
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="admin-profile">
+                    <span class="admin-name">Admin Name</span>
+                    <img src="../../assets/images/admin-avatar.png" alt="Admin Avatar">
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <section id="onboarding-checklist">
+                    <h2>Onboarding Process Checklist</h2>
+                    <p>Use this form to track and manage the onboarding process for new employees.</p>
+                    
+                    <div class="employee-selector-wrapper">
+                        <div class="form-group">
+                            <label>Select Employee:</label>
+                            <select id="employee-selector">
+                                <option value="">Select an employee</option>
+                                <option value="1">John Doe - IT Department</option>
+                                <option value="2">Jane Smith - HR Department</option>
+                                <option value="3">Robert Johnson - Marketing</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="onboarding-checklist-wrapper">
+                        <!-- Stage 1: Induction -->
+                        <div class="onboarding-section">
+                            <h3 class="section-title">1. Induction</h3>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                  
+                                    <h4>Company Overview Video</h4>
+                                    <span class="document-type">Video</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="induction-video-complete">
+                                            <label for="induction-video-complete">Completed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                
+                                    <h4>Company Policies Document</h4>
+                                    <span class="document-type">PDF</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="policies-doc-complete">
+                                            <label for="policies-doc-complete">Completed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                
+                                    <h4>Employee Handbook-HR</h4>
+                                    <span class="document-type">PDF</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="handbook-complete">
+                                            <label for="handbook-complete">Completed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stage 2: Forms -->
+                        <div class="onboarding-section">
+                            <h3 class="section-title">2. Forms</h3>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                
+                                    <h4>Personal Information Form</h4>
+                                    <span class="document-type">Online Form/Upload file</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="personal-info-complete">
+                                            <label for="personal-info-complete">Completed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                   
+                                    <h4>Employment Contract Form</h4>
+                                    <span class="document-type">Online Form</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="contract-complete">
+                                            <label for="contract-complete">Completed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                   
+                                    <h4>Tax Declaration Form</h4>
+                                    <span class="document-type">Online Form</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="tax-form-complete">
+                                            <label for="tax-form-complete">Completed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stage 3: Training -->
+                        <div class="onboarding-section">
+                            <h3 class="section-title">3. Training</h3>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                   
+                                    <h4>Company Introduction Training</h4>
+                                    <span class="document-type">PDF/Video</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="intro-training-complete">
+                                            <label for="intro-training-complete">Completed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                   
+                                    <h4>Department-specific Training</h4>
+                                    <span class="document-type">PDF/Video</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="dept-training-complete">
+                                            <label for="dept-training-complete">Completed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stage 4: Process Documents -->
+                        <div class="onboarding-section">
+                            <h3 class="section-title">4. Process Documents</h3>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                  
+                                    <h4>Workflow and Procedures Guide</h4>
+                                    <span class="document-type">PDF/Video</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="workflow-guide-complete">
+                                            <label for="workflow-guide-complete">Completed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stage 5: Completion Notification -->
+                        <div class="onboarding-section">
+                            <h3 class="section-title">5. Completion Notification</h3>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                   
+                                    <h4>Notify Admin of Completion</h4>
+                                    <span class="document-type">Automated</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="completion-notification-complete">
+                                            <label for="completion-notification-complete">Completed</label>
+                                        </div>
+                                        <button class="send-email-btn" data-item="completion-notification"><i class="fas fa-envelope"></i> Send Email</button>
+                                        <span class="email-status" id="completion-email-status">Not sent</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stage 6: SSO Integration -->
+                        <div class="onboarding-section">
+                            <h3 class="section-title">6. SSO Integration</h3>
+                            
+                            <div class="checklist-item">
+                                <div class="item-header">
+                                    <h4>Enable Access to Internal Tools</h4>
+                                    <span class="document-type">Admin Panel</span>
+                                </div>
+                                <div class="item-controls">
+                                    <div class="admin-controls">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="sso-integration-complete">
+                                            <label for="sso-integration-complete">Completed</label>
+                                        </div>
+                                        <button class="action-btn"><i class="fas fa-key"></i> Enable Access</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="completion-actions">
+                        <div class="progress-tracker">
+                            <div class="progress-label">Overall Progress:</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="overall-progress-bar" style="width: 0%"></div>
+                                <span class="progress-text">0%</span>
+                            </div>
+                        </div>
+                        <button id="mark-all-complete" class="btn-primary"><i class="fas fa-check-double"></i> Mark All as Complete</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle checkbox clicks
+            const checkboxes = document.querySelectorAll('.checkbox-wrapper input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateProgress();
+                    
+                    // If this is the SSO checkbox, toggle the enable button state
+                    if (this.id === 'sso-integration-complete') {
+                        const enableBtn = this.closest('.admin-controls').querySelector('.action-btn');
+                        if (this.checked) {
+                            enableBtn.classList.add('enabled');
+                            enableBtn.innerHTML = '<i class="fas fa-check"></i> Access Enabled';
+                        } else {
+                            enableBtn.classList.remove('enabled');
+                            enableBtn.innerHTML = '<i class="fas fa-key"></i> Enable Access';
+                        }
+                    }
+                });
+            });
+            
+            // Handle completion notification email button
+            const emailBtn = document.querySelector('.send-email-btn');
+            if (emailBtn) {
+                emailBtn.addEventListener('click', function() {
+                    sendCompletionEmail();
+                    this.innerHTML = '<i class="fas fa-check"></i> Email Sent';
+                    this.classList.add('email-sent');
+                    this.disabled = true;
+                    
+                    const emailStatus = document.getElementById('completion-email-status');
+                    if (emailStatus) {
+                        emailStatus.textContent = 'Email sent on ' + new Date().toLocaleDateString();
+                        emailStatus.classList.add('sent');
+                    }
+                });
+            }
+            
+            // Enable Access button
+            const enableAccessBtn = document.querySelector('.action-btn');
+            if (enableAccessBtn) {
+                enableAccessBtn.addEventListener('click', function() {
+                    const ssoCheckbox = document.getElementById('sso-integration-complete');
+                    if (!ssoCheckbox.checked) {
+                        ssoCheckbox.checked = true;
+                        const event = new Event('change');
+                        ssoCheckbox.dispatchEvent(event);
+                    }
+                });
+            }
+            
+            // Mark all as complete button
+            const markAllCompleteBtn = document.getElementById('mark-all-complete');
+            markAllCompleteBtn.addEventListener('click', function() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = true;
+                    
+                    // Trigger change event to update UI
+                    const event = new Event('change');
+                    checkbox.dispatchEvent(event);
+                });
+            });
+            
+            // Update progress function
+            function updateProgress() {
+                const total = checkboxes.length;
+                const completed = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+                const percentage = Math.round((completed / total) * 100);
+                
+                const progressBar = document.getElementById('overall-progress-bar');
+                const progressText = progressBar.nextElementSibling;
+                
+                progressBar.style.width = percentage + '%';
+                progressText.textContent = percentage + '%';
+                
+                // Update checklist items to show completed status
+                checkboxes.forEach(checkbox => {
+                    const checklistItem = checkbox.closest('.checklist-item');
+                    if (checkbox.checked) {
+                        checklistItem.classList.add('completed');
+                    } else {
+                        checklistItem.classList.remove('completed');
+                    }
+                });
+            }
+            
+            // Send completion email function
+            function sendCompletionEmail() {
+                console.log('Sending completion notification email');
+                // In a real application, this would make an API call to send an email
+            }
+            
+            // Initial progress update
+            updateProgress();
+        });
+    </script>
+    <style>
+        /* Additional styles for the onboarding checklist */
+        .employee-selector-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .employee-selector-wrapper .form-group {
+            flex: 1;
+            margin-right: 20px;
+            margin-bottom: 0;
+        }
+        
+        .onboarding-checklist-wrapper {
+            margin-bottom: 30px;
+        }
+        
+        .onboarding-section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            margin: 0;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 18px;
+        }
+        
+        .checklist-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            transition: background-color 0.3s;
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-item.completed {
+            background-color: #e9f5ff;
+        }
+        
+        .item-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .checklist-item.completed .step-number {
+            background-color: #0d6efd;
+            color: white;
+        }
+        
+        .item-header h4 {
+            margin: 0;
+            flex: 1;
+        }
+        
+        .document-type {
+            background-color: #e9ecef;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #495057;
+        }
+        
+        .item-controls {
+            margin-left: 43px;
+        }
+        
+        .admin-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .action-btn i {
+            margin-right: 5px;
+        }
+        
+        .action-btn:hover {
+            background-color: #e9ecef;
+        }
+        
+        .action-btn.enabled {
+            background-color: #d1e7dd;
+            color: #198754;
+            border-color: #badbcc;
+        }
+        
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-wrapper input[type="checkbox"] {
+            margin-right: 5px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .checkbox-wrapper label {
+            font-weight: 500;
+        }
+        
+        .send-email-btn {
+            padding: 6px 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            color: #495057;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        
+        .send-email-btn i {
+            margin-right: 5px;
+        }
+        
+        .send-email-btn:hover {
+            background-color: #e9ecef;
+        }
+        
+        .send-email-btn.email-sent {
+            background-color: #d1e7dd;
+            color: #198754;
+            border-color: #badbcc;
+        }
+        
+        .email-status {
+            font-size: 14px;
+            color: #dc3545;
+            margin-left: 10px;
+        }
+        
+        .email-status.sent {
+            color: #198754;
+        }
+        
+        .completion-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .progress-tracker {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .progress-label {
+            font-weight: 500;
+        }
+        
+        .progress-bar-container {
+            width: 300px;
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #0d6efd;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            position: absolute;
+            right: 5px;
+            top: -2px;
+            font-size: 12px;
+            color: #495057;
+        }
+    </style>
+</body>
+</html> 

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees - Admin Dashboard</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <img src="../../assets/images/logo.png" alt="Company Logo">
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="onboarding.html"><i class="fas fa-user-plus"></i> Onboarding</a></li>
+                    <li><a href="employees.html" class="active"><i class="fas fa-users"></i> Employees</a></li>
+                 
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="admin-profile">
+                    <span class="admin-name">Admin Name</span>
+                    <img src="../../assets/images/admin-avatar.png" alt="Admin Avatar">
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <section id="employees-management">
+                    <h2>Employees Management</h2>
+                    
+                    <div class="employee-filters">
+                        <div class="filter-group">
+                            <label>Department:</label>
+                            <select id="department-filter">
+                                <option value="all">All Departments</option>
+                                <option value="it">IT</option>
+                                <option value="hr">HR</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="online">Online Department</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Status:</label>
+                            <select id="status-filter">
+                                <option value="all">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="onboarding">Onboarding</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary" id="add-employee-btn"><i class="fas fa-plus"></i> Add Employee</button>
+                    </div>
+                    
+                    <!-- Employee Progress Table (moved from dashboard) -->
+                    <div class="employee-progress">
+                        <h3>Employee Onboarding Progress</h3>
+                        <div class="progress-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Employee</th>
+                                        <th>Department</th>
+                                        <th>Start Date</th>
+                                        <th>Progress</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="employee-progress-body">
+                                    <!-- Dynamic content will be added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Employee Details Section -->
+                    <div class="employee-details-section" id="employee-details" style="display: none;">
+                        <h3>Employee Details</h3>
+                        <div class="details-card">
+                            <div class="employee-profile">
+                                <img src="../../assets/images/profile-placeholder.png" alt="Employee Photo" id="employee-photo">
+                                <div class="employee-info">
+                                    <h4 id="employee-name">Employee Name</h4>
+                                    <p id="employee-position">Position</p>
+                                    <p id="employee-department">Department</p>
+                                </div>
+                            </div>
+                            <div class="employee-contact">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span id="employee-email">email@example.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span id="employee-phone">+1 234 567 890</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span id="employee-join-date">Jan 1, 2023</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="details-tabs">
+                            <button class="tab-btn active" data-tab="onboarding">Onboarding Progress</button>
+                            <button class="tab-btn" data-tab="documents">Documents</button>
+                            <button class="tab-btn" data-tab="personal">Personal Info</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="onboarding-tab">
+                            <div class="progress-summary">
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" id="employee-progress-bar" style="width: 45%"></div>
+                                    <span class="progress-text">45% Complete</span>
+                                </div>
+                                <a href="onboarding.html" class="btn-secondary"><i class="fas fa-tasks"></i> Manage Onboarding</a>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="documents-tab">
+                            <div class="document-list">
+                                <div class="document-item">
+                                    <span class="doc-name">ID Proof</span>
+                                    <span class="doc-status uploaded">Uploaded</span>
+                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                </div>
+                                <div class="document-item">
+                                    <span class="doc-name">Address Proof</span>
+                                    <span class="doc-status uploaded">Uploaded</span>
+                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                </div>
+                                <div class="document-item">
+                                    <span class="doc-name">Education Certificates</span>
+                                    <span class="doc-status pending">Pending</span>
+                                </div>
+                                <div class="document-item">
+                                    <span class="doc-name">Experience Letters</span>
+                                    <span class="doc-status pending">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="personal-tab">
+                            <div class="personal-info">
+                                <div class="info-group">
+                                    <label>Full Name</label>
+                                    <p>John Smith Doe</p>
+                                </div>
+                                <div class="info-group">
+                                    <label>Date of Birth</label>
+                                    <p>January 15, 1990</p>
+                                </div>
+                                <div class="info-group">
+                                    <label>Address</label>
+                                    <p>123 Main Street, Anytown, State, 12345</p>
+                                </div>
+                                <div class="info-group">
+                                    <label>Emergency Contact</label>
+                                    <p>Jane Doe | +1 987 654 3210</p>
+                                </div>
+                                <div class="info-group">
+                                    <label>Blood Group</label>
+                                    <p>O+</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Populate employee table from onboardingState (from admin.js)
+            if (window.onboardingState) {
+                updateEmployeeTable();
+            } else {
+                // Fallback with sample data if onboardingState is not available
+                populateWithSampleData();
+            }
+            
+            // Add Event Listeners
+            
+            // Department filter
+            const departmentFilter = document.getElementById('department-filter');
+            if (departmentFilter) {
+                departmentFilter.addEventListener('change', filterEmployees);
+            }
+            
+            // Status filter
+            const statusFilter = document.getElementById('status-filter');
+            if (statusFilter) {
+                statusFilter.addEventListener('change', filterEmployees);
+            }
+            
+            // Add employee button
+            const addEmployeeBtn = document.getElementById('add-employee-btn');
+            if (addEmployeeBtn) {
+                addEmployeeBtn.addEventListener('click', function() {
+                    window.location.href = 'dashboard.html#onboarding-form';
+                });
+            }
+            
+            // Tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // View employee buttons
+            setupViewEmployeeButtons();
+        });
+        
+        // Update employee table from onboardingState
+        function updateEmployeeTable() {
+            const tableBody = document.getElementById('employee-progress-body');
+            if (!tableBody) return;
+            
+            tableBody.innerHTML = '';
+            
+            // Get employees from onboardingState
+            const employees = Array.from(window.onboardingState.employees.values());
+            
+            employees.forEach(employee => {
+                const row = document.createElement('tr');
+                row.setAttribute('data-department', employee.department);
+                row.setAttribute('data-status', employee.status.toLowerCase());
+                
+                row.innerHTML = `
+                    <td>${employee.name}</td>
+                    <td>${employee.department}</td>
+                    <td>${new Date(employee.startDate).toLocaleDateString()}</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: ${employee.progress}%"></div>
+                            <span>${employee.progress}%</span>
+                        </div>
+                    </td>
+                    <td><span class="status-badge ${employee.status.toLowerCase()}">${employee.status}</span></td>
+                    <td>
+                        <button class="btn-view" data-employee-id="${employee.id}">View</button>
+                        <button class="btn-edit" data-employee-id="${employee.id}">Edit</button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            setupViewEmployeeButtons();
+        }
+        
+        // Populate with sample data if onboardingState is not available
+        function populateWithSampleData() {
+            const tableBody = document.getElementById('employee-progress-body');
+            if (!tableBody) return;
+            
+            const sampleEmployees = [
+                { id: 1, name: 'John Doe', department: 'IT', startDate: '2023-01-15', progress: 75, status: 'In Progress' },
+                { id: 2, name: 'Jane Smith', department: 'HR', startDate: '2023-02-20', progress: 100, status: 'Completed' },
+                { id: 3, name: 'Robert Johnson', department: 'Marketing', startDate: '2023-03-10', progress: 30, status: 'In Progress' },
+                { id: 4, name: 'Emily Davis', department: 'Online', startDate: '2023-04-05', progress: 0, status: 'Pending' }
+            ];
+            
+            sampleEmployees.forEach(employee => {
+                const row = document.createElement('tr');
+                row.setAttribute('data-department', employee.department.toLowerCase());
+                row.setAttribute('data-status', employee.status.toLowerCase().replace(' ', ''));
+                
+                row.innerHTML = `
+                    <td>${employee.name}</td>
+                    <td>${employee.department}</td>
+                    <td>${new Date(employee.startDate).toLocaleDateString()}</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: ${employee.progress}%"></div>
+                            <span>${employee.progress}%</span>
+                        </div>
+                    </td>
+                    <td><span class="status-badge ${employee.status.toLowerCase().replace(' ', '')}">${employee.status}</span></td>
+                    <td>
+                        <button class="btn-view" data-employee-id="${employee.id}">View</button>
+                        <button class="btn-edit" data-employee-id="${employee.id}">Edit</button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            setupViewEmployeeButtons();
+        }
+        
+        // Set up view employee buttons
+        function setupViewEmployeeButtons() {
+            const viewButtons = document.querySelectorAll('.btn-view');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const employeeId = this.getAttribute('data-employee-id');
+                    showEmployeeDetails(employeeId);
+                });
+            });
+            
+            const editButtons = document.querySelectorAll('.btn-edit');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const employeeId = this.getAttribute('data-employee-id');
+                    window.location.href = `dashboard.html?edit=${employeeId}#onboarding-form`;
+                });
+            });
+        }
+        
+        // Show employee details
+        function showEmployeeDetails(employeeId) {
+            // In a real app, you would fetch employee details from an API or database
+            // For demo, we'll just show the details section
+            const detailsSection = document.getElementById('employee-details');
+            if (detailsSection) {
+                detailsSection.style.display = 'block';
+                
+                // Scroll to the details section
+                detailsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Filter employees based on department and status
+        function filterEmployees() {
+            const departmentFilter = document.getElementById('department-filter').value;
+            const statusFilter = document.getElementById('status-filter').value;
+            
+            const rows = document.querySelectorAll('#employee-progress-body tr');
+            
+            rows.forEach(row => {
+                const department = row.getAttribute('data-department');
+                const status = row.getAttribute('data-status');
+                
+                const departmentMatch = departmentFilter === 'all' || department === departmentFilter;
+                const statusMatch = statusFilter === 'all' || status === statusFilter;
+                
+                if (departmentMatch && statusMatch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+    <style>
+        /* Additional styles for the employees page */
+        .employee-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .filter-group label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        
+        .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            min-width: 150px;
+        }
+        
+        /* Employee Details Section */
+        .employee-details-section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            padding: 20px;
+        }
+        
+        .details-card {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .employee-profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .employee-profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        
+        .employee-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+        }
+        
+        .employee-info p {
+            margin: 0 0 5px 0;
+            color: #6c757d;
+        }
+        
+        .employee-contact {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .contact-item {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-item i {
+            width: 20px;
+            color: #6c757d;
+            margin-right: 10px;
+        }
+        
+        /* Tabs */
+        .details-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .tab-btn {
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            margin-right: 15px;
+            font-weight: 500;
+        }
+        
+        .tab-btn.active {
+            border-bottom: 2px solid #0d6efd;
+            color: #0d6efd;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 15px 0;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Progress Summary */
+        .progress-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .btn-secondary i {
+            margin-right: 5px;
+        }
+        
+        /* Document List */
+        .document-list {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .document-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .doc-name {
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .doc-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 15px;
+        }
+        
+        .doc-status.uploaded {
+            background-color: #d1e7dd;
+            color: #198754;
+        }
+        
+        .doc-status.pending {
+            background-color: #f8d7da;
+            color: #dc3545;
+        }
+        
+        /* Personal Info */
+        .personal-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .info-group label {
+            display: block;
+            font-weight: 500;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+        
+        .info-group p {
+            margin: 0;
+            color: #212529;
+        }
+    </style>
+</body>
+</html> 
