@@ -456,7 +456,7 @@
 
 .stage.active {
     display: block;
-    animation: fadeIn 0.3s ease;
+    /* animation: fadeIn 0.3s ease; */
 }
 
 @keyframes fadeIn {
@@ -827,4 +827,9 @@ input[type="date"] {
         width: 100%;
     }
 }
-
+.stage {
+    display: none; /* Hide all stages by default */
+}
+.stage.active {
+    display: block; /* Show only the active stage */
+}
