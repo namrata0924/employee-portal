@@ -12,9 +12,9 @@
     <div class="app-container">
         <!-- Sidebar will be injected here -->
         <main class="main-content">
-    <div class="module-container">
-        <h2>Employee Onboarding</h2>
-                
+            <div class="module-container">
+                <h2>Employee Onboarding</h2>
+
                 <!-- Stage Progress Bar -->
                 <div class="stage-progress">
                     <div class="stage-indicators">
@@ -48,8 +48,8 @@
                         </div>
                     </div>
                     <div class="stage-progress-bar">
-            <div class="progress" style="width: 0%"></div>
-        </div>
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
                 </div>
 
                 <!-- Stages Container -->
@@ -63,67 +63,67 @@
                         <div class="steps">
                             <!-- Step 1.1 -->
                             <div class="step" data-step="1">
-                    <div class="step-header">
+                                <div class="step-header">
                                     <div class="step-number">1.1</div>
-                        <h4>Company Overview Video</h4>
+                                    <h4>Company Overview Video</h4>
                                     <div class="step-status pending">Pending</div>
-                    </div>
-                    <div class="step-content">
-                        <div class="video-container">
-                            <video id="company-video" controls>
-                                <source src="../assets/videos/company-overview.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <div class="completion-status">
-                            <label>
-                                <input type="checkbox" class="completion-checkbox" data-step="1.1">
-                                I have watched the complete video
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                                </div>
+                                <div class="step-content">
+                                    <div class="video-container">
+                                        <video id="company-video" controls>
+                                            <source src="../assets/videos/company-overview.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                    <div class="completion-status">
+                                        <label>
+                                            <input type="checkbox" class="completion-checkbox" data-step="1.1">
+                                            I have watched the complete video
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- Step 1.2 -->
                             <div class="step" data-step="2">
-                    <div class="step-header">
+                                <div class="step-header">
                                     <div class="step-number">1.2</div>
-                        <h4>Company Policies Document</h4>
+                                    <h4>Company Policies Document</h4>
                                     <div class="step-status pending">Pending</div>
-                    </div>
-                    <div class="step-content">
-                        <div class="document-viewer">
-                            <iframe src="../assets/documents/company-policies.pdf" width="100%" height="400px"></iframe>
-                        </div>
-                        <div class="completion-status">
-                            <label>
+                                </div>
+                                <div class="step-content">
+                                    <div class="document-viewer">
+                                        <iframe src="../assets/documents/company-policies.pdf" width="100%" height="400px"></iframe>
+                                    </div>
+                                    <div class="completion-status">
+                                        <label>
                                             <input type="checkbox" class="completion-checkbox" data-step="1.2">
-                                I have read and understood the company policies
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                                            I have read and understood the company policies
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- Step 1.3 -->
                             <div class="step" data-step="3">
-                    <div class="step-header">
+                                <div class="step-header">
                                     <div class="step-number">1.3</div>
                                     <h4>Employee Handbook-HR</h4>
                                     <div class="step-status pending">Pending</div>
-                    </div>
-                    <div class="step-content">
-                        <div class="document-viewer">
-                            <iframe src="../assets/documents/employee-handbook.pdf" width="100%" height="400px"></iframe>
-                        </div>
-                        <div class="completion-status">
-                            <label>
+                                </div>
+                                <div class="step-content">
+                                    <div class="document-viewer">
+                                        <iframe src="../assets/documents/employee-handbook.pdf" width="100%" height="400px"></iframe>
+                                    </div>
+                                    <div class="completion-status">
+                                        <label>
                                             <input type="checkbox" class="completion-checkbox" data-step="1.3">
-                                I have read and understood the employee handbook
-                            </label>
+                                            I have read and understood the employee handbook
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
                         <div class="navigation-buttons">
                             <button class="btn-prev" onclick="onboardingModule.previousStage()">Previous</button>
                             <button class="btn-next" onclick="onboardingModule.nextStage()">Next</button>
@@ -166,7 +166,7 @@
                                                     <input type="date" id="dateOfJoining" name="dateOfJoining" required>
                                                 </div>
                                             </div>
-                            
+
                                             <div class="form-row">
                                                 <div class="form-group required">
                                                     <label for="consultantName">Name of Consultant</label>
@@ -177,7 +177,7 @@
                                                     <input type="date" id="dateOfBirth" name="dateOfBirth" required>
                                                 </div>
                                             </div>
-                            
+
                                             <div class="form-row">
                                                 <div class="form-group required">
                                                     <label for="maritalStatus">Marital Status</label>
@@ -205,7 +205,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                            
+
                                         <div class="form-section">
                                             <h5 class="form-section-title">Current Address</h5>
                                             <div class="form-group required">
@@ -227,7 +227,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                            
+
                                         <div class="form-section">
                                             <h5 class="form-section-title">Permanent Address</h5>
                                             <div class="form-group required">
@@ -249,7 +249,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                            
+
                                         <div class="form-section">
                                             <h5 class="form-section-title">Contact Information</h5>
                                             <div class="form-row">
@@ -266,7 +266,7 @@
                                                     <input type="text" id="aadhar" name="aadhar" pattern="[0-9]{12}" title="Please enter a valid 12-digit Aadhar number" required>
                                                 </div>
                                             </div>
-                            
+
                                             <div class="form-row">
                                                 <div class="form-group required">
                                                     <label for="mobile">Mobile Number</label>
@@ -278,7 +278,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                            
+
                                         <div class="form-actions">
                                             <button type="button" class="btn-cancel">Cancel</button>
                                             <button type="submit" class="btn-save">Save Information</button>
@@ -289,132 +289,132 @@
 
                             <!-- Step 2.2 -->
                             <div class="step" data-step="5">
-                    <div class="step-header">
+                                <div class="step-header">
                                     <div class="step-number">2.2</div>
-                        <h4>Employment Details</h4>
+                                    <h4>Employment Details</h4>
                                     <div class="step-status pending">Pending</div>
-                    </div>
-                    <div class="step-content">
-                        <form id="family-info-form" class="onboarding-form">
-                            <div class="family-members">
-                                <!-- Father Information -->
-                                <div class="family-member-section">
-                                    <h5>Father</h5>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="fatherName">Name</label>
-                                            <input type="text" id="fatherName" name="fatherName" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="fatherDOB">Date of Birth</label>
-                                            <input type="date" id="fatherDOB" name="fatherDOB" required>
-                                        </div>
-                                        <div class="form-group checkbox-group">
-                                            <label>
-                                                <input type="checkbox" id="fatherResiding" name="fatherResiding">
-                                                Residing with Self
-                                            </label>
-                                        </div>
-                                    </div>
                                 </div>
-                
-                                <!-- Mother Information -->
-                                <div class="family-member-section">
-                                    <h5>Mother</h5>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="motherName">Name</label>
-                                            <input type="text" id="motherName" name="motherName" required>
+                                <div class="step-content">
+                                    <form id="family-info-form" class="onboarding-form">
+                                        <div class="family-members">
+                                            <!-- Father Information -->
+                                            <div class="family-member-section">
+                                                <h5>Father</h5>
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="fatherName">Name</label>
+                                                        <input type="text" id="fatherName" name="fatherName" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="fatherDOB">Date of Birth</label>
+                                                        <input type="date" id="fatherDOB" name="fatherDOB" required>
+                                                    </div>
+                                                    <div class="form-group checkbox-group">
+                                                        <label>
+                                                            <input type="checkbox" id="fatherResiding" name="fatherResiding">
+                                                            Residing with Self
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Mother Information -->
+                                            <div class="family-member-section">
+                                                <h5>Mother</h5>
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="motherName">Name</label>
+                                                        <input type="text" id="motherName" name="motherName" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="motherDOB">Date of Birth</label>
+                                                        <input type="date" id="motherDOB" name="motherDOB" required>
+                                                    </div>
+                                                    <div class="form-group checkbox-group">
+                                                        <label>
+                                                            <input type="checkbox" id="motherResiding" name="motherResiding">
+                                                            Residing with Self
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Spouse Information -->
+                                            <div class="family-member-section">
+                                                <h5>Spouse</h5>
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="spouseName">Name</label>
+                                                        <input type="text" id="spouseName" name="spouseName">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="spouseDOB">Date of Birth</label>
+                                                        <input type="date" id="spouseDOB" name="spouseDOB">
+                                                    </div>
+                                                    <div class="form-group checkbox-group">
+                                                        <label>
+                                                            <input type="checkbox" id="spouseResiding" name="spouseResiding">
+                                                            Residing with Self
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn-remove-family-member" style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Spouse</button>
+                                            </div>
+
+                                            <!-- Children Information -->
+                                            <div class="family-member-section">
+                                                <h5>Son/Daughter 1</h5>
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="child1Name">Name</label>
+                                                        <input type="text" id="child1Name" name="child1Name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="child1DOB">Date of Birth</label>
+                                                        <input type="date" id="child1DOB" name="child1DOB">
+                                                    </div>
+                                                    <div class="form-group checkbox-group">
+                                                        <label>
+                                                            <input type="checkbox" id="child1Residing" name="child1Residing">
+                                                            Residing with Self
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn-remove-family-member" style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Child 1</button>
+                                            </div>
+
+                                            <div class="family-member-section">
+                                                <h5>Son/Daughter 2</h5>
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="child2Name">Name</label>
+                                                        <input type="text" id="child2Name" name="child2Name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="child2DOB">Date of Birth</label>
+                                                        <input type="date" id="child2DOB" name="child2DOB">
+                                                    </div>
+                                                    <div class="form-group checkbox-group">
+                                                        <label>
+                                                            <input type="checkbox" id="child2Residing" name="child2Residing">
+                                                            Residing with Self
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn-remove-family-member" style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Child 2</button>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="motherDOB">Date of Birth</label>
-                                            <input type="date" id="motherDOB" name="motherDOB" required>
+
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn-primary">Save Family Information</button>
                                         </div>
-                                        <div class="form-group checkbox-group">
-                                            <label>
-                                                <input type="checkbox" id="motherResiding" name="motherResiding">
-                                                Residing with Self
-                                            </label>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                
-                                <!-- Spouse Information -->
-                                <div class="family-member-section">
-                                    <h5>Spouse</h5>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="spouseName">Name</label>
-                                            <input type="text" id="spouseName" name="spouseName">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="spouseDOB">Date of Birth</label>
-                                            <input type="date" id="spouseDOB" name="spouseDOB">
-                                        </div>
-                                        <div class="form-group checkbox-group">
-                                            <label>
-                                                <input type="checkbox" id="spouseResiding" name="spouseResiding">
-                                                Residing with Self
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn-remove-family-member" style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Spouse</button>
-                                </div>
-                
-                                <!-- Children Information -->
-                                <div class="family-member-section">
-                                    <h5>Son/Daughter 1</h5>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="child1Name">Name</label>
-                                            <input type="text" id="child1Name" name="child1Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="child1DOB">Date of Birth</label>
-                                            <input type="date" id="child1DOB" name="child1DOB">
-                                        </div>
-                                        <div class="form-group checkbox-group">
-                                            <label>
-                                                <input type="checkbox" id="child1Residing" name="child1Residing">
-                                                Residing with Self
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn-remove-family-member" style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Child 1</button>
-                                </div>
-                
-                                <div class="family-member-section">
-                                    <h5>Son/Daughter 2</h5>
-                                    <div class="form-row">
-                            <div class="form-group">
-                                            <label for="child2Name">Name</label>
-                                            <input type="text" id="child2Name" name="child2Name">
                             </div>
-                            <div class="form-group">
-                                            <label for="child2DOB">Date of Birth</label>
-                                            <input type="date" id="child2DOB" name="child2DOB">
-                                        </div>
-                                        <div class="form-group checkbox-group">
-                                            <label>
-                                                <input type="checkbox" id="child2Residing" name="child2Residing">
-                                                Residing with Self
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn-remove-family-member" style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Child 2</button>
-                                </div>
-                            </div>
-                
-                            <div class="form-actions">
-                                <button type="submit" class="btn-primary">Save Family Information</button>
-                            </div>
-                        </form>
-                </div>
-            </div>
 
                             <!-- Step 2.3 -->
                             <div class="step" data-step="6">
-                    <div class="step-header">
+                                <div class="step-header">
                                     <div class="step-number">2.3</div>
                                     <h4>Additional Documents</h4>
                                     <div class="step-status pending">Pending</div>
@@ -429,7 +429,7 @@
                                                     <label for="org1Name">Organization Name</label>
                                                     <input type="text" id="org1Name" name="org1Name" required>
                                                 </div>
-                                                
+
                                                 <div class="experience-details">
                                                     <div class="form-row">
                                                         <div class="form-group">
@@ -446,14 +446,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                
+
                                                 <div class="form-row">
                                                     <div class="form-group">
                                                         <label for="org1ContactNo">Contact No.</label>
                                                         <input type="tel" id="org1ContactNo" name="org1ContactNo" pattern="[0-9]{10}" title="Please enter a valid 10-digit contact number">
                                                     </div>
                                                 </div>
-                                
+
                                                 <div class="form-group">
                                                     <label for="org1JobDescription">Job Description</label>
                                                     <textarea id="org1JobDescription" name="org1JobDescription" rows="3" required></textarea>
@@ -461,16 +461,17 @@
                                                 <button type="button" class="btn-remove-organization" style="margin-top: 10px; background-color: var(--error-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Organization</button>
                                             </div>
                                         </div>
-                            
-                                        <button type="button" id="add-organization-btn" class="btn-primary" style="margin-top: 1.5rem; background-color: var(--success-color)"><i class="fas fa-plus"></i> Add Another Organization</button>
-                                        
-                                        <!-- Second Organization (Structure removed, will be added dynamically) -->
-                            
+
+                                        <button type="button" id="add-organization-btn" class="btn-primary" style="margin-top: 1.5rem; background-color: var(--success-color)">
+                                            <i class="fas fa-plus"></i> Add Another Organization
+                                        </button>
+
                                         <div class="form-actions">
                                             <button type="submit" class="btn-primary">Save Work Experience</button>
                                         </div>
                                     </form>
                                 </div>
+                            </div>
                         </div>
                         <div class="navigation-buttons">
                             <button class="btn-prev" onclick="onboardingModule.previousStage()">Previous</button>
@@ -491,18 +492,24 @@
                                     <div class="step-number">3.1</div>
                                     <h4>Safety Training</h4>
                                     <div class="step-status pending">Pending</div>
-                    </div>
-                    <div class="step-content">
-                                <div class="video-container">
-                                    <video controls>
-                                        <source src="../assets/videos/safety-training.mp4" type="video/mp4">
-                                    </video>
                                 </div>
-                                <div class="quiz-section">
+                                <div class="step-content">
+                                    <div class="video-container">
+                                        <video controls>
+                                            <source src="../assets/videos/safety-training.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                    <div class="completion-status">
+                                        <label>
+                                            <input type="checkbox" class="completion-checkbox" data-step="3.1">
+                                            I have completed the Safety Training
+                                        </label>
+                                    </div>
+                                    <div class="quiz-section">
                                         <h6>Safety Training Quiz</h6>
-                                    <form class="quiz-form">
-                                        <!-- Quiz questions will be dynamically loaded -->
-                                    </form>
+                                        <form class="quiz-form">
+                                            <!-- Quiz questions will be dynamically loaded -->
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -517,6 +524,12 @@
                                 <div class="step-content">
                                     <div class="training-materials">
                                         <!-- Training content will be dynamically loaded based on department -->
+                                    </div>
+                                    <div class="completion-status">
+                                        <label>
+                                            <input type="checkbox" class="completion-checkbox" data-step="3.2">
+                                            I have completed the Department Training
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -542,14 +555,25 @@
                                 </div>
                                 <div class="step-content">
                                     <!-- Process documentation content -->
-                    </div>
-                </div>
-            </div>
+                                    <p>Please review the following documents:</p>
+                                    <ul>
+                                        <li>Document 1: <a href="../assets/documents/document1.pdf" target="_blank">View Document</a></li>
+                                        <li>Document 2: <a href="../assets/documents/document2.pdf" target="_blank">View Document</a></li>
+                                    </ul>
+                                    <div class="completion-status">
+                                        <label>
+                                            <input type="checkbox" class="completion-checkbox" data-step="4.1">
+                                            I have reviewed the process documentation
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="navigation-buttons">
                             <button class="btn-prev" onclick="onboardingModule.previousStage()">Previous</button>
                             <button class="btn-next" onclick="onboardingModule.nextStage()">Next</button>
-                </div>
-            </div>
+                        </div>
+                    </div>
 
                     <!-- Stage 5: Completion Notification -->
                     <div class="stage" data-stage="5">
@@ -559,12 +583,12 @@
                         </div>
                         <div class="steps">
                             <div class="step" data-step="10">
-                    <div class="step-header">
+                                <div class="step-header">
                                     <div class="step-number">5.1</div>
                                     <h4>Completion Review</h4>
                                     <div class="step-status pending">Pending</div>
-                    </div>
-                    <div class="step-content">
+                                </div>
+                                <div class="step-content">
                                     <div class="completion-summary">
                                         <!-- Summary will be dynamically generated -->
                                     </div>

@@ -17,7 +17,6 @@
 }
 
 /* Onboarding Module Styles */
-
 .module-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -299,7 +298,7 @@
 .upload-item {
     background: #f8f9fa;
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     border: 2px dashed #E3F2FD;
 }
 
@@ -454,10 +453,6 @@
     transition: var(--transition);
 }
 
-.stage.active {
-    display: block;
-    /* animation: fadeIn 0.3s ease; */
-}
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -623,7 +618,7 @@
         width: 100%;
         justify-content: center;
     }
-} 
+}
 
 .form-row {
     display: flex;
@@ -827,9 +822,11 @@ input[type="date"] {
         width: 100%;
     }
 }
+
 .stage {
     display: none; /* Hide all stages by default */
 }
+
 .stage.active {
     display: block; /* Show only the active stage */
 }

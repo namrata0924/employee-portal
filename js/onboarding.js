@@ -57,12 +57,10 @@ const onboardingModule = {
         console.log(`[navigateToStage] canAccessStage(${stageNumber}) returned: ${canAccess}`);
         if (stageNumber > this.currentStage && !canAccess) {
             console.warn(`[navigateToStage] Navigation to Stage ${stageNumber} denied. It's not yet accessible.`);
-            // this.showNotification('Please complete the current stage first.', 'error'); // Optional: canAccessStage might show its own.
             return;
         }
 
         const newStageElement = document.querySelector(`.stage[data-stage="${stageNumber}"]`);
-
         if (!newStageElement) {
             console.error(`[navigateToStage] Stage element for data-stage="${stageNumber}" not found.`);
             return;
@@ -107,7 +105,6 @@ const onboardingModule = {
             // Set 'active' for the current stage, or 'locked' for inaccessible future stages
             if (indicatorStageNum === stageNumber) { // Current stage being navigated to
                 indicator_elem.classList.add('active');
-                // 'locked' is implicitly removed by the reset and not re-added for active stage
             } else {
                 // For non-active stages, lock them if they are not completed AND their prerequisite is not met
                 if (!this.completedStages.has(indicatorStageNum) && 
@@ -134,8 +131,7 @@ const onboardingModule = {
         }
         
         this.updateNavigationButtons();
-        // newStageElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Temporarily disable scroll for testing
-        console.log(`Successfully navigated to Stage ${stageNumber}. Display should be updated.`);
+        console.log(`[navigateToStage] Successfully navigated to Stage ${stageNumber}. Display should be updated.`);
     },
 
     updateNavigationButtons() {
@@ -242,7 +238,6 @@ const onboardingModule = {
         stepStatus.classList.add('completed');
 
         this.checkStageCompletion(step.closest('.stage'));
-        // this.showNotification('Stage completed successfully!', 'success'); // Moved to checkStageCompletion
     },
 
     checkStageCompletion(stage) {
@@ -260,7 +255,7 @@ const onboardingModule = {
         const stageNumber = parseInt(stageElement.dataset.stage);
         if (this.completedStages.has(stageNumber)) {
             console.log(`Stage ${stageNumber} is already marked as completed.`);
-            // return; // Optionally return if already processed
+            return; // Optionally return if already processed
         }
         console.log(`completeStage called for Stage ${stageNumber}.`);
 
@@ -278,7 +273,6 @@ const onboardingModule = {
         this.completedStages.add(stageNumber);
         console.log('Completed stages set:', Array.from(this.completedStages));
         this.showNotification(`Stage ${stageNumber} completed successfully!`, 'success');
-
 
         // Unlock and update status for the next stage, if it exists
         if (stageNumber < this.totalStages) {
@@ -342,7 +336,6 @@ const onboardingModule = {
         const checkbox = step.querySelector('.completion-checkbox');
         
         if (checkbox) {
-            // checkbox.disabled = false;
             this.showNotification('Video completed. Please check the acknowledgment box to proceed.');
         }
     },
