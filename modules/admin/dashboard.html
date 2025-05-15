@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Employee Onboarding</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <img src="../../assets/images/logo.png" alt="Company Logo">
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="#dashboard" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#onboarding"><i class="fas fa-user-plus"></i> Onboarding</a></li>
+                    <li><a href="#employees"><i class="fas fa-users"></i> Employees</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="admin-profile">
+                    <span class="admin-name">Admin Name</span>
+                    <img src="../../assets/images/admin-avatar.png" alt="Admin Avatar">
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <section id="onboarding-management" class="active-section">
+                    <h2>Onboarding Management</h2>
+                    
+                    <!-- New Employee Onboarding Form -->
+                    <div class="onboarding-form-section">
+                        <h3>New Employee Onboarding</h3>
+                        <form id="it-onboarding-form" class="admin-form">
+                            <div class="form-group">
+                                <label>Employee Name</label>
+                                <input type="text" name="employeeName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Employee ID</label>
+                                <input type="text" name="employeeId" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Department</label>
+                                <select name="department" required>
+                                    <option value="">Select Department</option>
+                                    <option value="it">IT</option>
+                                    <option value="hr">HR</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="online">Online Department</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Joining Date</label>
+                                <input type="date" name="joiningDate" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Initiate Onboarding</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Employee Progress Summary -->
+                    <div class="employee-progress">
+                        <h3>Employee Onboarding Progress</h3>
+                        <div class="progress-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Employee</th>
+                                        <th>Department</th>
+                                        <th>Start Date</th>
+                                        <th>Progress</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="employee-progress-body">
+                                    <!-- Dynamic content will be added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Onboarding Activities Timeline -->
+                    <div class="onboarding-activities-wrapper">
+                        <h3>Onboarding Activities</h3>
+                        
+                        <div class="activity-controls">
+                            <div class="employee-selector">
+                                <label>Select Employee:</label>
+                                <select id="activity-employee-select">
+                                    <option value="">Choose an employee</option>
+                                    <!-- Will be populated dynamically -->
+                                </select>
+                            </div>
+                            <div class="activity-filters">
+                                <button class="filter-btn active" data-filter="all">All Steps</button>
+                                <button class="filter-btn" data-filter="pending">Pending</button>
+                                <button class="filter-btn" data-filter="completed">Completed</button>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-timeline">
+                            <!-- Step 1: IT Onboarding Form -->
+                            <div class="activity-step" data-step="1">
+                                <div class="step-number">1</div>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <h3>IT On-boarding Form</h3>
+                                        <div class="assigned-to">HR & IT</div>
+                                        <button class="expand-activity"><i class="fas fa-chevron-down"></i></button>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-description">HR to fill up the IT onboarding form to intimate new joining for arrangements of IT assets</p>
+                                        <div class="document-section">
+                                            <h4>Document</h4>
+                                            <div class="document-type">PDF Form</div>
+                                            <div class="document-actions">
+                                                <div class="upload-section">
+                                                    <input type="file" id="it-form-upload" accept=".pdf">
+                                                    <label for="it-form-upload" class="upload-btn"><i class="fas fa-file-upload"></i> Upload IT Form</label>
+                                                </div>
+                                                <div class="download-section">
+                                                    <a href="#" class="download-btn"><i class="fas fa-file-download"></i> Download Template</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="completion-section">
+                                            <div class="completion-toggle">
+                                                <input type="checkbox" id="step1-complete">
+                                                <label for="step1-complete">Mark as Complete</label>
+                                            </div>
+                                            <div class="completion-meta">
+                                                <span class="completion-date">Completion Date: <span id="step1-date">Not completed</span></span>
+                                                <span class="completed-by">Completed by: <span id="step1-by">-</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 2: Welcome Preparation -->
+                            <div class="activity-step" data-step="2">
+                                <div class="step-number">2</div>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <h3>Preparing for Welcome</h3>
+                                        <div class="assigned-to">HR & Marketing</div>
+                                        <button class="expand-activity"><i class="fas fa-chevron-down"></i></button>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-description">HR will share the Photo and CV of the joining employee with Digital Marketing (AA) to prepare intro mail and WhatsApp welcome image</p>
+                                        <div class="document-section">
+                                            <h4>Required Materials</h4>
+                                            <div class="file-uploads">
+                                                <div class="upload-section">
+                                                    <input type="file" id="employee-photo-upload" accept="image/*">
+                                                    <label for="employee-photo-upload" class="upload-btn"><i class="fas fa-image"></i> Upload Photo</label>
+                                                </div>
+                                                <div class="upload-section">
+                                                    <input type="file" id="employee-cv-upload" accept=".pdf,.doc,.docx">
+                                                    <label for="employee-cv-upload" class="upload-btn"><i class="fas fa-file-alt"></i> Upload CV</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="completion-section">
+                                            <div class="completion-toggle">
+                                                <input type="checkbox" id="step2-complete">
+                                                <label for="step2-complete">Mark as Complete</label>
+                                            </div>
+                                            <div class="completion-meta">
+                                                <span class="completion-date">Completion Date: <span id="step2-date">Not completed</span></span>
+                                                <span class="completed-by">Completed by: <span id="step2-by">-</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 3: IT Assets Handover -->
+                            <div class="activity-step" data-step="3">
+                                <div class="step-number">3</div>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <h3>IT Assets Handover</h3>
+                                        <div class="assigned-to">Admin, IT & HR</div>
+                                        <button class="expand-activity"><i class="fas fa-chevron-down"></i></button>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-description">IT assets: Laptop, charger, mouse (if required).</p>
+                                        <div class="asset-checklist">
+                                            <h4>Assets</h4>
+                                            <div class="asset-item">
+                                                <input type="checkbox" id="asset-laptop">
+                                                <label for="asset-laptop">Laptop</label>
+                                                <input type="text" placeholder="Asset ID" class="asset-id">
+                                            </div>
+                                            <div class="asset-item">
+                                                <input type="checkbox" id="asset-charger">
+                                                <label for="asset-charger">Charger</label>
+                                                <input type="text" placeholder="Asset ID" class="asset-id">
+                                            </div>
+                                            <div class="asset-item">
+                                                <input type="checkbox" id="asset-mouse">
+                                                <label for="asset-mouse">Mouse</label>
+                                                <input type="text" placeholder="Asset ID" class="asset-id">
+                                            </div>
+                                            <div class="asset-item">
+                                                <input type="checkbox" id="asset-other">
+                                                <label for="asset-other">Other:</label>
+                                                <input type="text" placeholder="Specify" class="asset-name">
+                                                <input type="text" placeholder="Asset ID" class="asset-id">
+                                            </div>
+                                        </div>
+                                        <div class="completion-section">
+                                            <div class="completion-toggle">
+                                                <input type="checkbox" id="step3-complete">
+                                                <label for="step3-complete">Mark as Complete</label>
+                                            </div>
+                                            <div class="completion-meta">
+                                                <span class="completion-date">Completion Date: <span id="step3-date">Not completed</span></span>
+                                                <span class="completed-by">Completed by: <span id="step3-by">-</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 4: Company Branding Assets -->
+                            <div class="activity-step" data-step="4">
+                                <div class="step-number">4</div>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <h3>Company Branding Assets</h3>
+                                        <div class="assigned-to">Admin & HR</div>
+                                        <button class="expand-activity"><i class="fas fa-chevron-down"></i></button>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-description">Circular badge, Dive-In mug, and pen (if any).</p>
+                                        <div class="asset-checklist">
+                                            <h4>Branding Items</h4>
+                                            <div class="asset-item">
+                                                <input type="checkbox" id="asset-badge">
+                                                <label for="asset-badge">Circular Badge</label>
+                                            </div>
+                                            <div class="asset-item">
+                                                <input type="checkbox" id="asset-mug">
+                                                <label for="asset-mug">Dive-In Mug</label>
+                                            </div>
+                                            <div class="asset-item">
+                                                <input type="checkbox" id="asset-pen">
+                                                <label for="asset-pen">Company Pen</label>
+                                            </div>
+                                            <div class="asset-item">
+                                                <input type="checkbox" id="asset-other-brand">
+                                                <label for="asset-other-brand">Other:</label>
+                                                <input type="text" placeholder="Specify" class="asset-name">
+                                            </div>
+                                        </div>
+                                        <div class="completion-section">
+                                            <div class="completion-toggle">
+                                                <input type="checkbox" id="step4-complete">
+                                                <label for="step4-complete">Mark as Complete</label>
+                                            </div>
+                                            <div class="completion-meta">
+                                                <span class="completion-date">Completion Date: <span id="step4-date">Not completed</span></span>
+                                                <span class="completed-by">Completed by: <span id="step4-by">-</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 5: Login Credentials -->
+                            <div class="activity-step" data-step="5">
+                                <div class="step-number">5</div>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <h3>Create Login Credentials</h3>
+                                        <div class="assigned-to">Admin & IT</div>
+                                        <button class="expand-activity"><i class="fas fa-chevron-down"></i></button>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-description">Outlook (IT), HR One (HR), ERP (Admin), Ticket Management System (all employees). OSM, GMOS (online dept) (online employees only).</p>
+                                        <div class="credential-checklist">
+                                            <h4>System Access</h4>
+                                            <div class="credential-item">
+                                                <input type="checkbox" id="cred-outlook">
+                                                <label for="cred-outlook">Outlook Email</label>
+                                                <input type="text" placeholder="Email address" class="credential-value">
+                                            </div>
+                                            <div class="credential-item">
+                                                <input type="checkbox" id="cred-hrone">
+                                                <label for="cred-hrone">HR One System</label>
+                                                <input type="text" placeholder="Username" class="credential-value">
+                                            </div>
+                                            <div class="credential-item">
+                                                <input type="checkbox" id="cred-erp">
+                                                <label for="cred-erp">ERP System</label>
+                                                <input type="text" placeholder="Username" class="credential-value">
+                                            </div>
+                                            <div class="credential-item">
+                                                <input type="checkbox" id="cred-ticket">
+                                                <label for="cred-ticket">Ticket Management</label>
+                                                <input type="text" placeholder="Username" class="credential-value">
+                                            </div>
+                                            <div class="credential-item online-only">
+                                                <input type="checkbox" id="cred-osm">
+                                                <label for="cred-osm">OSM (Online Dept)</label>
+                                                <input type="text" placeholder="Username" class="credential-value">
+                                            </div>
+                                            <div class="credential-item online-only">
+                                                <input type="checkbox" id="cred-gmos">
+                                                <label for="cred-gmos">GMOS (Online Dept)</label>
+                                                <input type="text" placeholder="Username" class="credential-value">
+                                            </div>
+                                        </div>
+                                        <div class="completion-section">
+                                            <div class="completion-toggle">
+                                                <input type="checkbox" id="step5-complete">
+                                                <label for="step5-complete">Mark as Complete</label>
+                                            </div>
+                                            <div class="completion-meta">
+                                                <span class="completion-date">Completion Date: <span id="step5-date">Not completed</span></span>
+                                                <span class="completed-by">Completed by: <span id="step5-by">-</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 6: Personal Information Form -->
+                            <div class="activity-step" data-step="6">
+                                <div class="step-number">6</div>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <h3>Personal Information Form</h3>
+                                        <div class="assigned-to">Employee</div>
+                                        <button class="expand-activity"><i class="fas fa-chevron-down"></i></button>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-description">Employee to complete personal information form.</p>
+                                        <div class="document-section">
+                                            <h4>Personal Information</h4>
+                                            <div class="document-type">Online Form/Upload file</div>
+                                            <div class="document-actions">
+                                                <div class="view-section">
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View Uploaded Form</a>
+                                                    <span class="upload-status" id="personal-info-status">Not uploaded by employee yet</span>
+                                                </div>
+                                                <div class="download-section">
+                                                    <a href="#" class="download-btn"><i class="fas fa-file-download"></i> Download Form Template</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="completion-section">
+                                            <div class="submission-tracking">
+                                                <span class="submission-status">Submission Status: <span id="step6-status">Not submitted</span></span>
+                                            </div>
+                                            <div class="completion-toggle">
+                                                <input type="checkbox" id="step6-complete">
+                                                <label for="step6-complete">Mark as Complete</label>
+                                            </div>
+                                            <div class="completion-meta">
+                                                <span class="completion-date">Completion Date: <span id="step6-date">Not completed</span></span>
+                                                <span class="completed-by">Completed by: <span id="step6-by">-</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 7: Document Upload -->
+                            <div class="activity-step" data-step="7">
+                                <div class="step-number">7</div>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <h3>Employee Document Upload</h3>
+                                        <div class="assigned-to">Employee</div>
+                                        <button class="expand-activity"><i class="fas fa-chevron-down"></i></button>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-description">Employee to upload all their individual docs.</p>
+                                        <div class="document-section">
+                                            <h4>Required Documents</h4>
+                                            <div class="document-checklist">
+                                                <div class="document-item">
+                                                    <span class="doc-name">ID Proof</span>
+                                                    <div class="view-section">
+                                                        <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View Document</a>
+                                                    </div>
+                                                    <span class="upload-status" id="id-proof-status">Not uploaded by employee yet</span>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Address Proof</span>
+                                                    <div class="view-section">
+                                                        <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View Document</a>
+                                                    </div>
+                                                    <span class="upload-status" id="address-proof-status">Not uploaded by employee yet</span>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Educational Certificates</span>
+                                                    <div class="view-section">
+                                                        <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View Document</a>
+                                                    </div>
+                                                    <span class="upload-status" id="education-cert-status">Not uploaded by employee yet</span>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Previous Experience Certificates</span>
+                                                    <div class="view-section">
+                                                        <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View Document</a>
+                                                    </div>
+                                                    <span class="upload-status" id="experience-cert-status">Not uploaded by employee yet</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="completion-section">
+                                            <div class="completion-toggle">
+                                                <input type="checkbox" id="step7-complete">
+                                                <label for="step7-complete">Mark as Complete</label>
+                                            </div>
+                                            <div class="completion-meta">
+                                                <span class="completion-date">Completion Date: <span id="step7-date">Not completed</span></span>
+                                                <span class="completed-by">Completed by: <span id="step7-by">-</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 9: Joining Letter -->
+                            <div class="activity-step" data-step="9">
+                                <div class="step-number">9</div>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <h3>Joining Letter</h3>
+                                        <div class="assigned-to">HR</div>
+                                        <button class="expand-activity"><i class="fas fa-chevron-down"></i></button>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-description">Prepare and issue joining letter to the employee.</p>
+                                        <div class="document-section">
+                                            <h4>Joining Letter</h4>
+                                            <div class="document-actions">
+                                                <div class="view-section">
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View Joining Letter</a>
+                                                    <span class="upload-status" id="joining-letter-status">Not uploaded by HR yet</span>
+                                                </div>
+                                                <div class="download-section">
+                                                    <a href="#" class="download-btn"><i class="fas fa-file-download"></i> Download Template</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="completion-section">
+                                            <div class="completion-toggle">
+                                                <input type="checkbox" id="step9-complete">
+                                                <label for="step9-complete">Mark as Complete</label>
+                                            </div>
+                                            <div class="completion-meta">
+                                                <span class="completion-date">Completion Date: <span id="step9-date">Not completed</span></span>
+                                                <span class="completed-by">Completed by: <span id="step9-by">-</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 10: Official Documents -->
+                            <div class="activity-step" data-step="10">
+                                <div class="step-number">10</div>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <h3>Official Documents</h3>
+                                        <div class="assigned-to">HR & Employee</div>
+                                        <button class="expand-activity"><i class="fas fa-chevron-down"></i></button>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-description">Appointment letter, Non-Disclosure Agreement, Code of Conduct, Employee Joining Form, Asset Handover Form, 2 signed crossed cheques addressing company name with current gross monthly salary (without date).</p>
+                                        <div class="document-section">
+                                            <h4>Official Documents</h4>
+                                            <div class="document-checklist">
+                                                <div class="document-item">
+                                                    <span class="doc-name">Appointment Letter</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <span class="upload-status" id="appointment-letter-status">Not uploaded by employee yet</span>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Non-Disclosure Agreement</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <span class="upload-status" id="nda-status">Not uploaded by employee yet</span>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Code of Conduct</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <span class="upload-status" id="code-of-conduct-status">Not uploaded by employee yet</span>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Employee Joining Form</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <span class="upload-status" id="joining-form-status">Not uploaded by employee yet</span>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Asset Handover Form</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <span class="upload-status" id="asset-form-status">Not uploaded by employee yet</span>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Signed Cheques</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <span class="upload-status" id="cheques-status">Not uploaded by employee yet</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="completion-section">
+                                            <div class="completion-toggle">
+                                                <input type="checkbox" id="step10-complete">
+                                                <label for="step10-complete">Mark as Complete</label>
+                                            </div>
+                                            <div class="completion-meta">
+                                                <span class="completion-date">Completion Date: <span id="step10-date">Not completed</span></span>
+                                                <span class="completed-by">Completed by: <span id="step10-by">-</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 11: Signed Copy Verification -->
+                            <div class="activity-step" data-step="11">
+                                <div class="step-number">11</div>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <h3>Document Verification</h3>
+                                        <div class="assigned-to">HR</div>
+                                        <button class="expand-activity"><i class="fas fa-chevron-down"></i></button>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-description">Signed copy of the letters provided after the first week. Uploaded by Employee and HR should see the uploaded files.</p>
+                                        <div class="document-section">
+                                            <h4>Signed Documents</h4>
+                                            <div class="document-checklist verification-checklist">
+                                                <div class="document-item">
+                                                    <span class="doc-name">Appointment Letter (Signed)</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <div class="verification-status">
+                                                        <input type="checkbox" id="verify-appointment">
+                                                        <label for="verify-appointment">Verify</label>
+                                                    </div>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">NDA (Signed)</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <div class="verification-status">
+                                                        <input type="checkbox" id="verify-nda">
+                                                        <label for="verify-nda">Verify</label>
+                                                    </div>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Code of Conduct (Signed)</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <div class="verification-status">
+                                                        <input type="checkbox" id="verify-coc">
+                                                        <label for="verify-coc">Verify</label>
+                                                    </div>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Employee Joining Form (Signed)</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <div class="verification-status">
+                                                        <input type="checkbox" id="verify-joining">
+                                                        <label for="verify-joining">Verify</label>
+                                                    </div>
+                                                </div>
+                                                <div class="document-item">
+                                                    <span class="doc-name">Asset Handover Form (Signed)</span>
+                                                    <a href="#" class="view-doc-btn"><i class="fas fa-eye"></i> View</a>
+                                                    <div class="verification-status">
+                                                        <input type="checkbox" id="verify-asset">
+                                                        <label for="verify-asset">Verify</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="completion-section">
+                                            <div class="completion-toggle">
+                                                <input type="checkbox" id="step11-complete">
+                                                <label for="step11-complete">Mark as Complete</label>
+                                            </div>
+                                            <div class="completion-meta">
+                                                <span class="completion-date">Completion Date: <span id="step11-date">Not completed</span></span>
+                                                <span class="completed-by">Completed by: <span id="step11-by">-</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/admin.js"></script>
+</body>
+</html> 
