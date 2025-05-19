@@ -14,53 +14,56 @@
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --border-radius: 8px;
     --transition: all 0.3s ease;
+    --stage-indicator-size: 40px;
+    --stage-indicator-spacing: 2rem;
 }
 
 /* Onboarding Module Styles */
 .module-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: var(--spacing-lg);
 }
 
 /* Progress Bar Styles */
 .onboarding-progress {
-    background: #fff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: var(--neutral-50);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
 }
 
 .progress-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-md);
 }
 
 .progress-header h3 {
     margin: 0;
-    color: #333;
+    color: var(--neutral-900);
+    font-size: var(--text-lg);
 }
 
 .progress-percentage {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #2196F3;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--primary-600);
 }
 
 .progress-bar {
     height: 8px;
-    background: #E0E0E0;
-    border-radius: 4px;
+    background: var(--neutral-200);
+    border-radius: var(--radius-full);
     overflow: hidden;
 }
 
 .progress {
     height: 100%;
-    background: #2196F3;
-    transition: width 0.3s ease;
+    background: var(--primary-600);
+    transition: var(--transition-all);
 }
 
 /* Step Groups */
@@ -370,7 +373,7 @@
 .stage-indicators {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-xl);
     position: relative;
 }
 
@@ -378,12 +381,13 @@
 .stage-indicators::before {
     content: '';
     position: absolute;
-    top: 20px;
-    left: 40px;
-    right: 40px;
+    top: calc(var(--stage-indicator-size) / 2);
+    left: calc(var(--stage-indicator-size) + var(--stage-indicator-spacing));
+    right: calc(var(--stage-indicator-size) + var(--stage-indicator-spacing));
     height: 2px;
-    background: var(--gray-medium);
+    background: var(--neutral-200);
     z-index: 1;
+    transform: translateY(-50%);
 }
 
 .stage-indicator {
@@ -393,7 +397,7 @@
     position: relative;
     z-index: 2;
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-all);
 }
 
 .stage-indicator.locked {
@@ -402,155 +406,158 @@
 }
 
 .stage-number {
-    width: 40px;
-    height: 40px;
-    background: var(--gray-medium);
-    border-radius: 50%;
+    width: var(--stage-indicator-size);
+    height: var(--stage-indicator-size);
+    background: var(--neutral-200);
+    border-radius: var(--radius-full);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-light);
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    transition: var(--transition);
-    border: 2px solid var(--white);
+    color: var(--neutral-600);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    transition: var(--transition-all);
+    border: 2px solid var(--neutral-50);
     box-shadow: var(--shadow-sm);
 }
 
 .stage-indicator span {
-    font-size: 0.875rem;
-    color: var(--text-light);
+    font-size: var(--text-sm);
+    color: var(--neutral-600);
     text-align: center;
     max-width: 100px;
-    transition: var(--transition);
+    transition: var(--transition-all);
 }
 
 .stage-indicator.active .stage-number {
-    background: var(--primary-color);
-    color: var(--white);
+    background: var(--primary-600);
+    color: var(--neutral-50);
     transform: scale(1.1);
 }
 
 .stage-indicator.completed .stage-number {
-    background: var(--success-color);
-    color: var(--white);
+    background: var(--success-600);
+    color: var(--neutral-50);
 }
 
 .stage-indicator.active span,
 .stage-indicator.completed span {
-    color: var(--text-dark);
+    color: var(--neutral-900);
     font-weight: 500;
 }
 
 /* Stage Content */
 .stage {
     display: none;
-    background: var(--white);
-    border-radius: var(--border-radius);
+    background: var(--neutral-50);
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    padding: 2rem;
-    margin-bottom: 2rem;
-    transition: var(--transition);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    transition: var(--transition-all);
 }
 
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.stage.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
 }
 
 .stage-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--gray-light);
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--neutral-200);
 }
 
 .stage-header h3 {
     margin: 0;
-    color: var(--text-dark);
-    font-size: 1.5rem;
+    color: var(--neutral-900);
+    font-size: var(--text-xl);
 }
 
 .stage-status {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
     font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--spacing-xs);
 }
 
 .stage-status::before {
     content: '';
     width: 8px;
     height: 8px;
-    border-radius: 50%;
+    border-radius: var(--radius-full);
     background: currentColor;
 }
 
 .stage-status.locked {
-    background: var(--gray-light);
-    color: var(--text-light);
+    background: var(--neutral-100);
+    color: var(--neutral-600);
 }
 
 .stage-status.in-progress {
-    background: #E3F2FD;
-    color: var(--primary-color);
+    background: var(--primary-50);
+    color: var(--primary-700);
 }
 
 .stage-status.completed {
-    background: #E8F5E9;
-    color: var(--success-color);
+    background: var(--success-50);
+    color: var(--success-700);
 }
 
 /* Navigation Buttons */
 .navigation-buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid var(--gray-light);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 2px solid var(--neutral-200);
 }
 
 .navigation-buttons button {
-    padding: 0.75rem 1.5rem;
+    padding: var(--spacing-sm) var(--spacing-lg);
     border: none;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
     font-weight: 500;
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-all);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
+    min-width: 120px;
 }
 
 .btn-prev {
-    background-color: var(--gray-light);
-    color: var(--text-dark);
+    background-color: var(--neutral-100);
+    color: var(--neutral-700);
 }
 
 .btn-next {
-    background-color: var(--primary-color);
-    color: var(--white);
+    background-color: var(--primary-600);
+    color: var(--neutral-50);
 }
 
 .btn-prev:hover {
-    background-color: var(--gray-medium);
+    background-color: var(--neutral-200);
+    transform: translateY(-1px);
 }
 
 .btn-next:hover {
-    background-color: var(--primary-dark);
+    background-color: var(--primary-700);
+    transform: translateY(-1px);
 }
 
 .navigation-buttons button:disabled {
-    background-color: var(--gray-medium);
+    background-color: var(--neutral-200);
+    color: var(--neutral-400);
     cursor: not-allowed;
-    opacity: 0.7;
+    transform: none;
 }
 
 /* Notifications */
@@ -596,7 +603,7 @@
 @media (max-width: 768px) {
     .stage-indicators {
         overflow-x: auto;
-        padding-bottom: 1rem;
+        padding-bottom: var(--spacing-md);
     }
 
     .stage-indicator {
@@ -605,18 +612,49 @@
 
     .stage-header {
         flex-direction: column;
-        gap: 1rem;
+        gap: var(--spacing-md);
         text-align: center;
     }
 
     .navigation-buttons {
         flex-direction: column;
-        gap: 1rem;
+        gap: var(--spacing-md);
     }
 
     .navigation-buttons button {
         width: 100%;
         justify-content: center;
+    }
+
+    .stage-2-form {
+        padding: var(--spacing-md);
+    }
+
+    .stage-2-form .step-content {
+        padding: var(--spacing-lg);
+    }
+
+    .form-section {
+        padding: var(--spacing-lg);
+    }
+
+    .form-group {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn-save,
+    .btn-cancel {
+        width: 100%;
     }
 }
 
@@ -730,46 +768,46 @@ input[type="date"] {
 .stage-2-form {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: var(--spacing-lg);
 }
 
 .stage-2-form .step {
-    background: var(--white);
-    border-radius: var(--border-radius);
+    background: var(--neutral-50);
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-lg);
 }
 
 .stage-2-form .step-content {
-    padding: 2rem;
+    padding: var(--spacing-xl);
 }
 
 .form-group.error input,
 .form-group.error select,
 .form-group.error textarea {
-    border-color: var(--error-color);
+    border-color: var(--error-600);
 }
 
 .form-group.error .error-message {
-    color: var(--error-color);
-    font-size: 0.85rem;
-    margin-top: 0.5rem;
+    color: var(--error-600);
+    font-size: var(--text-sm);
+    margin-top: var(--spacing-xs);
 }
 
 /* File Upload Styles */
 .file-upload {
-    border: 2px dashed var(--gray-medium);
-    padding: 2rem;
+    border: 2px dashed var(--neutral-300);
+    padding: var(--spacing-xl);
     text-align: center;
-    border-radius: var(--border-radius);
-    background: var(--gray-light);
+    border-radius: var(--radius-lg);
+    background: var(--neutral-100);
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-all);
 }
 
 .file-upload:hover {
-    border-color: var(--primary-color);
-    background: rgba(33, 150, 243, 0.05);
+    border-color: var(--primary-400);
+    background: var(--primary-50);
 }
 
 .file-upload input[type="file"] {
@@ -780,53 +818,16 @@ input[type="date"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    color: var(--text-light);
+    gap: var(--spacing-md);
+    color: var(--neutral-600);
 }
 
 .file-upload-icon {
-    font-size: 2rem;
-    color: var(--primary-color);
+    font-size: var(--text-2xl);
+    color: var(--primary-600);
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .stage-2-form {
-        padding: 1rem;
-    }
-
-    .stage-2-form .step-content {
-        padding: 1.5rem;
-    }
-
-    .form-section {
-        padding: 1.5rem;
-    }
-
-    .form-group {
-        flex: 1 1 100%;
-        min-width: 100%;
-    }
-
-    .form-row {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .form-actions {
-        flex-direction: column-reverse;
-    }
-
-    .btn-save,
-    .btn-cancel {
-        width: 100%;
-    }
-}
-
-.stage {
-    display: none; /* Hide all stages by default */
-}
-
-.stage.active {
-    display: block; /* Show only the active stage */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
