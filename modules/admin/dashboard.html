@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="../../js/auth.js"></script>
 </head>
 <body>
     <div class="admin-container">
@@ -19,7 +20,7 @@
                     <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
                     <li><a href="onboarding.html"><i class="fas fa-user-plus"></i> Onboarding</a></li>
                     <li><a href="employees.html"><i class="fas fa-users"></i> Employees</a></li>
-                   
+                    <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 </ul>
             </nav>
         </aside>
@@ -31,8 +32,11 @@
                     <i class="fas fa-search"></i>
                 </div>
                 <div class="admin-profile">
-                    <span class="admin-name">Admin Name</span>
+                    <span id="adminEmail" class="admin-email">Loading...</span>
                     <img src="../../assets/images/admin-avatar.png" alt="Admin Avatar">
+                    <a href="#" onclick="logout()" class="logout-btn" title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
                 </div>
             </header>
 
@@ -591,5 +595,12 @@
     </div>
 
     <script src="../../js/admin.js"></script>
+    <script>
+        // Update admin information on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminEmail = localStorage.getItem('employeeEmail');
+            document.getElementById('adminEmail').textContent = adminEmail || '';
+        });
+    </script>
 </body>
 </html> 
