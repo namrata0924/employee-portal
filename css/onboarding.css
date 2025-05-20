@@ -514,13 +514,19 @@
 .navigation-buttons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: var(--spacing-xl);
-    padding-top: var(--spacing-lg);
+    padding: var(--spacing-lg) 0;
     border-top: 2px solid var(--neutral-200);
+    gap: var(--spacing-md);
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .navigation-buttons button {
-    padding: var(--spacing-sm) var(--spacing-lg);
+    padding: 0.875rem 2rem;
     border: none;
     border-radius: var(--radius-md);
     font-size: var(--text-base);
@@ -529,18 +535,22 @@
     transition: var(--transition-all);
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    min-width: 120px;
+    justify-content: center;
+    min-width: 140px;
+    height: 48px;
+    flex: 0 0 auto;
 }
 
 .btn-prev {
     background-color: var(--neutral-100);
     color: var(--neutral-700);
+    margin-right: auto;
 }
 
 .btn-next {
     background-color: var(--primary-600);
     color: var(--neutral-50);
+    margin-left: auto;
 }
 
 .btn-prev:hover {
@@ -558,6 +568,30 @@
     color: var(--neutral-400);
     cursor: not-allowed;
     transform: none;
+    opacity: 0.7;
+}
+
+/* Responsive Design for Navigation Buttons */
+@media (max-width: 768px) {
+    .navigation-buttons {
+        flex-direction: row;
+        padding: var(--spacing-md) 0;
+        gap: var(--spacing-sm);
+    }
+
+    .navigation-buttons button {
+        min-width: 120px;
+        padding: 0.75rem 1.5rem;
+        font-size: var(--text-sm);
+    }
+
+    .btn-prev {
+        margin-right: 0;
+    }
+
+    .btn-next {
+        margin-left: 0;
+    }
 }
 
 /* Notifications */

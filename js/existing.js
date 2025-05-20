@@ -1,5 +1,6 @@
 const dashboardModule = {
     init() {
+        console.log('Initializing dashboard module...');
         this.currentStep = 1;
         this.totalSteps = 7;
         this.stepCompleted = {
@@ -12,76 +13,155 @@ const dashboardModule = {
             7: false
         };
 
-        this.bindEvents();
-        this.bindProgressBarClick();
+        // Always wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded');
+            this.setupEventListeners();
+            this.initializeStageIndicatorClicks();
         this.showCurrentStep();
-        this.updateNavigationButtons();
+            this.updateProgress();
+        });
     },
 
-    bindProgressBarClick() {
-        const circles = document.querySelectorAll('.circle');
-        circles.forEach((circle, index) => {
-            circle.addEventListener('click', () => {
-                const stepNumber = index + 1;
-                
-                // Check if trying to access a future step
-                if (stepNumber > this.currentStep) {
-                    this.showNotification('Please complete the current step before proceeding.', 'error');
-                    return;
+    initializeStageIndicatorClicks() {
+        const indicators = document.querySelectorAll('.stage-indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                const stageNumber = index + 1;
+                if (this.canAccessStage(stageNumber)) {
+                    this.navigateToStage(stageNumber);
+                } else {
+                    this.showNotification('Please complete the previous steps first.', 'error');
                 }
-
-                // Check if trying to access step 2 without completing step 1
-                if (stepNumber === 2 && !this.stepCompleted[1]) {
-                    this.showNotification('Please complete Step 1 before proceeding to Step 2.', 'error');
-                    return;
-                }
-
-                this.currentStep = stepNumber;
-                this.showCurrentStep();
-                this.updateNavigationButtons();
             });
         });
     },
 
-    showCurrentStep() {
-        // Hide all steps
-        const steps = document.querySelectorAll('.step');
-        steps.forEach(step => step.style.display = 'none');
-
-        // Show the current step
-        const currentStepElement = document.querySelector(`.step[data-step="${this.currentStep}"]`);
-        if (currentStepElement) {
-            currentStepElement.style.display = 'block';
-        }
-
-        // Update circle indicators
-        const circles = document.querySelectorAll('.circle');
-        circles.forEach((circle, index) => {
-            circle.classList.remove('active', 'completed');
-            if (index + 1 < this.currentStep) {
-                circle.classList.add('completed');
-            } else if (index + 1 === this.currentStep) {
-                circle.classList.add('active');
-            }
-        });
+    canAccessStage(stageNumber) {
+        // Can only access current stage or completed stages
+        return stageNumber <= this.currentStep || this.stepCompleted[stageNumber - 1];
     },
 
-    bindEvents() {
+    navigateToStage(stageNumber) {
+        if (stageNumber === this.currentStep) return;
+
+        // Hide all steps
+        const steps = document.querySelectorAll('.step');
+        steps.forEach(step => {
+            step.style.display = 'none';
+        });
+
+        // Show the selected step
+        const targetStep = document.querySelector(`.step[data-step="${stageNumber}"]`);
+        if (targetStep) {
+            targetStep.style.display = 'block';
+        }
+
+        // Update current step
+        this.currentStep = stageNumber;
+
+        // Update stage indicators
+        const indicators = document.querySelectorAll('.stage-indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.classList.remove('active', 'completed');
+            if (index + 1 < stageNumber) {
+                indicator.classList.add('completed');
+            } else if (index + 1 === stageNumber) {
+                indicator.classList.add('active');
+            }
+        });
+
+        // Update navigation buttons
+        this.updateNavigationButtons();
+        
+        // Update progress bar
+        this.updateProgress();
+    },
+
+    updateProgress() {
+        const progress = (this.currentStep - 1) / (this.totalSteps - 1) * 100;
+        const progressBar = document.querySelector('.stage-progress-bar .progress');
+        if (progressBar) {
+            progressBar.style.width = `${progress}%`;
+        }
+    },
+
+    updateNavigationButtons() {
+        const prevButton = document.querySelector('.btn-prev');
+        const nextButton = document.querySelector('.btn-next');
+
+        if (prevButton) {
+            prevButton.disabled = this.currentStep === 1;
+        }
+
+        if (nextButton) {
+            nextButton.disabled = !this.stepCompleted[this.currentStep];
+            nextButton.textContent = this.currentStep === this.totalSteps ? 'Finish' : 'Next';
+        }
+    },
+
+    nextStage() {
+        if (this.currentStep < this.totalSteps) {
+            if (!this.stepCompleted[this.currentStep]) {
+                this.showNotification('Please complete the current step before proceeding.', 'error');
+                return;
+            }
+            this.navigateToStage(this.currentStep + 1);
+        }
+    },
+
+    previousStage() {
+        if (this.currentStep > 1) {
+            this.navigateToStage(this.currentStep - 1);
+        }
+    },
+
+    setupEventListeners() {
+        console.log('Setting up event listeners');
+        
+        // Content Type Selection Handler
+        const trainingContentType = document.getElementById('training-content-type');
+        console.log('Training Content Type Element:', trainingContentType);
+        
+        if (trainingContentType) {
+            trainingContentType.addEventListener('change', (e) => {
+                console.log('Content type changed:', e.target.value);
+                const form = e.target.closest('form');
+                if (!form) {
+                    console.log('Form not found');
+                    return;
+                }
+
+                const pdfContent = form.querySelector('.pdf-content');
+                const videoContent = form.querySelector('.video-content');
+                
+                console.log('PDF Content Element:', pdfContent);
+                console.log('Video Content Element:', videoContent);
+                
+                if (pdfContent && videoContent) {
+                    if (e.target.value === 'pdf') {
+                        pdfContent.style.display = 'block';
+                        videoContent.style.display = 'none';
+                    } else if (e.target.value === 'video') {
+                        pdfContent.style.display = 'none';
+                        videoContent.style.display = 'block';
+                    } else {
+                        pdfContent.style.display = 'none';
+                        videoContent.style.display = 'none';
+                    }
+                }
+            });
+        }
+
         // Document Type Selection Handlers
         document.getElementById('process-doc-type')?.addEventListener('change', (e) => {
             const pdfUpload = e.target.closest('form').querySelector('.pdf-upload');
             const videoUpload = e.target.closest('form').querySelector('.video-upload');
             
+            if (pdfUpload && videoUpload) {
             pdfUpload.style.display = e.target.value === 'pdf' ? 'block' : 'none';
             videoUpload.style.display = e.target.value === 'video' ? 'block' : 'none';
-        });
-
-        document.getElementById('training-content-type')?.addEventListener('change', (e) => {
-            const pdfUpload = e.target.closest('form').querySelector('.pdf-upload');
-            const videoUpload = e.target.closest('form').querySelector('.video-upload');
-            
-            pdfUpload.style.display = e.target.value === 'pdf' ? 'block' : 'none';
-            videoUpload.style.display = e.target.value === 'video' ? 'block' : 'none';
+            }
         });
 
         // Video Completion Checkbox
@@ -214,30 +294,43 @@ const dashboardModule = {
             this.updateStepStatus(7, 'completed');
             this.updateNavigationButtons();
         });
+    },
 
-        // Navigation Buttons
-        document.querySelectorAll('#prev-step').forEach(button => {
-            button.addEventListener('click', () => {
-                if (this.currentStep > 1) {
-                    this.currentStep--;
-                    this.showCurrentStep();
-                    this.updateNavigationButtons();
-                }
-            });
+    showCurrentStep() {
+        console.log('Showing current step:', this.currentStep);
+        // Hide all steps
+        const steps = document.querySelectorAll('.step');
+        steps.forEach(step => {
+            step.style.display = 'none';
+            console.log('Hiding step:', step.dataset.step);
         });
 
-        document.querySelectorAll('#next-step').forEach(button => {
-            button.addEventListener('click', () => {
-                if (this.currentStep < this.totalSteps) {
-                    if (!this.stepCompleted[this.currentStep]) {
-                        this.showNotification('Please complete the current step before proceeding.', 'error');
-                        return;
-                    }
-                    this.currentStep++;
-                    this.showCurrentStep();
-                    this.updateNavigationButtons();
+        // Show the current step
+        const currentStepElement = document.querySelector(`.step[data-step="${this.currentStep}"]`);
+        if (currentStepElement) {
+            currentStepElement.style.display = 'block';
+            console.log('Showing step:', this.currentStep);
+            
+            // If it's step 2, ensure content type is properly initialized
+            if (this.currentStep === 2) {
+                const trainingContentType = document.getElementById('training-content-type');
+                if (trainingContentType) {
+                    // Trigger change event to show/hide appropriate content
+                    const event = new Event('change');
+                    trainingContentType.dispatchEvent(event);
                 }
-            });
+            }
+        }
+
+        // Update circle indicators
+        const circles = document.querySelectorAll('.circle');
+        circles.forEach((circle, index) => {
+            circle.classList.remove('active', 'completed');
+            if (index + 1 < this.currentStep) {
+                circle.classList.add('completed');
+            } else if (index + 1 === this.currentStep) {
+                circle.classList.add('active');
+                }
         });
     },
 
@@ -260,20 +353,6 @@ const dashboardModule = {
         }
     },
 
-    updateNavigationButtons() {
-        const prevButtons = document.querySelectorAll('#prev-step');
-        const nextButtons = document.querySelectorAll('#next-step');
-
-        prevButtons.forEach(button => {
-            button.disabled = this.currentStep === 1;
-        });
-
-        nextButtons.forEach(button => {
-            button.disabled = !this.stepCompleted[this.currentStep];
-            button.textContent = this.currentStep === this.totalSteps ? 'Finish' : 'Next';
-        });
-    },
-
     showNotification(message, type = 'info') {
         // Create notification element
         const notification = document.createElement('div');
@@ -291,6 +370,4 @@ const dashboardModule = {
 };
 
 // Initialize existing module
-document.addEventListener('DOMContentLoaded', () => {
     dashboardModule.init();
-});

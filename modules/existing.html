@@ -17,38 +17,45 @@
 
                 <!-- Multi-Step Section -->
                 <div class="multi-step-section">
-                    <div class="progress_container">
-                        <div class="progress-step">
-                            <div class="circle active">1</div>
-                            <span class="step-label">Process Documents</span>
+                    <!-- Stage Progress Bar -->
+                    <div class="stage-progress">
+                        <div class="stage-indicators">
+                            <div class="stage-indicator active" data-stage="1">
+                                <div class="stage-number">1</div>
+                                <span>Process Documents</span>
+                            </div>
+                            <div class="stage-indicator" data-stage="2">
+                                <div class="stage-number">2</div>
+                                <span>Training Videos</span>
+                            </div>
+                            <div class="stage-indicator" data-stage="3">
+                                <div class="stage-number">3</div>
+                                <span>Feedback Form</span>
+                            </div>
+                            <div class="stage-indicator" data-stage="4">
+                                <div class="stage-number">4</div>
+                                <span>KPI, KRI</span>
+                            </div>
+                            <div class="stage-indicator" data-stage="5">
+                                <div class="stage-number">5</div>
+                                <span>Brand Survey</span>
+                            </div>
+                            <div class="stage-indicator" data-stage="6">
+                                <div class="stage-number">6</div>
+                                <span>Grievance Form</span>
+                            </div>
+                            <div class="stage-indicator" data-stage="7">
+                                <div class="stage-number">7</div>
+                                <span>POSH Complaint</span>
+                            </div>
                         </div>
-                        <div class="progress-step">
-                            <div class="circle">2</div>
-                            <span class="step-label">Training Videos</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="circle">3</div>
-                            <span class="step-label">Feedback Form</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="circle">4</div>
-                            <span class="step-label">KPI, KRI</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="circle">5</div>
-                            <span class="step-label">Brand Survey</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="circle">6</div>
-                            <span class="step-label">Grievance Form</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="circle">7</div>
-                            <span class="step-label">POSH Complaint</span>
+                        <div class="stage-progress-bar">
+                            <div class="progress" style="width: 0%"></div>
                         </div>
                     </div>
 
-                    <div class="step-content" id="step-content">
+                    <!-- Steps Container -->
+                    <div class="stages-container">
                         <!-- Step 1 -->
                         <div class="step card" data-step="1">
                             <h4>Step 1: View Process Documents</h4>
@@ -86,22 +93,35 @@
                             <h4>Step 2: Department Training Videos</h4>
                             <div class="training-section">
                                 <form class="modal-form" id="training-form">
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>Content Type</label>
                                         <select name="contentType" id="training-content-type" required>
                                             <option value="">Select Content Type</option>
                                             <option value="pdf">PDF</option>
                                             <option value="video">Video</option>
                                         </select>
-                                    </div>
-                                    <div class="form-group pdf-upload" style="display: none;">
-                                        <label>Choose Training PDF</label>
-                                        <input type="file" name="trainingPdf" accept=".pdf" class="file-input">
-                                    </div>
-                                    <div class="form-group video-upload" style="display: none;">
-                                        <label>Training Video Link</label>
-                                        <input type="url" name="trainingVideoLink" placeholder="Enter video URL">
-                                    </div>
+                                    </div> -->
+                                    <!-- <div class="content-display pdf-content" style="display: none;"> -->
+                                        <div class="pdf-viewer">
+                                            <iframe src="../assets/sample.pdf" width="100%" height="500px" frameborder="0"></iframe>
+                                        </div>
+                                        <div class="content-info">
+                                            <h5>Employee Handbook</h5>
+                                            <p>Please review the complete employee handbook document.</p>
+                                        </div>
+                                    <!-- </div> -->
+                                    <!-- <div class="content-display video-content" style="display: none;"> -->
+                                        <div class="video-container">
+                                            <video width="100%" height="500px" controls>
+                                                <source src="../assets/video.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="content-info">
+                                            <h5>Department Training Video</h5>
+                                            <p>Please watch the complete training video.</p>
+                                        </div>
+                                    <!-- </div> -->
                                     <div class="form-group video-completion">
                                         <label class="checkbox-label">
                                             <input type="checkbox" id="video-watched" name="videoWatched">
@@ -258,10 +278,11 @@
                                 </div>
                             </form>
                         </div>
-                          <div class="step-navigation">
-                                <button type="button" class="btn-secondary" id="prev-step" disabled>Back</button>
-                                <button type="button" class="btn-primary" id="next-step" disabled>Next</button>
-                            </div>
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button class="btn-prev" onclick="dashboardModule.previousStage()">Previous</button>
+                        <button class="btn-next" onclick="dashboardModule.nextStage()">Next</button>
                     </div>
                 </div>
             </div>

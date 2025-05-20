@@ -15,600 +15,607 @@
             <div class="module-container">
                 <h2>Employee Offboarding</h2>
                 
-                <!-- Offboarding Steps -->
-                <div class="offboarding-steps">
-                    <div class="progress-card">
-                        <div class="progress_container">
-                            <div class="progress-step">
-                                <div class="circle active">1</div>
-                                <span class="step-label">Initiation</span>
+                <!-- Multi-Step Section -->
+                <div class="multi-step-section">
+                    <!-- Stage Progress Bar -->
+                    <div class="stage-progress">
+                        <div class="stage-indicators">
+                            <div class="stage-indicator active" data-stage="1">
+                                <div class="stage-number">1</div>
+                                <span>Process Documents</span>
                             </div>
-                            <div class="progress-step">
-                                <div class="circle">2</div>
-                                <span class="step-label">Notification</span>
+                            <div class="stage-indicator" data-stage="2">
+                                <div class="stage-number">2</div>
+                                <span>Training Videos</span>
                             </div>
-                            <div class="progress-step">
-                                <div class="circle">3</div>
-                                <span class="step-label">Clearance</span>
+                            <div class="stage-indicator" data-stage="3">
+                                <div class="stage-number">3</div>
+                                <span>Feedback Form</span>
                             </div>
-                            <div class="progress-step">
-                                <div class="circle">4</div>
-                                <span class="step-label">Clearance</span>
+                            <div class="stage-indicator" data-stage="4">
+                                <div class="stage-number">4</div>
+                                <span>KPI, KRI</span>
                             </div>
-                            <div class="progress-step">
-                                <div class="circle">5</div>
-                                <span class="step-label">Documentation</span>
+                            <div class="stage-indicator" data-stage="5">
+                                <div class="stage-number">5</div>
+                                <span>Brand Survey</span>
                             </div>
-                            <div class="progress-step">
-                                <div class="circle">6</div>
-                                <span class="step-label">Final Clearance</span>
+                            <div class="stage-indicator" data-stage="6">
+                                <div class="stage-number">6</div>
+                                <span>Grievance Form</span>
                             </div>
-                            <div class="progress-step">
-                                <div class="circle">7</div>
-                                <span class="step-label">Notification</span>
+                            <div class="stage-indicator" data-stage="7">
+                                <div class="stage-number">7</div>
+                                <span>POSH Complaint</span>
                             </div>
+                        </div>
+                        <div class="stage-progress-bar">
+                            <div class="progress" style="width: 0%"></div>
                         </div>
                     </div>
 
-                    <!-- Step 1: Initiation -->
-                    <div class="step-container" data-step="1">
-                        <div class="step-header">
-                            <div class="step-number">1</div>
-                            <div class="step-info">
-                                <h3>Initiation</h3>
-                                <p>Offboarding Request Initiated</p>
-                            </div>
-                            <div class="step-status">
-                                <span class="status-badge pending">Pending</span>
-                            </div>
-                        </div>
-                        <div class="step-content">
-                            <form id="offboarding-request-form" class="offboarding-form">
-                                <div class="form-section">
-                                    <div class="form-group">
-                                        <label>Last Working Day</label>
-                                        <input type="date" name="lastWorkingDay" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Reason for Leaving</label>
-                                        <select name="reason" required>
-                                            <option value="">Select Reason</option>
-                                            <option value="resignation">Resignation</option>
-                                            <option value="retirement">Retirement</option>
-                                            <option value="end_of_contract">End of Contract</option>
-                                            <option value="other">Other</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Additional Comments</label>
-                                        <textarea name="comments" rows="3"></textarea>
-                                    </div>
-                                    <div>
-                                        <button type="submit" class="btn-primary">Submit Request</button>
-                                    </div>
+                    <!-- Steps Container -->
+                    <div class="stages-container">
+                        <!-- Step 1: Initiation -->
+                        <div class="step-container" data-step="1">
+                            <div class="step-header">
+                                <div class="step-number">1</div>
+                                <div class="step-info">
+                                    <h3>Initiation</h3>
+                                    <p>Offboarding Request Initiated</p>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Notification -->
-                    <div class="step-container" data-step="2" style="display: none;">
-                        <div class="step-header">
-                            <div class="step-number">2</div>
-                            <div class="step-info">
-                                <h3>Notification</h3>
-                                <p>Department Head & Admin Notification</p>
-                            </div>
-                            <div class="step-status">
-                                <span class="status-badge pending">Pending</span>
-                            </div>
-                        </div>
-                        <div class="step-content">
-                            <div class="notification-status">
-                                <div class="status-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <span>Department Head Notification</span>
-                                    <span class="status pending">Pending</span>
-                                </div>
-                                <div class="status-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <span>Admin Notification</span>
-                                    <span class="status pending">Pending</span>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
                                 </div>
                             </div>
-                            <div class="completion-checkbox">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" id="notification-complete">
-                                    I confirm that I have reviewed all notifications
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Asset Return -->
-                    <div class="step-container" data-step="3" style="display: none;">
-                        <div class="step-header">
-                            <div class="step-number">3</div>
-                            <div class="step-info">
-                                <h3>Asset Return</h3>
-                                <p>Return Company Assets</p>
-                            </div>
-                            <div class="step-status">
-                                <span class="status-badge pending">Pending</span>
-                            </div>
-                        </div>
-                        <div class="step-content">
-                            <div class="asset-checklist">
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="asset1" name="assets" value="laptop">
-                                    <label for="asset1">Laptop</label>
-                                    <div class="asset-details">
-                                        <span class="asset-id">ID: LAP-12345</span>
-                                        <span class="asset-status">Status: Assigned</span>
-                                    </div>
-                                </div>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="asset2" name="assets" value="id_card">
-                                    <label for="asset2">ID Card</label>
-                                    <div class="asset-details">
-                                        <span class="asset-id">ID: ID-67890</span>
-                                        <span class="asset-status">Status: Active</span>
-                                    </div>
-                                </div>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="asset3" name="assets" value="access_card">
-                                    <label for="asset3">Access Card</label>
-                                    <div class="asset-details">
-                                        <span class="asset-id">ID: ACC-54321</span>
-                                        <span class="asset-status">Status: Active</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn-primary" id="submit-assets">Submit Asset Return</button>
-                        </div>
-                    </div>
-
-                    <!-- Step 4: System Access -->
-                    <div class="step-container" data-step="4" style="display: none;">
-                        <div class="step-header">
-                            <div class="step-number">4</div>
-                            <div class="step-info">
-                                <h3>System Access</h3>
-                                <p>Revoke System & Software Access</p>
-                            </div>
-                            <div class="step-status">
-                                <span class="status-badge pending">Pending</span>
-                            </div>
-                        </div>
-                        <div class="step-content">
-                            <div class="system-access-list">
-                                <div class="access-item">
-                                    <i class="fas fa-desktop"></i>
-                                    <span>GMOS Access</span>
-                                    <span class="status pending">Pending</span>
-                                </div>
-                                <div class="access-item">
-                                    <i class="fas fa-server"></i>
-                                    <span>OSM Access</span>
-                                    <span class="status pending">Pending</span>
-                                </div>
-                                <div class="access-item">
-                                    <i class="fas fa-database"></i>
-                                    <span>ERP Access</span>
-                                    <span class="status pending">Pending</span>
-                                </div>
-                            </div>
-                            <div class="completion-checkbox">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" id="system-access-complete">
-                                    I confirm that I have reviewed all system access revocations
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 5: Exit Interview -->
-                    <div class="step-container" data-step="5" style="display: none;">
-                        <div class="step-header">
-                            <div class="step-number">5</div>
-                            <div class="step-info">
-                                <h3>Exit Interview</h3>
-                                <p>Complete Exit Interview & Feedback</p>
-                            </div>
-                            <div class="step-status">
-                                <span class="status-badge pending">Pending</span>
-                            </div>
-                        </div>
-                        <div class="step-content">
-                            <form id="exit-interview-form" class="offboarding-form">
-                                <!-- Employee Information -->
-                                <div class="form-section">
-                                    <h4>Employee Information</h4>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Employee Name</label>
-                                            <input type="text" name="employee_name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Designation</label>
-                                            <input type="text" name="designation" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Date of Joining</label>
-                                            <input type="date" name="doj" required>
-                                        </div>
+                            <div class="step-content">
+                                <form id="offboarding-request-form" class="offboarding-form">
+                                    <div class="form-section">
                                         <div class="form-group">
                                             <label>Last Working Day</label>
-                                            <input type="date" name="lwd" required>
+                                            <input type="date" name="lastWorkingDay" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Resignation Date</label>
-                                            <input type="date" name="resignation_date" required>
+                                            <label>Reason for Leaving</label>
+                                            <select name="reason" required>
+                                                <option value="">Select Reason</option>
+                                                <option value="resignation">Resignation</option>
+                                                <option value="retirement">Retirement</option>
+                                                <option value="end_of_contract">End of Contract</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Additional Comments</label>
+                                            <textarea name="comments" rows="3"></textarea>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="btn-primary">Submit Request</button>
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Reporting Manager</label>
-                                            <input type="text" name="reporting_manager" required>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Notification -->
+                        <div class="step-container" data-step="2" style="display: none;">
+                            <div class="step-header">
+                                <div class="step-number">2</div>
+                                <div class="step-info">
+                                    <h3>Notification</h3>
+                                    <p>Department Head & Admin Notification</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <div class="notification-status">
+                                    <div class="status-item">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Department Head Notification</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Admin Notification</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                </div>
+                                <div class="completion-checkbox">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="notification-complete">
+                                        I confirm that I have reviewed all notifications
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Asset Return -->
+                        <div class="step-container" data-step="3" style="display: none;">
+                            <div class="step-header">
+                                <div class="step-number">3</div>
+                                <div class="step-info">
+                                    <h3>Asset Return</h3>
+                                    <p>Return Company Assets</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <div class="asset-checklist">
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="asset1" name="assets" value="laptop">
+                                        <label for="asset1">Laptop</label>
+                                        <div class="asset-details">
+                                            <span class="asset-id">ID: LAP-12345</span>
+                                            <span class="asset-status">Status: Assigned</span>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Department</label>
-                                            <input type="text" name="department" required>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="asset2" name="assets" value="id_card">
+                                        <label for="asset2">ID Card</label>
+                                        <div class="asset-details">
+                                            <span class="asset-id">ID: ID-67890</span>
+                                            <span class="asset-status">Status: Active</span>
+                                        </div>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="asset3" name="assets" value="access_card">
+                                        <label for="asset3">Access Card</label>
+                                        <div class="asset-details">
+                                            <span class="asset-id">ID: ACC-54321</span>
+                                            <span class="asset-status">Status: Active</span>
                                         </div>
                                     </div>
                                 </div>
+                                <button class="btn-primary" id="submit-assets">Submit Asset Return</button>
+                            </div>
+                        </div>
 
-                                <!-- Resignation Details -->
-                                <div class="form-section">
-                                    <h4>Resignation Details</h4>
-                                    <div class="form-group">
-                                        <label>1. At approximately what point in time did you begin making your decision to resign?</label>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="resignation_timing" value="6-9_months"> 6-9 months ago</label>
-                                            <label><input type="radio" name="resignation_timing" value="3-5_months"> 3-5 months ago</label>
-                                            <label><input type="radio" name="resignation_timing" value="1-2_months"> 1-2 months ago</label>
-                                            <label><input type="radio" name="resignation_timing" value="other"> Other</label>
-                                        </div>
-                                        <input type="text" name="resignation_timing_other" placeholder="Please specify if other">
+                        <!-- Step 4: System Access -->
+                        <div class="step-container" data-step="4" style="display: none;">
+                            <div class="step-header">
+                                <div class="step-number">4</div>
+                                <div class="step-info">
+                                    <h3>System Access</h3>
+                                    <p>Revoke System & Software Access</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <div class="system-access-list">
+                                    <div class="access-item">
+                                        <i class="fas fa-desktop"></i>
+                                        <span>GMOS Access</span>
+                                        <span class="status pending">Pending</span>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label>2. Please indicate reason(s) below, which contributed to your decision to resign your current position?</label>
-                                        <div class="checkbox-group">
-                                            <label><input type="checkbox" name="resignation_reasons" value="salary"> Salary</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="family"> Family Responsibilities</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="advancement"> Job Advancement</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="management"> Dissatisfied/Management</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="benefits"> Personal Benefits</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="school"> Return to School</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="eliminated"> Job Eliminated</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="relocation"> Relocation</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="health"> Health</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="retirement"> Retirement</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="manager"> Dissatisfaction with the Manager</label>
-                                            <label><input type="checkbox" name="resignation_reasons" value="other"> Other</label>
-                                        </div>
-                                        <input type="text" name="resignation_reasons_other" placeholder="Please specify if other">
+                                    <div class="access-item">
+                                        <i class="fas fa-server"></i>
+                                        <span>OSM Access</span>
+                                        <span class="status pending">Pending</span>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label>3. Was there a specific event or issue that prompted your resignation?</label>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="specific_event" value="yes"> Yes</label>
-                                            <label><input type="radio" name="specific_event" value="no"> No</label>
-                                        </div>
-                                        <textarea name="specific_event_details" placeholder="If yes, please briefly explain"></textarea>
-                                        <div class="radio-group">
-                                            <label>If yes, did you discuss this matter with your supervisor/manager?</label>
-                                            <label><input type="radio" name="discussed_with_manager" value="yes"> Yes</label>
-                                            <label><input type="radio" name="discussed_with_manager" value="no"> No</label>
-                                        </div>
+                                    <div class="access-item">
+                                        <i class="fas fa-database"></i>
+                                        <span>ERP Access</span>
+                                        <span class="status pending">Pending</span>
                                     </div>
                                 </div>
-
-                                <!-- Rating Section -->
-                                <div class="form-section">
-                                    <h4>Rating Questions</h4>
-                                    <p>On a scale of 1 to 5, with "1" being poor and "5" being outstanding, please rate the following:</p>
-                                    
-                                    <div class="rating-group">
-                                        <label>4. Quantity and quality of training received for your position(s)</label>
-                                        <div class="rating-scale">
-                                            <label><input type="radio" name="training_rating" value="1"> 1</label>
-                                            <label><input type="radio" name="training_rating" value="2"> 2</label>
-                                            <label><input type="radio" name="training_rating" value="3"> 3</label>
-                                            <label><input type="radio" name="training_rating" value="4"> 4</label>
-                                            <label><input type="radio" name="training_rating" value="5"> 5</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="rating-group">
-                                        <label>5. Working relationship with your current supervisor</label>
-                                        <div class="rating-scale">
-                                            <label><input type="radio" name="supervisor_rating" value="1"> 1</label>
-                                            <label><input type="radio" name="supervisor_rating" value="2"> 2</label>
-                                            <label><input type="radio" name="supervisor_rating" value="3"> 3</label>
-                                            <label><input type="radio" name="supervisor_rating" value="4"> 4</label>
-                                            <label><input type="radio" name="supervisor_rating" value="5"> 5</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="rating-group">
-                                        <label>6. Working relationship with fellow employees</label>
-                                        <div class="rating-scale">
-                                            <label><input type="radio" name="colleagues_rating" value="1"> 1</label>
-                                            <label><input type="radio" name="colleagues_rating" value="2"> 2</label>
-                                            <label><input type="radio" name="colleagues_rating" value="3"> 3</label>
-                                            <label><input type="radio" name="colleagues_rating" value="4"> 4</label>
-                                            <label><input type="radio" name="colleagues_rating" value="5"> 5</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="rating-group">
-                                        <label>7. Salary for your position</label>
-                                        <div class="rating-scale">
-                                            <label><input type="radio" name="salary_rating" value="1"> 1</label>
-                                            <label><input type="radio" name="salary_rating" value="2"> 2</label>
-                                            <label><input type="radio" name="salary_rating" value="3"> 3</label>
-                                            <label><input type="radio" name="salary_rating" value="4"> 4</label>
-                                            <label><input type="radio" name="salary_rating" value="5"> 5</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="rating-group">
-                                        <label>8. Employee Benefits package</label>
-                                        <div class="rating-scale">
-                                            <label><input type="radio" name="benefits_rating" value="1"> 1</label>
-                                            <label><input type="radio" name="benefits_rating" value="2"> 2</label>
-                                            <label><input type="radio" name="benefits_rating" value="3"> 3</label>
-                                            <label><input type="radio" name="benefits_rating" value="4"> 4</label>
-                                            <label><input type="radio" name="benefits_rating" value="5"> 5</label>
-                                        </div>
-                                        <textarea name="benefits_comments" placeholder="Please offer any comments or suggestions for improvement related to the Benefits package"></textarea>
-                                    </div>
-
-                                    <div class="rating-group">
-                                        <label>9. Overall workload for your position</label>
-                                        <div class="rating-scale">
-                                            <label><input type="radio" name="workload_rating" value="1"> 1</label>
-                                            <label><input type="radio" name="workload_rating" value="2"> 2</label>
-                                            <label><input type="radio" name="workload_rating" value="3"> 3</label>
-                                            <label><input type="radio" name="workload_rating" value="4"> 4</label>
-                                            <label><input type="radio" name="workload_rating" value="5"> 5</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="rating-group">
-                                        <label>10. Overall satisfaction and enjoyment in your current position</label>
-                                        <div class="rating-scale">
-                                            <label><input type="radio" name="satisfaction_rating" value="1"> 1</label>
-                                            <label><input type="radio" name="satisfaction_rating" value="2"> 2</label>
-                                            <label><input type="radio" name="satisfaction_rating" value="3"> 3</label>
-                                            <label><input type="radio" name="satisfaction_rating" value="4"> 4</label>
-                                            <label><input type="radio" name="satisfaction_rating" value="5"> 5</label>
-                                        </div>
-                                    </div>
+                                <div class="completion-checkbox">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="system-access-complete">
+                                        I confirm that I have reviewed all system access revocations
+                                    </label>
                                 </div>
+                            </div>
+                        </div>
 
-                                <!-- Additional Feedback -->
-                                <div class="form-section">
-                                    <h4>Additional Feedback</h4>
-                                    <div class="form-group">
-                                        <label>11. Did you encounter any problems in your current position?</label>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="problems_encountered" value="yes"> Yes</label>
-                                            <label><input type="radio" name="problems_encountered" value="no"> No</label>
-                                        </div>
-                                        <textarea name="problems_details" placeholder="If yes, please briefly comment"></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>12. What did you enjoy most about your employment?</label>
-                                        <textarea name="enjoyed_most" required></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>13. What did you enjoy least about your employment?</label>
-                                        <textarea name="enjoyed_least" required></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>14. Would you recommend Divergent as a potential employer?</label>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="would_recommend" value="yes"> Yes</label>
-                                            <label><input type="radio" name="would_recommend" value="no"> No</label>
-                                        </div>
-                                        <textarea name="recommendation_explanation" placeholder="If no, please briefly explain"></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>15. Would you reapply to Divergent if a future opportunity arose?</label>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="would_reapply" value="yes"> Yes</label>
-                                            <label><input type="radio" name="would_reapply" value="no"> No</label>
-                                        </div>
-                                        <textarea name="reapply_explanation" placeholder="If no, please briefly explain"></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Additional Comments</label>
-                                        <textarea name="additional_comments"></textarea>
-                                    </div>
+                        <!-- Step 5: Exit Interview -->
+                        <div class="step-container" data-step="5" style="display: none;">
+                            <div class="step-header">
+                                <div class="step-number">5</div>
+                                <div class="step-info">
+                                    <h3>Exit Interview</h3>
+                                    <p>Complete Exit Interview & Feedback</p>
                                 </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <form id="exit-interview-form" class="offboarding-form">
+                                    <!-- Employee Information -->
+                                    <div class="form-section">
+                                        <h4>Employee Information</h4>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Employee Name</label>
+                                                <input type="text" name="employee_name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Designation</label>
+                                                <input type="text" name="designation" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Date of Joining</label>
+                                                <input type="date" name="doj" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Last Working Day</label>
+                                                <input type="date" name="lwd" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Resignation Date</label>
+                                                <input type="date" name="resignation_date" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Reporting Manager</label>
+                                                <input type="text" name="reporting_manager" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Department</label>
+                                                <input type="text" name="department" required>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <!-- Handover Section -->
-                                <div class="form-section">
-                                    <h4>Handover Details</h4>
-                                    <div class="form-row">
+                                    <!-- Resignation Details -->
+                                    <div class="form-section">
+                                        <h4>Resignation Details</h4>
                                         <div class="form-group">
-                                            <label>Handover Given</label>
+                                            <label>1. At approximately what point in time did you begin making your decision to resign?</label>
                                             <div class="radio-group">
-                                                <label><input type="radio" name="handover_given" value="yes"> Yes</label>
-                                                <label><input type="radio" name="handover_given" value="no"> No</label>
+                                                <label><input type="radio" name="resignation_timing" value="6-9_months"> 6-9 months ago</label>
+                                                <label><input type="radio" name="resignation_timing" value="3-5_months"> 3-5 months ago</label>
+                                                <label><input type="radio" name="resignation_timing" value="1-2_months"> 1-2 months ago</label>
+                                                <label><input type="radio" name="resignation_timing" value="other"> Other</label>
+                                            </div>
+                                            <input type="text" name="resignation_timing_other" placeholder="Please specify if other">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>2. Please indicate reason(s) below, which contributed to your decision to resign your current position?</label>
+                                            <div class="checkbox-group">
+                                                <label><input type="checkbox" name="resignation_reasons" value="salary"> Salary</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="family"> Family Responsibilities</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="advancement"> Job Advancement</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="management"> Dissatisfied/Management</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="benefits"> Personal Benefits</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="school"> Return to School</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="eliminated"> Job Eliminated</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="relocation"> Relocation</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="health"> Health</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="retirement"> Retirement</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="manager"> Dissatisfaction with the Manager</label>
+                                                <label><input type="checkbox" name="resignation_reasons" value="other"> Other</label>
+                                            </div>
+                                            <input type="text" name="resignation_reasons_other" placeholder="Please specify if other">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>3. Was there a specific event or issue that prompted your resignation?</label>
+                                            <div class="radio-group">
+                                                <label><input type="radio" name="specific_event" value="yes"> Yes</label>
+                                                <label><input type="radio" name="specific_event" value="no"> No</label>
+                                            </div>
+                                            <textarea name="specific_event_details" placeholder="If yes, please briefly explain"></textarea>
+                                            <div class="radio-group">
+                                                <label>If yes, did you discuss this matter with your supervisor/manager?</label>
+                                                <label><input type="radio" name="discussed_with_manager" value="yes"> Yes</label>
+                                                <label><input type="radio" name="discussed_with_manager" value="no"> No</label>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Charge taken By</label>
-                                            <input type="text" name="charge_taken_by">
-                                        </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Signature (Of the person who took over Charge)</label>
-                                            <input type="text" name="charge_signature">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Reporting Manager's Signature</label>
-                                            <input type="text" name="manager_signature">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Signature of Department Head</label>
-                                            <input type="text" name="department_head_signature">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Return of ID/Business Card</label>
-                                            <input type="text" name="id_return">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Laptop</label>
-                                            <input type="text" name="laptop_return">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Exit interview conducted by</label>
-                                            <input type="text" name="interviewer">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Date/Time</label>
-                                            <input type="datetime-local" name="interview_datetime">
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Final Clearance -->
-                                <div class="form-section">
-                                    <h4>Final Clearance</h4>
-                                    <div class="form-group">
-                                        <p>F&F will be cleared after 45 Days.</p>
+                                    <!-- Rating Section -->
+                                    <div class="form-section">
+                                        <h4>Rating Questions</h4>
+                                        <p>On a scale of 1 to 5, with "1" being poor and "5" being outstanding, please rate the following:</p>
+                                        
+                                        <div class="rating-group">
+                                            <label>4. Quantity and quality of training received for your position(s)</label>
+                                            <div class="rating-scale">
+                                                <label><input type="radio" name="training_rating" value="1"> 1</label>
+                                                <label><input type="radio" name="training_rating" value="2"> 2</label>
+                                                <label><input type="radio" name="training_rating" value="3"> 3</label>
+                                                <label><input type="radio" name="training_rating" value="4"> 4</label>
+                                                <label><input type="radio" name="training_rating" value="5"> 5</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="rating-group">
+                                            <label>5. Working relationship with your current supervisor</label>
+                                            <div class="rating-scale">
+                                                <label><input type="radio" name="supervisor_rating" value="1"> 1</label>
+                                                <label><input type="radio" name="supervisor_rating" value="2"> 2</label>
+                                                <label><input type="radio" name="supervisor_rating" value="3"> 3</label>
+                                                <label><input type="radio" name="supervisor_rating" value="4"> 4</label>
+                                                <label><input type="radio" name="supervisor_rating" value="5"> 5</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="rating-group">
+                                            <label>6. Working relationship with fellow employees</label>
+                                            <div class="rating-scale">
+                                                <label><input type="radio" name="colleagues_rating" value="1"> 1</label>
+                                                <label><input type="radio" name="colleagues_rating" value="2"> 2</label>
+                                                <label><input type="radio" name="colleagues_rating" value="3"> 3</label>
+                                                <label><input type="radio" name="colleagues_rating" value="4"> 4</label>
+                                                <label><input type="radio" name="colleagues_rating" value="5"> 5</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="rating-group">
+                                            <label>7. Salary for your position</label>
+                                            <div class="rating-scale">
+                                                <label><input type="radio" name="salary_rating" value="1"> 1</label>
+                                                <label><input type="radio" name="salary_rating" value="2"> 2</label>
+                                                <label><input type="radio" name="salary_rating" value="3"> 3</label>
+                                                <label><input type="radio" name="salary_rating" value="4"> 4</label>
+                                                <label><input type="radio" name="salary_rating" value="5"> 5</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="rating-group">
+                                            <label>8. Employee Benefits package</label>
+                                            <div class="rating-scale">
+                                                <label><input type="radio" name="benefits_rating" value="1"> 1</label>
+                                                <label><input type="radio" name="benefits_rating" value="2"> 2</label>
+                                                <label><input type="radio" name="benefits_rating" value="3"> 3</label>
+                                                <label><input type="radio" name="benefits_rating" value="4"> 4</label>
+                                                <label><input type="radio" name="benefits_rating" value="5"> 5</label>
+                                            </div>
+                                            <textarea name="benefits_comments" placeholder="Please offer any comments or suggestions for improvement related to the Benefits package"></textarea>
+                                        </div>
+
+                                        <div class="rating-group">
+                                            <label>9. Overall workload for your position</label>
+                                            <div class="rating-scale">
+                                                <label><input type="radio" name="workload_rating" value="1"> 1</label>
+                                                <label><input type="radio" name="workload_rating" value="2"> 2</label>
+                                                <label><input type="radio" name="workload_rating" value="3"> 3</label>
+                                                <label><input type="radio" name="workload_rating" value="4"> 4</label>
+                                                <label><input type="radio" name="workload_rating" value="5"> 5</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="rating-group">
+                                            <label>10. Overall satisfaction and enjoyment in your current position</label>
+                                            <div class="rating-scale">
+                                                <label><input type="radio" name="satisfaction_rating" value="1"> 1</label>
+                                                <label><input type="radio" name="satisfaction_rating" value="2"> 2</label>
+                                                <label><input type="radio" name="satisfaction_rating" value="3"> 3</label>
+                                                <label><input type="radio" name="satisfaction_rating" value="4"> 4</label>
+                                                <label><input type="radio" name="satisfaction_rating" value="5"> 5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Additional Feedback -->
+                                    <div class="form-section">
+                                        <h4>Additional Feedback</h4>
+                                        <div class="form-group">
+                                            <label>11. Did you encounter any problems in your current position?</label>
+                                            <div class="radio-group">
+                                                <label><input type="radio" name="problems_encountered" value="yes"> Yes</label>
+                                                <label><input type="radio" name="problems_encountered" value="no"> No</label>
+                                            </div>
+                                            <textarea name="problems_details" placeholder="If yes, please briefly comment"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>12. What did you enjoy most about your employment?</label>
+                                            <textarea name="enjoyed_most" required></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>13. What did you enjoy least about your employment?</label>
+                                            <textarea name="enjoyed_least" required></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>14. Would you recommend Divergent as a potential employer?</label>
+                                            <div class="radio-group">
+                                                <label><input type="radio" name="would_recommend" value="yes"> Yes</label>
+                                                <label><input type="radio" name="would_recommend" value="no"> No</label>
+                                            </div>
+                                            <textarea name="recommendation_explanation" placeholder="If no, please briefly explain"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>15. Would you reapply to Divergent if a future opportunity arose?</label>
+                                            <div class="radio-group">
+                                                <label><input type="radio" name="would_reapply" value="yes"> Yes</label>
+                                                <label><input type="radio" name="would_reapply" value="no"> No</label>
+                                            </div>
+                                            <textarea name="reapply_explanation" placeholder="If no, please briefly explain"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Additional Comments</label>
+                                            <textarea name="additional_comments"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- Handover Section -->
+                                    <div class="form-section">
+                                        <h4>Handover Details</h4>
                                         <div class="form-row">
                                             <div class="form-group">
-                                                <label>Date</label>
-                                                <input type="date" name="ff_clearance_date">
+                                                <label>Handover Given</label>
+                                                <div class="radio-group">
+                                                    <label><input type="radio" name="handover_given" value="yes"> Yes</label>
+                                                    <label><input type="radio" name="handover_given" value="no"> No</label>
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                <label>Signature</label>
-                                                <input type="text" name="ff_clearance_signature">
+                                                <label>Charge taken By</label>
+                                                <input type="text" name="charge_taken_by">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <p>No dues pending.</p>
                                         <div class="form-row">
                                             <div class="form-group">
-                                                <label>Date</label>
-                                                <input type="date" name="dues_clearance_date">
+                                                <label>Signature (Of the person who took over Charge)</label>
+                                                <input type="text" name="charge_signature">
                                             </div>
                                             <div class="form-group">
-                                                <label>Signature</label>
-                                                <input type="text" name="dues_clearance_signature">
+                                                <label>Reporting Manager's Signature</label>
+                                                <input type="text" name="manager_signature">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Signature of Department Head</label>
+                                                <input type="text" name="department_head_signature">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Return of ID/Business Card</label>
+                                                <input type="text" name="id_return">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Laptop</label>
+                                                <input type="text" name="laptop_return">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Exit interview conducted by</label>
+                                                <input type="text" name="interviewer">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Date/Time</label>
+                                                <input type="datetime-local" name="interview_datetime">
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <button type="submit" class="btn-primary">Submit Exit Interview</button>
-                            </form>
+                                    <!-- Final Clearance -->
+                                    <div class="form-section">
+                                        <h4>Final Clearance</h4>
+                                        <div class="form-group">
+                                            <p>F&F will be cleared after 45 Days.</p>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>Date</label>
+                                                    <input type="date" name="ff_clearance_date">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Signature</label>
+                                                    <input type="text" name="ff_clearance_signature">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <p>No dues pending.</p>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>Date</label>
+                                                    <input type="date" name="dues_clearance_date">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Signature</label>
+                                                    <input type="text" name="dues_clearance_signature">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn-primary">Submit Exit Interview</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Financial Settlement -->
+                        <div class="step-container" data-step="6" style="display: none;">
+                            <div class="step-header">
+                                <div class="step-number">6</div>
+                                <div class="step-info">
+                                    <h3>Financial Settlement</h3>
+                                    <p>Payroll & Financial Settlement</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <div class="financial-checklist">
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="finance1" disabled>
+                                        <label for="finance1">Final Salary Processing</label>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="finance2" disabled>
+                                        <label for="finance2">Bonus/Incentive Settlement</label>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <input type="checkbox" id="finance3" disabled>
+                                        <label for="finance3">Reimbursement Processing</label>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                </div>
+                                <div class="completion-checkbox">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="financial-complete">
+                                        I confirm that I have reviewed all financial settlements
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 7: Completion -->
+                        <div class="step-container" data-step="7" style="display: none;">
+                            <div class="step-header">
+                                <div class="step-number">7</div>
+                                <div class="step-info">
+                                    <h3>Completion</h3>
+                                    <p>Offboarding Completion</p>
+                                </div>
+                                <div class="step-status">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="step-content">
+                                <div class="completion-status">
+                                    <div class="status-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>HR Clearance</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>IT Clearance</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Finance Clearance</span>
+                                        <span class="status pending">Pending</span>
+                                    </div>
+                                </div>
+                                <div class="completion-checkbox">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="completion-complete">
+                                        I confirm that I have reviewed all clearances
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Step 6: Financial Settlement -->
-                    <div class="step-container" data-step="6" style="display: none;">
-                        <div class="step-header">
-                            <div class="step-number">6</div>
-                            <div class="step-info">
-                                <h3>Financial Settlement</h3>
-                                <p>Payroll & Financial Settlement</p>
-                            </div>
-                            <div class="step-status">
-                                <span class="status-badge pending">Pending</span>
-                            </div>
-                        </div>
-                        <div class="step-content">
-                            <div class="financial-checklist">
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="finance1" disabled>
-                                    <label for="finance1">Final Salary Processing</label>
-                                    <span class="status pending">Pending</span>
-                                </div>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="finance2" disabled>
-                                    <label for="finance2">Bonus/Incentive Settlement</label>
-                                    <span class="status pending">Pending</span>
-                                </div>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="finance3" disabled>
-                                    <label for="finance3">Reimbursement Processing</label>
-                                    <span class="status pending">Pending</span>
-                                </div>
-                            </div>
-                            <div class="completion-checkbox">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" id="financial-complete">
-                                    I confirm that I have reviewed all financial settlements
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 7: Completion -->
-                    <div class="step-container" data-step="7" style="display: none;">
-                        <div class="step-header">
-                            <div class="step-number">7</div>
-                            <div class="step-info">
-                                <h3>Completion</h3>
-                                <p>Offboarding Completion</p>
-                            </div>
-                            <div class="step-status">
-                                <span class="status-badge pending">Pending</span>
-                            </div>
-                        </div>
-                        <div class="step-content">
-                            <div class="completion-status">
-                                <div class="status-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>HR Clearance</span>
-                                    <span class="status pending">Pending</span>
-                                </div>
-                                <div class="status-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>IT Clearance</span>
-                                    <span class="status pending">Pending</span>
-                                </div>
-                                <div class="status-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Finance Clearance</span>
-                                    <span class="status pending">Pending</span>
-                                </div>
-                            </div>
-                            <div class="completion-checkbox">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" id="completion-complete">
-                                    I confirm that I have reviewed all clearances
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step-navigation">
-                        <button class="btn-secondary" id="prev-step" disabled>Back</button>
-                        <button class="btn-primary" id="next-step">Next</button>
+                    <div class="navigation-buttons">
+                        <button class="btn-prev" onclick="dashboardModule.previousStage()">Previous</button>
+                        <button class="btn-next" onclick="dashboardModule.nextStage()">Next</button>
                     </div>
                 </div>
             </div>

@@ -1,24 +1,11 @@
 // Offboarding Module JavaScript
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize offboarding module
-    const offboardingModule = {
-        // DOM Elements
-        elements: {
-            offboardingRequestForm: document.getElementById('offboarding-request-form'),
-            exitInterviewForm: document.getElementById('exit-interview-form'),
-            submitAssetsButton: document.getElementById('submit-assets'),
-            progressBar: document.querySelector('.progress'),
-            progressPercentage: document.querySelector('.progress-percentage'),
-            stepContainers: document.querySelectorAll('.step-container'),
-            nextButton: document.getElementById('next-step'),
-            prevButton: document.getElementById('prev-step')
-        },
-
-        // Initialize the module
-        currentStep: 1,
-        totalSteps: 7,
-        stepCompleted: {
+const dashboardModule = {
+    init() {
+        console.log('Initializing offboarding module...');
+        this.currentStep = 1;
+        this.totalSteps = 7;
+        this.stepCompleted = {
             1: false,
             2: false,
             3: false,
@@ -26,218 +13,186 @@ document.addEventListener('DOMContentLoaded', function() {
             5: false,
             6: false,
             7: false
-        },
+        };
 
-        init: function() {
-            this.bindEvents();
-            this.bindProgressBarClick();
+        // Always wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded');
+            this.setupEventListeners();
+            this.initializeStageIndicatorClicks();
             this.showCurrentStep();
-            this.updateNavigationButtons();
             this.updateProgress();
-        },
-
-        bindProgressBarClick: function() {
-            const circles = document.querySelectorAll('.circle');
-            circles.forEach((circle, index) => {
-                circle.addEventListener('click', () => {
-                    const stepNumber = index + 1;
-                    
-                    // Check if trying to access a future step
-                    if (stepNumber > this.currentStep) {
-                        this.showNotification('Please complete the current step before proceeding.', 'error');
-                        return;
-                    }
-
-                    // Check if trying to access step 2 without completing step 1
-                    if (stepNumber === 2 && !this.stepCompleted[1]) {
-                        this.showNotification('Please complete Step 1 before proceeding to Step 2.', 'error');
-                        return;
-                    }
-
-                    this.currentStep = stepNumber;
-                    this.showCurrentStep();
-                    this.updateNavigationButtons();
-                });
             });
         },
 
-        showCurrentStep: function() {
-            const steps = document.querySelectorAll('.step-container');
-            steps.forEach((step, index) => {
-                step.style.display = (index + 1 === this.currentStep) ? 'block' : 'none';
-            });
-
-            // Update circle indicators
-            const circles = document.querySelectorAll('.circle');
-            circles.forEach((circle, index) => {
-                const stepNumber = index + 1;
-                circle.classList.remove('active', 'completed');
-                
-                if (this.stepCompleted[stepNumber]) {
-                    circle.classList.add('completed');
-                } else if (stepNumber === this.currentStep) {
-                    circle.classList.add('active');
+    initializeStageIndicatorClicks() {
+        const indicators = document.querySelectorAll('.stage-indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                const stageNumber = index + 1;
+                if (this.canAccessStage(stageNumber)) {
+                    this.navigateToStage(stageNumber);
+                } else {
+                    this.showNotification('Please complete the previous steps first.', 'error');
                 }
             });
+            });
         },
 
-        // Bind event listeners
-        bindEvents: function() {
-            this.elements.offboardingRequestForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.handleOffboardingRequest(e.target);
-            });
+    canAccessStage(stageNumber) {
+        // Can only access current stage or completed stages
+        return stageNumber <= this.currentStep || this.stepCompleted[stageNumber - 1];
+    },
 
-            this.elements.exitInterviewForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.handleExitInterview(e.target);
-            });
+    navigateToStage(stageNumber) {
+        if (stageNumber === this.currentStep) return;
 
-            this.elements.submitAssetsButton.addEventListener('click', () => {
-                this.handleAssetReturn();
-            });
+        // Hide all steps
+        const steps = document.querySelectorAll('.step-container');
+        steps.forEach(step => {
+            step.style.display = 'none';
+        });
 
-            // Add event listeners for completion checkboxes
-            const completionCheckboxes = {
-                'notification-complete': 2,
-                'system-access-complete': 4,
-                'financial-complete': 6,
-                'completion-complete': 7
-            };
+        // Show the selected step
+        const targetStep = document.querySelector(`.step-container[data-step="${stageNumber}"]`);
+        if (targetStep) {
+            targetStep.style.display = 'block';
+        }
 
-            Object.entries(completionCheckboxes).forEach(([checkboxId, stepNumber]) => {
-                const checkbox = document.getElementById(checkboxId);
-                if (checkbox) {
-                    checkbox.addEventListener('change', (e) => {
-                        this.stepCompleted[stepNumber] = e.target.checked;
-                        if (e.target.checked) {
-                            this.updateStepStatus(stepNumber, 'completed');
-                            const circle = document.querySelector(`.circle:nth-child(${stepNumber})`);
-                            if (circle) {
-                                circle.classList.remove('active');
-                                circle.classList.add('completed');
+        // Update current step
+        this.currentStep = stageNumber;
+
+        // Update stage indicators
+        const indicators = document.querySelectorAll('.stage-indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.classList.remove('active', 'completed');
+            if (index + 1 < stageNumber) {
+                indicator.classList.add('completed');
+            } else if (index + 1 === stageNumber) {
+                indicator.classList.add('active');
                             }
-                        } else {
-                            this.updateStepStatus(stepNumber, 'pending');
-                            const circle = document.querySelector(`.circle:nth-child(${stepNumber})`);
-                            if (circle) {
-                                circle.classList.remove('completed');
-                                circle.classList.add('active');
-                            }
-                        }
-                        this.updateProgress();
+        });
+
+        // Update navigation buttons
                         this.updateNavigationButtons();
-                    });
+        
+        // Update progress bar
+        this.updateProgress();
+    },
+
+    updateProgress() {
+        const progress = (this.currentStep - 1) / (this.totalSteps - 1) * 100;
+        const progressBar = document.querySelector('.stage-progress-bar .progress');
+        if (progressBar) {
+            progressBar.style.width = `${progress}%`;
+        }
+    },
+
+    updateNavigationButtons() {
+        const prevButton = document.querySelector('.btn-prev');
+        const nextButton = document.querySelector('.btn-next');
+
+        if (prevButton) {
+            prevButton.disabled = this.currentStep === 1;
+        }
+
+        if (nextButton) {
+            nextButton.disabled = !this.stepCompleted[this.currentStep];
+            nextButton.textContent = this.currentStep === this.totalSteps ? 'Finish' : 'Next';
                 }
-            });
+    },
 
-            this.elements.nextButton.addEventListener('click', () => {
-                if (this.currentStep < this.totalSteps) {
-                    if (!this.stepCompleted[this.currentStep]) {
-                        this.showNotification('Please complete the current step before proceeding.', 'error');
-                        return;
-                    }
-                    this.currentStep++;
-                    this.showCurrentStep();
-                    this.updateNavigationButtons();
-                }
-            });
-
-            this.elements.prevButton.addEventListener('click', () => {
-                if (this.currentStep > 1) {
-                    this.currentStep--;
-                    this.showCurrentStep();
-                    this.updateNavigationButtons();
-                }
-            });
-        },
-
-        // Handle offboarding request submission
-        handleOffboardingRequest: function(form) {
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-
-            // Validate required fields
-            if (!data.lastWorkingDay || !data.reason) {
+    setupEventListeners() {
+        // Offboarding Request Form
+        document.getElementById('offboarding-request-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            if (!formData.get('lastWorkingDay') || !formData.get('reason')) {
                 this.showNotification('Please fill in all required fields.', 'error');
                 return;
             }
-
-            // Simulate API call
-            setTimeout(() => {
-                // Update step status
+            this.stepCompleted[1] = true;
+            this.showNotification('Offboarding request submitted successfully.', 'success');
                 this.updateStepStatus(1, 'completed');
-                this.stepCompleted[1] = true;
-                this.updateStepStatus(2, 'pending');
-                
-                // Update circle indicator
-                const circle = document.querySelector('.circle:nth-child(1)');
-                if (circle) {
-                    circle.classList.remove('active');
-                    circle.classList.add('completed');
-                }
-                
-                // Show success notification
-                this.showNotification('Offboarding request submitted successfully', 'success');
-                
-                // Update progress and navigation
-                this.updateProgress();
+            this.updateNavigationButtons();
+        });
+
+        // Notification Completion
+        document.getElementById('notification-complete')?.addEventListener('change', (e) => {
+            this.stepCompleted[2] = e.target.checked;
+            this.updateStepStatus(2, e.target.checked ? 'completed' : 'pending');
+            this.updateNavigationButtons();
+        });
+
+        // Asset Return
+        document.getElementById('submit-assets')?.addEventListener('click', () => {
+            const assets = document.querySelectorAll('input[name="assets"]:checked');
+            if (assets.length === 0) {
+                this.showNotification('Please select at least one asset to return.', 'error');
+                return;
+            }
+            this.stepCompleted[3] = true;
+            this.showNotification('Assets returned successfully.', 'success');
+            this.updateStepStatus(3, 'completed');
+            this.updateNavigationButtons();
+        });
+
+        // System Access
+        document.getElementById('system-access-complete')?.addEventListener('change', (e) => {
+            this.stepCompleted[4] = e.target.checked;
+            this.updateStepStatus(4, e.target.checked ? 'completed' : 'pending');
                 this.updateNavigationButtons();
-            }, 1000);
-        },
+        });
 
-        // Handle exit interview submission
-        handleExitInterview: function(form) {
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-
-            // Validate required fields
-            if (!data.employee_name || !data.designation || !data.doj || !data.lwd) {
+        // Exit Interview Form
+        document.getElementById('exit-interview-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const requiredFields = ['employee_name', 'designation', 'doj', 'lwd', 'resignation_date', 
+                                 'reporting_manager', 'department', 'enjoyed_most', 'enjoyed_least'];
+            
+            const missingFields = requiredFields.filter(field => !formData.get(field));
+            if (missingFields.length > 0) {
                 this.showNotification('Please fill in all required fields.', 'error');
                 return;
             }
 
-            // Simulate API call
-            setTimeout(() => {
-                // Update step status
+            this.stepCompleted[5] = true;
+            this.showNotification('Exit interview submitted successfully.', 'success');
                 this.updateStepStatus(5, 'completed');
-                this.stepCompleted[5] = true;
-                
-                // Show success notification
-                this.showNotification('Exit interview submitted successfully', 'success');
-                
-                // Update progress and navigation
-                this.updateProgress();
+            this.updateNavigationButtons();
+        });
+
+        // Financial Settlement
+        document.getElementById('financial-complete')?.addEventListener('change', (e) => {
+            this.stepCompleted[6] = e.target.checked;
+            this.updateStepStatus(6, e.target.checked ? 'completed' : 'pending');
+            this.updateNavigationButtons();
+        });
+
+        // Completion
+        document.getElementById('completion-complete')?.addEventListener('change', (e) => {
+            this.stepCompleted[7] = e.target.checked;
+            this.updateStepStatus(7, e.target.checked ? 'completed' : 'pending');
                 this.updateNavigationButtons();
-            }, 1000);
+        });
         },
 
-        // Handle asset return submission
-        handleAssetReturn: function() {
-            const checkedAssets = document.querySelectorAll('input[name="assets"]:checked');
-            
-            if (checkedAssets.length === 0) {
-                this.showNotification('Please select at least one asset to return', 'error');
-                return;
-            }
+    showCurrentStep() {
+        // Hide all steps
+        const steps = document.querySelectorAll('.step-container');
+        steps.forEach(step => {
+            step.style.display = 'none';
+        });
 
-            // Simulate API call
-            setTimeout(() => {
-                // Update step status
-                this.updateStepStatus(3, 'completed');
-                this.stepCompleted[3] = true;
-                
-                // Show success notification
-                this.showNotification('Assets returned successfully', 'success');
-                
-                // Update progress and navigation
-                this.updateProgress();
-                this.updateNavigationButtons();
-            }, 1000);
+        // Show the current step
+        const currentStepElement = document.querySelector(`.step-container[data-step="${this.currentStep}"]`);
+        if (currentStepElement) {
+            currentStepElement.style.display = 'block';
+        }
         },
 
-        // Update step status
-        updateStepStatus: function(stepNumber, status) {
+    updateStepStatus(stepNumber, status) {
             const stepContainer = document.querySelector(`.step-container[data-step="${stepNumber}"]`);
             if (!stepContainer) return;
 
@@ -248,40 +203,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 statusBadge.textContent = status.charAt(0).toUpperCase() + status.slice(1);
             }
 
-            // Update circle indicator
-            const circle = document.querySelector(`.circle:nth-child(${stepNumber})`);
-            if (circle) {
-                circle.classList.remove('active', 'completed');
+        // Update stage indicator
+        const stageIndicator = document.querySelector(`.stage-indicator[data-stage="${stepNumber}"]`);
+        if (stageIndicator) {
+            stageIndicator.classList.remove('active', 'completed');
                 if (status === 'completed') {
-                    circle.classList.add('completed');
+                stageIndicator.classList.add('completed');
                 } else if (stepNumber === this.currentStep) {
-                    circle.classList.add('active');
+                stageIndicator.classList.add('active');
                 }
             }
+    },
 
-            // Update individual status items if they exist
-            const statusItems = stepContainer.querySelectorAll('.status');
-            statusItems.forEach(item => {
-                item.className = `status ${status}`;
-                item.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-            });
-        },
-
-        // Update overall progress
-        updateProgress: function() {
-            const completedSteps = Object.values(this.stepCompleted).filter(Boolean).length;
-            const progress = (completedSteps / this.totalSteps) * 100;
-
-            if (this.elements.progressBar) {
-                this.elements.progressBar.style.width = `${progress}%`;
+    nextStage() {
+        if (this.currentStep < this.totalSteps) {
+            if (!this.stepCompleted[this.currentStep]) {
+                this.showNotification('Please complete the current step before proceeding.', 'error');
+                return;
             }
-            if (this.elements.progressPercentage) {
-                this.elements.progressPercentage.textContent = `${Math.round(progress)}%`;
+            this.navigateToStage(this.currentStep + 1);
+        }
+    },
+
+    previousStage() {
+        if (this.currentStep > 1) {
+            this.navigateToStage(this.currentStep - 1);
             }
         },
 
-        // Show notification
-        showNotification: function(message, type = 'info') {
+    showNotification(message, type = 'info') {
             // Create notification element
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
@@ -290,19 +240,20 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add notification to the page
             document.body.appendChild(notification);
 
+        // Show notification
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 100);
+
             // Remove notification after 3 seconds
+        setTimeout(() => {
+            notification.classList.remove('show');
             setTimeout(() => {
                 notification.remove();
+            }, 300);
             }, 3000);
-        },
-
-        updateNavigationButtons: function() {
-            this.elements.prevButton.disabled = this.currentStep === 1;
-            this.elements.nextButton.disabled = !this.stepCompleted[this.currentStep];
-            this.elements.nextButton.textContent = this.currentStep === this.totalSteps ? 'Finish' : 'Next';
         }
     };
 
-    // Initialize the offboarding module
-    offboardingModule.init();
-}); 
+// Initialize offboarding module
+dashboardModule.init(); 
