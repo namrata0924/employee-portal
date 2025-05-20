@@ -171,13 +171,24 @@ async function handleMicrosoftLogin() {
             // Get user roles from token
             const roles = tokenPayload.roles || [];
             const isAdmin = roles.includes('Admin');
+            const isEmployee = roles.includes('Employee');
             
             // Store user information
             localStorage.setItem('employeeEmail', tokenPayload.email);
             localStorage.setItem('employeeName', tokenPayload.name);
             localStorage.setItem('employeeLoggedIn', 'true');
             
-            if (isAdmin) {
+            // If user has both roles, show role selection
+            if (isAdmin && isEmployee) {
+                const selectedRole = await showRoleSelection();
+                if (selectedRole === 'admin') {
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    localStorage.setItem('adminUsername', tokenPayload.name);
+                    window.location.href = 'modules/admin/dashboard.html';
+                } else {
+                    window.location.href = 'index.html';
+                }
+            } else if (isAdmin) {
                 localStorage.setItem('adminLoggedIn', 'true');
                 localStorage.setItem('adminUsername', tokenPayload.name);
                 window.location.href = 'modules/admin/dashboard.html';
@@ -189,6 +200,95 @@ async function handleMicrosoftLogin() {
         console.error("Login failed:", error);
         alert("Login failed. Please try again.");
     }
+}
+
+// Show role selection dialog
+function showRoleSelection() {
+    return new Promise((resolve) => {
+        const dialog = document.createElement('div');
+        dialog.className = 'role-selection-dialog';
+        dialog.innerHTML = `
+            <div class="role-selection-content">
+                <h3>Select Role</h3>
+                <p>You have access to multiple roles. Please select which role you want to use:</p>
+                <div class="role-buttons">
+                    <button class="role-btn admin-btn" onclick="this.closest('.role-selection-dialog').remove(); window.roleSelectionResult = 'admin';">
+                        <i class="fas fa-user-shield"></i>
+                        Admin Portal
+                    </button>
+                    <button class="role-btn employee-btn" onclick="this.closest('.role-selection-dialog').remove(); window.roleSelectionResult = 'employee';">
+                        <i class="fas fa-user"></i>
+                        Employee Portal
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Add styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .role-selection-dialog {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+            .role-selection-content {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                text-align: center;
+                max-width: 400px;
+                width: 90%;
+            }
+            .role-buttons {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            .role-btn {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 14px;
+                transition: all 0.3s ease;
+            }
+            .admin-btn {
+                background: #dc3545;
+                color: white;
+            }
+            .employee-btn {
+                background: #0d6efd;
+                color: white;
+            }
+            .role-btn:hover {
+                opacity: 0.9;
+                transform: translateY(-2px);
+            }
+        `;
+        document.head.appendChild(style);
+        document.body.appendChild(dialog);
+
+        // Wait for role selection
+        const checkSelection = setInterval(() => {
+            if (window.roleSelectionResult) {
+                clearInterval(checkSelection);
+                resolve(window.roleSelectionResult);
+                delete window.roleSelectionResult;
+            }
+        }, 100);
+    });
 }
 
 // Check if user is already logged in
