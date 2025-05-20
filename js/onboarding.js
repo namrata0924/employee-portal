@@ -190,6 +190,56 @@ const onboardingModule = {
                 return;
             }
         });
+
+        const sameAsCurrentCheckbox = document.getElementById('sameAsCurrent');
+        if (sameAsCurrentCheckbox) {
+            sameAsCurrentCheckbox.addEventListener('change', (e) => {
+                const permanentFields = {
+                    address: document.getElementById('permanentAddress'),
+                    state: document.getElementById('permanentState'),
+                    city: document.getElementById('permanentCity'),
+                    pincode: document.getElementById('permanentPincode')
+                };
+                
+                const currentFields = {
+                    address: document.getElementById('currentAddress'),
+                    state: document.getElementById('currentState'),
+                    city: document.getElementById('currentCity'),
+                    pincode: document.getElementById('currentPincode')
+                };
+
+                if (e.target.checked) {
+                    // Copy current address values to permanent address
+                    permanentFields.address.value = currentFields.address.value;
+                    permanentFields.state.value = currentFields.state.value;
+                    permanentFields.city.value = currentFields.city.value;
+                    permanentFields.pincode.value = currentFields.pincode.value;
+                    
+                    // Disable permanent address fields
+                    Object.values(permanentFields).forEach(field => {
+                        field.disabled = true;
+                    });
+                } else {
+                    // Enable permanent address fields
+                    Object.values(permanentFields).forEach(field => {
+                        field.disabled = false;
+                        field.value = ''; // Clear the fields
+                    });
+                }
+            });
+
+            // Also add listeners to current address fields to update permanent address if checkbox is checked
+            ['address', 'state', 'city', 'pincode'].forEach(field => {
+                const currentField = document.getElementById(`current${field.charAt(0).toUpperCase() + field.slice(1)}`);
+                const permanentField = document.getElementById(`permanent${field.charAt(0).toUpperCase() + field.slice(1)}`);
+                
+                currentField.addEventListener('input', () => {
+                    if (sameAsCurrentCheckbox.checked) {
+                        permanentField.value = currentField.value;
+                    }
+                });
+            });
+        }
     },
 
     handleStepCompletion(step) {

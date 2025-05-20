@@ -212,6 +212,7 @@
                                             </div>
                                         </div>
 
+                                        <!-- Current Address Section -->
                                         <div class="form-section">
                                             <h5 class="form-section-title">Current Address</h5>
                                             <div class="form-group required">
@@ -232,9 +233,16 @@
                                                     <input type="text" id="currentPincode" name="currentPincode" pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode" required>
                                                 </div>
                                             </div>
+                                            <div class="form-group checkbox-group">
+                                                <label>
+                                                    <input type="checkbox" id="sameAsCurrent" name="sameAsCurrent">
+                                                    Permanent Address same as Current Address
+                                                </label>
+                                            </div>
                                         </div>
 
-                                        <div class="form-section">
+                                        <!-- Permanent Address Section -->
+                                        <div class="form-section" id="permanentAddressSection">
                                             <h5 class="form-section-title">Permanent Address</h5>
                                             <div class="form-group required">
                                                 <label for="permanentAddress">Address</label>
