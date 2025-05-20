@@ -20,7 +20,7 @@
 /* Sidebar Styles */
 .admin-sidebar {
     width: var(--sidebar-width);
-    background: linear-gradient(to bottom, var(--primary-700), var(--primary-800));
+    background: linear-gradient(to bottom, var(--primary-700), var(--neutral-800));
     color: var(--neutral-50);
     padding: 1.5rem 0;
     box-shadow: var(--shadow-md);
