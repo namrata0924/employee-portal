@@ -20,9 +20,208 @@
 
 /* Onboarding Module Styles */
 .module-container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: var(--spacing-lg);
+    padding: 2rem;
+}
+
+/* Progress Card Styles */
+.stage-progress {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2.5rem 2rem 2rem 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stage-indicators {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+}
+
+/* Progress Line */
+.stage-indicators::before {
+    content: '';
+    position: absolute;
+    top: calc(var(--stage-indicator-size) / 2);
+    left: calc(var(--stage-indicator-size) + var(--stage-indicator-spacing));
+    right: calc(var(--stage-indicator-size) + var(--stage-indicator-spacing));
+    height: 2px;
+    background: var(--gray-medium);
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.stage-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.stage-number {
+    width: var(--stage-indicator-size);
+    height: var(--stage-indicator-size);
+    background: var(--gray-medium);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    transition: var(--transition);
+    border: 2px solid var(--white);
+    box-shadow: var(--shadow-sm);
+}
+
+.stage-indicator.active .stage-number {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+.stage-indicator.completed .stage-number {
+    background: var(--success-color);
+    color: var(--white);
+}
+
+.stage-indicator.completed .stage-number::after {
+    content: '✓';
+    position: absolute;
+    font-size: 1.2rem;
+}
+
+.stage-indicator span {
+    margin-top: 0.7rem;
+    font-size: 1.05rem;
+    color: #444;
+    text-align: center;
+    max-width: 110px;
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--gray-medium);
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navigation-buttons button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 120px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.btn-prev {
+    background-color: var(--gray-light);
+    color: var(--text-dark);
+}
+
+.btn-next {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-prev:hover {
+    background-color: var(--gray-medium);
+    transform: translateY(-1px);
+}
+
+.btn-next:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.navigation-buttons button:disabled {
+    background-color: var(--gray-medium);
+    color: var(--text-light);
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.7;
+}
+
+/* Progress Bar */
+.stage-progress-bar {
+    height: 8px;
+    background: var(--gray-medium);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.progress {
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .stage-progress {
+        padding: 1.2rem 0.5rem 1rem 0.5rem;
+        max-width: 100vw;
+    }
+    
+    .stage-indicators {
+        padding: 0 0.5rem;
+    }
+    
+    .stage-indicator {
+        min-width: 60px;
+    }
+    
+    .stage-indicator span {
+        font-size: 0.8rem;
+        max-width: 60px;
+    }
+    
+    .stage-number {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+    
+    .stage-indicators::before {
+        left: 20px;
+        right: 20px;
+    }
+    
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .navigation-buttons button {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* Progress Bar Styles */
@@ -58,12 +257,6 @@
     background: var(--neutral-200);
     border-radius: var(--radius-full);
     overflow: hidden;
-}
-
-.progress {
-    height: 100%;
-    background: var(--primary-600);
-    transition: var(--transition-all);
 }
 
 /* Step Groups */
@@ -336,264 +529,6 @@
     height: 18px;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .step-header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .step-number {
-        margin: 0 0 0.75rem 0;
-    }
-
-    .onboarding-form {
-        max-width: 100%;
-    }
-
-    .document-viewer iframe {
-        height: 300px;
-    }
-
-    .options {
-        gap: 0.5rem;
-    }
-}
-
-/* Stage Progress Bar */
-.stage-progress {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
-    margin-bottom: 2rem;
-    position: relative;
-}
-
-.stage-indicators {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--spacing-xl);
-    position: relative;
-}
-
-/* Progress Line */
-.stage-indicators::before {
-    content: '';
-    position: absolute;
-    top: calc(var(--stage-indicator-size) / 2);
-    left: calc(var(--stage-indicator-size) + var(--stage-indicator-spacing));
-    right: calc(var(--stage-indicator-size) + var(--stage-indicator-spacing));
-    height: 2px;
-    background: var(--neutral-200);
-    z-index: 1;
-    transform: translateY(-50%);
-}
-
-.stage-indicator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-    cursor: pointer;
-    transition: var(--transition-all);
-}
-
-.stage-indicator.locked {
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-.stage-number {
-    width: var(--stage-indicator-size);
-    height: var(--stage-indicator-size);
-    background: var(--neutral-200);
-    border-radius: var(--radius-full);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--neutral-600);
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-    transition: var(--transition-all);
-    border: 2px solid var(--neutral-50);
-    box-shadow: var(--shadow-sm);
-}
-
-.stage-indicator span {
-    font-size: var(--text-sm);
-    color: var(--neutral-600);
-    text-align: center;
-    max-width: 100px;
-    transition: var(--transition-all);
-}
-
-.stage-indicator.active .stage-number {
-    background: var(--primary-600);
-    color: var(--neutral-50);
-    transform: scale(1.1);
-}
-
-.stage-indicator.completed .stage-number {
-    background: var(--success-600);
-    color: var(--neutral-50);
-}
-
-.stage-indicator.active span,
-.stage-indicator.completed span {
-    color: var(--neutral-900);
-    font-weight: 500;
-}
-
-/* Stage Content */
-.stage {
-    display: none;
-    background: var(--neutral-50);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: var(--spacing-xl);
-    margin-bottom: var(--spacing-lg);
-    transition: var(--transition-all);
-}
-
-.stage.active {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-.stage-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--spacing-xl);
-    padding-bottom: var(--spacing-md);
-    border-bottom: 2px solid var(--neutral-200);
-}
-
-.stage-header h3 {
-    margin: 0;
-    color: var(--neutral-900);
-    font-size: var(--text-xl);
-}
-
-.stage-status {
-    padding: var(--spacing-xs) var(--spacing-md);
-    border-radius: var(--radius-full);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-}
-
-.stage-status::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: var(--radius-full);
-    background: currentColor;
-}
-
-.stage-status.locked {
-    background: var(--neutral-100);
-    color: var(--neutral-600);
-}
-
-.stage-status.in-progress {
-    background: var(--primary-50);
-    color: var(--primary-700);
-}
-
-.stage-status.completed {
-    background: var(--success-50);
-    color: var(--success-700);
-}
-
-/* Navigation Buttons */
-.navigation-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: var(--spacing-xl);
-    padding: var(--spacing-lg) 0;
-    border-top: 2px solid var(--neutral-200);
-    gap: var(--spacing-md);
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.navigation-buttons button {
-    padding: 0.875rem 2rem;
-    border: none;
-    border-radius: var(--radius-md);
-    font-size: var(--text-base);
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition-all);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 140px;
-    height: 48px;
-    flex: 0 0 auto;
-}
-
-.btn-prev {
-    background-color: var(--neutral-100);
-    color: var(--neutral-700);
-    margin-right: auto;
-}
-
-.btn-next {
-    background-color: var(--primary-600);
-    color: var(--neutral-50);
-    margin-left: auto;
-}
-
-.btn-prev:hover {
-    background-color: var(--neutral-200);
-    transform: translateY(-1px);
-}
-
-.btn-next:hover {
-    background-color: var(--primary-700);
-    transform: translateY(-1px);
-}
-
-.navigation-buttons button:disabled {
-    background-color: var(--neutral-200);
-    color: var(--neutral-400);
-    cursor: not-allowed;
-    transform: none;
-    opacity: 0.7;
-}
-
-/* Responsive Design for Navigation Buttons */
-@media (max-width: 768px) {
-    .navigation-buttons {
-        flex-direction: row;
-        padding: var(--spacing-md) 0;
-        gap: var(--spacing-sm);
-    }
-
-    .navigation-buttons button {
-        min-width: 120px;
-        padding: 0.75rem 1.5rem;
-        font-size: var(--text-sm);
-    }
-
-    .btn-prev {
-        margin-right: 0;
-    }
-
-    .btn-next {
-        margin-left: 0;
-    }
-}
-
 /* Notifications */
 .notification {
     position: fixed;
@@ -859,6 +794,223 @@ input[type="date"] {
 .file-upload-icon {
     font-size: var(--text-2xl);
     color: var(--primary-600);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stage Content */
+.stage {
+    display: none;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stage.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.stage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--gray-medium);
+}
+
+.stage-header h3 {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: 1.5rem;
+}
+
+.stage-status {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stage-status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.stage-status.locked {
+    background: var(--gray-light);
+    color: var(--text-light);
+}
+
+.stage-status.in-progress {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.stage-status.completed {
+    background: var(--success-color);
+    color: var(--white);
+}
+
+/* Steps Container */
+.stages-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Steps */
+.step {
+    background: var(--white);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--gray-light);
+    border-bottom: 1px solid var(--gray-medium);
+    gap: 1rem;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step-info {
+    flex: 1;
+}
+
+.step-info h4 {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+}
+
+.step-content {
+    padding: 1.5rem;
+}
+
+/* Form Styles */
+.onboarding-form {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.form-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.form-section:last-child {
+    margin-bottom: 0;
+}
+
+.form-section-title {
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-row:last-child {
+    margin-bottom: 0;
+}
+
+.form-group {
+    flex: 1 1 calc(33.333% - 1rem);
+    min-width: 250px;
+}
+
+.form-group.full-width {
+    flex: 1 1 100%;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--gray-medium);
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .stage {
+        padding: 1.5rem;
+    }
+
+    .stage-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .form-group {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .navigation-buttons button {
+        width: 100%;
+    }
 }
 
 @keyframes fadeIn {

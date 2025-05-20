@@ -16,6 +16,17 @@ const onboardingModule = {
         this.completedStages = new Set();
         this.nextOrganizationIndex = 2; // For adding new organizations
         
+        // Hide all stages initially except the first one
+        this.stages.forEach((stage, index) => {
+            if (index === 0) {
+                stage.style.display = 'block';
+                stage.classList.add('active');
+            } else {
+                stage.style.display = 'none';
+                stage.classList.remove('active');
+            }
+        });
+        
         this.bindEvents();
         this.initializeStageIndicatorClicks();
         this.navigateToStage(this.currentStage); // Initialize view to current stage (Stage 1)
@@ -26,11 +37,9 @@ const onboardingModule = {
         this.stageIndicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
                 const stageNumber = index + 1;
-                // Allow navigation if the stage is already completed, OR if it's accessible (previous is completed)
-                if (this.completedStages.has(stageNumber) || this.canAccessStage(stageNumber)) {
+                if (this.canAccessStage(stageNumber)) {
                     this.navigateToStage(stageNumber);
                 } else {
-                    // If neither completed nor accessible, show error
                     this.showNotification('Please complete the previous stages first.', 'error');
                 }
             });
@@ -38,132 +47,85 @@ const onboardingModule = {
     },
 
     canAccessStage(stageNumber) {
-        if (stageNumber === 1) return true; // Stage 1 is always accessible initially
-        // For any other stage, the previous stage must be completed
+        if (stageNumber === 1) return true;
         const previousStageNumber = stageNumber - 1;
-        if (!this.completedStages.has(previousStageNumber)) {
-            console.log(`canAccessStage(${stageNumber}): Denied. Previous stage ${previousStageNumber} not in completedStages:`, this.completedStages);
-            return false;
-        }
-        console.log(`canAccessStage(${stageNumber}): Allowed. Previous stage ${previousStageNumber} is completed.`);
-        return true;
+        return this.completedStages.has(previousStageNumber);
     },
 
     navigateToStage(stageNumber) {
         console.log(`[navigateToStage] Attempting to navigate to Stage ${stageNumber}. Current list of completed stages:`, Array.from(this.completedStages));
 
-        // If trying to move forward to a stage that's not yet accessible
-        const canAccess = this.canAccessStage(stageNumber);
-        console.log(`[navigateToStage] canAccessStage(${stageNumber}) returned: ${canAccess}`);
-        if (stageNumber > this.currentStage && !canAccess) {
+        if (stageNumber > this.currentStage && !this.canAccessStage(stageNumber)) {
             console.warn(`[navigateToStage] Navigation to Stage ${stageNumber} denied. It's not yet accessible.`);
             return;
         }
 
+        // Hide all stages first
+        this.stages.forEach(stage => {
+            stage.style.display = 'none';
+            stage.classList.remove('active');
+        });
+
+        // Show and activate the new stage
         const newStageElement = document.querySelector(`.stage[data-stage="${stageNumber}"]`);
         if (!newStageElement) {
             console.error(`[navigateToStage] Stage element for data-stage="${stageNumber}" not found.`);
             return;
         }
-        console.log(`[navigateToStage] Found newStageElement for Stage ${stageNumber}:`, newStageElement);
 
-        // Hide all other stages
-        this.stages.forEach(s => {
-            if (s !== newStageElement) {
-                s.classList.remove('active');
-            }
-        });
-
-        // Show the new stage
-        console.log(`[navigateToStage] About to add 'active' class to Stage ${stageNumber} div.`);
-        if (!newStageElement.classList.contains('active')) {
-            newStageElement.classList.add('active');
-            console.log(`[navigateToStage] Added 'active' class to Stage ${stageNumber} div. It should now be visible.`);
-            if (newStageElement.classList.contains('active')) {
-                console.log(`[navigateToStage] Confirmed: Stage ${stageNumber} div now has 'active' class.`);
-            } else {
-                console.error(`[navigateToStage] ERROR: Stage ${stageNumber} div DOES NOT have 'active' class after attempting to add it.`);
-            }
-        } else {
-            console.log(`[navigateToStage] Stage ${stageNumber} div already has 'active' class.`);
-        }
-        
+        newStageElement.style.display = 'block';
+        newStageElement.classList.add('active');
         this.currentStage = stageNumber;
         
         // Update stage indicators
-        this.stageIndicators.forEach((indicator_elem, index) => {
+        this.stageIndicators.forEach((indicator, index) => {
             const indicatorStageNum = index + 1;
+            indicator.classList.remove('active', 'completed', 'locked');
 
-            // Reset classes for this indicator
-            indicator_elem.classList.remove('active', 'locked', 'completed');
-
-            // Add 'completed' if the stage is in completedStages
             if (this.completedStages.has(indicatorStageNum)) {
-                indicator_elem.classList.add('completed');
-            }
-
-            // Set 'active' for the current stage, or 'locked' for inaccessible future stages
-            if (indicatorStageNum === stageNumber) { // Current stage being navigated to
-                indicator_elem.classList.add('active');
-            } else {
-                // For non-active stages, lock them if they are not completed AND their prerequisite is not met
-                if (!this.completedStages.has(indicatorStageNum) && 
-                    indicatorStageNum > 1 && 
-                    !this.completedStages.has(indicatorStageNum - 1)) {
-                    indicator_elem.classList.add('locked');
-                }
+                indicator.classList.add('completed');
+            } else if (indicatorStageNum === stageNumber) {
+                indicator.classList.add('active');
+            } else if (!this.canAccessStage(indicatorStageNum)) {
+                indicator.classList.add('locked');
             }
         });
 
-        // Update header status of the now active stage
+        // Update header status
         const stageHeaderStatus = newStageElement.querySelector('.stage-header .stage-status');
         if (stageHeaderStatus) {
             if (this.completedStages.has(stageNumber)) {
                 stageHeaderStatus.textContent = 'Completed';
                 stageHeaderStatus.className = 'stage-status completed';
-            } else if (stageHeaderStatus.textContent === 'Locked' || stageHeaderStatus.classList.contains('locked')) {
+            } else if (stageNumber === 1 || this.canAccessStage(stageNumber)) {
                 stageHeaderStatus.textContent = 'In Progress';
                 stageHeaderStatus.className = 'stage-status in-progress';
-            } else if (!stageHeaderStatus.classList.contains('completed')) { // If not completed and not locked, ensure 'In Progress'
-                 stageHeaderStatus.textContent = 'In Progress';
-                 stageHeaderStatus.className = 'stage-status in-progress';
+            } else {
+                stageHeaderStatus.textContent = 'Locked';
+                stageHeaderStatus.className = 'stage-status locked';
             }
         }
         
         this.updateNavigationButtons();
-        console.log(`[navigateToStage] Successfully navigated to Stage ${stageNumber}. Display should be updated.`);
+        this.updateProgress();
     },
 
     updateNavigationButtons() {
-        const currentStageElement = document.querySelector(`.stage.active[data-stage="${this.currentStage}"]`);
-        if (!currentStageElement) {
-            console.warn(`updateNavigationButtons: No active stage found for currentStage: ${this.currentStage}. Disabling all nav buttons.`);
-            document.querySelectorAll('.navigation-buttons button').forEach(btn => btn.disabled = true);
-            return;
-        }
-
-        const nav = currentStageElement.querySelector('.navigation-buttons');
-        console.log(`updateNavigationButtons called for currentStage: ${this.currentStage}`);
+        const prevBtn = document.querySelector('.btn-prev');
+        const nextBtn = document.querySelector('.btn-next');
         
-        if (nav) {
-            const prevBtn = nav.querySelector('.btn-prev');
-            const nextBtn = nav.querySelector('.btn-next');
-            
-            if (prevBtn) {
-                prevBtn.disabled = this.currentStage === 1;
+        if (prevBtn) {
+            prevBtn.disabled = this.currentStage === 1;
+        }
+        
+        if (nextBtn) {
+            if (this.currentStage >= this.totalStages) {
+                nextBtn.disabled = true;
+                nextBtn.textContent = 'Finish';
+            } else {
+                nextBtn.disabled = !this.completedStages.has(this.currentStage);
+                nextBtn.textContent = 'Next';
             }
-            if (nextBtn) {
-                if (this.currentStage >= this.totalStages) {
-                    nextBtn.disabled = true; // Last stage, no next
-                } else {
-                    // Enable "Next" if the current stage is completed OR if the next stage is directly accessible (e.g. already completed)
-                    const canAccessNextStage = this.canAccessStage(this.currentStage + 1);
-                    nextBtn.disabled = !canAccessNextStage;
-                    console.log(`updateNavigationButtons: For Stage ${this.currentStage}, Next button disabled: ${nextBtn.disabled} (canAccessStage(${this.currentStage + 1}): ${canAccessNextStage})`);
-                }
-            }
-        } else {
-            console.warn(`updateNavigationButtons: Navigation buttons container not found for Stage ${this.currentStage}.`);
         }
     },
 
@@ -398,9 +360,6 @@ const onboardingModule = {
         const progressPercentage = (completedStageCount / this.totalStages) * 100;
         if (this.progressBar) {
             this.progressBar.style.width = `${progressPercentage}%`;
-            console.log(`Progress bar updated to ${progressPercentage}%`);
-        } else {
-            console.warn("Progress bar element not found.");
         }
     },
 
@@ -432,17 +391,12 @@ const onboardingModule = {
     },
 
     nextStage() {
-        // Navigate to the next stage if accessible
-        const targetStage = this.currentStage + 1;
-        if (targetStage <= this.totalStages) {
-            if(this.canAccessStage(targetStage)){ // Check if current stage is completed to allow next
-                 this.navigateToStage(targetStage);
-            } else {
-                this.showNotification('Please complete the current stage first.', 'error');
-                console.warn(`Cannot move to Next Stage ${targetStage}. Current stage ${this.currentStage} not completed or other pre-requisites not met.`);
+        if (this.currentStage < this.totalStages) {
+            if (!this.completedStages.has(this.currentStage)) {
+                this.showNotification('Please complete the current stage before proceeding.', 'error');
+                return;
             }
-        } else {
-            console.log("Already on the last stage.");
+            this.navigateToStage(this.currentStage + 1);
         }
     },
 
