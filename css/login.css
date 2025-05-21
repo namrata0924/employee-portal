@@ -124,16 +124,27 @@
 .toggle-password {
     position: absolute;
     right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
     color: var(--text-light);
     cursor: pointer;
     padding: 0.25rem;
     transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
 }
 
 .toggle-password:hover {
     color: var(--primary-color);
+}
+
+.toggle-password i {
+    position: static;
+    font-size: 1.1rem;
 }
 
 .form-options {
