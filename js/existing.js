@@ -4,13 +4,13 @@ const dashboardModule = {
         this.currentStep = 1;
         this.totalSteps = 7;
         this.stepCompleted = {
-            1: false,
-            2: false,
-            3: false,
-            4: false,
-            5: false,
-            6: false,
-            7: false
+            1: true,
+            2: true,
+            3: true,
+            4: true,
+            5: true,
+            6: true,
+            7: true
         };
 
         // Always wait for DOM to be fully loaded
@@ -18,7 +18,7 @@ const dashboardModule = {
             console.log('DOM Content Loaded');
             this.setupEventListeners();
             this.initializeStageIndicatorClicks();
-        this.showCurrentStep();
+            this.showCurrentStep();
             this.updateProgress();
         });
     },
@@ -27,19 +27,14 @@ const dashboardModule = {
         const indicators = document.querySelectorAll('.stage-indicator');
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
-                const stageNumber = index + 1;
-                if (this.canAccessStage(stageNumber)) {
-                    this.navigateToStage(stageNumber);
-                } else {
-                    this.showNotification('Please complete the previous steps first.', 'error');
-                }
+                this.navigateToStage(index + 1);
             });
         });
     },
 
     canAccessStage(stageNumber) {
-        // Can only access current stage or completed stages
-        return stageNumber <= this.currentStep || this.stepCompleted[stageNumber - 1];
+        // Remove validation - allow access to all stages
+        return true;
     },
 
     navigateToStage(stageNumber) {
@@ -95,17 +90,15 @@ const dashboardModule = {
         }
 
         if (nextButton) {
-            nextButton.disabled = !this.stepCompleted[this.currentStep];
+            // Remove validation - always enable next button
+            nextButton.disabled = false;
             nextButton.textContent = this.currentStep === this.totalSteps ? 'Finish' : 'Next';
         }
     },
 
     nextStage() {
         if (this.currentStep < this.totalSteps) {
-            if (!this.stepCompleted[this.currentStep]) {
-                this.showNotification('Please complete the current step before proceeding.', 'error');
-                return;
-            }
+            // Remove validation - directly navigate
             this.navigateToStage(this.currentStep + 1);
         }
     },
@@ -121,22 +114,13 @@ const dashboardModule = {
         
         // Content Type Selection Handler
         const trainingContentType = document.getElementById('training-content-type');
-        console.log('Training Content Type Element:', trainingContentType);
-        
         if (trainingContentType) {
             trainingContentType.addEventListener('change', (e) => {
-                console.log('Content type changed:', e.target.value);
                 const form = e.target.closest('form');
-                if (!form) {
-                    console.log('Form not found');
-                    return;
-                }
+                if (!form) return;
 
                 const pdfContent = form.querySelector('.pdf-content');
                 const videoContent = form.querySelector('.video-content');
-                
-                console.log('PDF Content Element:', pdfContent);
-                console.log('Video Content Element:', videoContent);
                 
                 if (pdfContent && videoContent) {
                     if (e.target.value === 'pdf') {
@@ -159,140 +143,58 @@ const dashboardModule = {
             const videoUpload = e.target.closest('form').querySelector('.video-upload');
             
             if (pdfUpload && videoUpload) {
-            pdfUpload.style.display = e.target.value === 'pdf' ? 'block' : 'none';
-            videoUpload.style.display = e.target.value === 'video' ? 'block' : 'none';
+                pdfUpload.style.display = e.target.value === 'pdf' ? 'block' : 'none';
+                videoUpload.style.display = e.target.value === 'video' ? 'block' : 'none';
             }
         });
 
-        // Video Completion Checkbox
+        // Video Completion Checkbox - Modified to directly navigate
         document.getElementById('video-watched')?.addEventListener('change', (e) => {
-            this.stepCompleted[2] = e.target.checked;
-            this.updateStepStatus(2, e.target.checked ? 'completed' : 'pending');
-            this.updateNavigationButtons();
+            if (e.target.checked) {
+                this.navigateToStage(this.currentStep + 1);
+            }
         });
 
-        // Process Docs Form
+        // Process Docs Form - Modified to directly navigate
         document.getElementById('process-docs-form')?.addEventListener('submit', (e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
-            const docType = formData.get('documentType');
-            
-            if (!docType) {
-                this.showNotification('Please select a document type.', 'error');
-                return;
-            }
-
-            if (docType === 'pdf' && !formData.get('pdfDocument')) {
-                this.showNotification('Please upload a PDF document.', 'error');
-                return;
-            }
-
-            if (docType === 'video' && !formData.get('videoLink')) {
-                this.showNotification('Please provide a video link.', 'error');
-                return;
-            }
-
-            this.stepCompleted[1] = true;
-            this.showNotification('Process documents submitted successfully.', 'success');
-            this.updateStepStatus(1, 'completed');
-            this.updateNavigationButtons();
+            this.navigateToStage(this.currentStep + 1);
         });
 
-        // Training Form
+        // Training Form - Modified to directly navigate
         document.getElementById('training-form')?.addEventListener('submit', (e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
-            const contentType = formData.get('contentType');
-            
-            if (!contentType) {
-                this.showNotification('Please select a content type.', 'error');
-                return;
-            }
-
-            if (contentType === 'pdf' && !formData.get('trainingPdf')) {
-                this.showNotification('Please upload a training PDF.', 'error');
-                return;
-            }
-
-            if (contentType === 'video' && !formData.get('trainingVideoLink')) {
-                this.showNotification('Please provide a training video link.', 'error');
-                return;
-            }
-
-            this.stepCompleted[2] = true;
-            this.showNotification('Training content submitted successfully.', 'success');
-            this.updateStepStatus(2, 'completed');
-            this.updateNavigationButtons();
+            this.navigateToStage(this.currentStep + 1);
         });
 
-        // Feedback Form
+        // Feedback Form - Modified to directly navigate
         document.getElementById('feedback-form')?.addEventListener('submit', (e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
-            if (!formData.get('rating') || !formData.get('strengths') || !formData.get('improvements')) {
-                this.showNotification('Please fill in all required fields.', 'error');
-                return;
-            }
-            this.stepCompleted[3] = true;
-            this.showNotification('Feedback submitted successfully.', 'success');
-            this.updateStepStatus(3, 'completed');
-            this.updateNavigationButtons();
+            this.navigateToStage(this.currentStep + 1);
         });
 
-        // KPI Form
+        // KPI Form - Modified to directly navigate
         document.getElementById('kpi-form')?.addEventListener('submit', (e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
-            if (!formData.get('category') || !formData.get('score') || !formData.get('comments')) {
-                this.showNotification('Please fill in all required fields.', 'error');
-                return;
-            }
-            this.stepCompleted[4] = true;
-            this.showNotification('KPI submitted successfully.', 'success');
-            this.updateStepStatus(4, 'completed');
-            this.updateNavigationButtons();
+            this.navigateToStage(this.currentStep + 1);
         });
 
-        // Brand Survey Form
+        // Brand Survey Form - Modified to directly navigate
         document.getElementById('brand-survey-form')?.addEventListener('submit', (e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
-            if (!formData.get('rating') || !formData.get('improvements')) {
-                this.showNotification('Please fill in all required fields.', 'error');
-                return;
-            }
-            this.stepCompleted[5] = true;
-            this.showNotification('Brand survey submitted successfully.', 'success');
-            this.updateStepStatus(5, 'completed');
-            this.updateNavigationButtons();
+            this.navigateToStage(this.currentStep + 1);
         });
 
-        // Grievance Form
+        // Grievance Form - Modified to directly navigate
         document.getElementById('grievance-form')?.addEventListener('submit', (e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
-            if (!formData.get('type') || !formData.get('description')) {
-                this.showNotification('Please fill in all required fields.', 'error');
-                return;
-            }
-            this.stepCompleted[6] = true;
-            this.showNotification('Grievance submitted successfully.', 'success');
-            this.updateStepStatus(6, 'completed');
-            this.updateNavigationButtons();
+            this.navigateToStage(this.currentStep + 1);
         });
 
-        // POSH Form
+        // POSH Form - Modified to directly navigate
         document.getElementById('posh-form')?.addEventListener('submit', (e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
-            if (!formData.get('date') || !formData.get('location') || !formData.get('description')) {
-                this.showNotification('Please fill in all required fields.', 'error');
-                return;
-            }
-            this.stepCompleted[7] = true;
-            this.showNotification('POSH complaint submitted successfully.', 'success');
-            this.updateStepStatus(7, 'completed');
-            this.updateNavigationButtons();
+            this.navigateToStage(this.currentStep + 1);
         });
     },
 
@@ -302,20 +204,17 @@ const dashboardModule = {
         const steps = document.querySelectorAll('.step');
         steps.forEach(step => {
             step.style.display = 'none';
-            console.log('Hiding step:', step.dataset.step);
         });
 
         // Show the current step
         const currentStepElement = document.querySelector(`.step[data-step="${this.currentStep}"]`);
         if (currentStepElement) {
             currentStepElement.style.display = 'block';
-            console.log('Showing step:', this.currentStep);
             
             // If it's step 2, ensure content type is properly initialized
             if (this.currentStep === 2) {
                 const trainingContentType = document.getElementById('training-content-type');
                 if (trainingContentType) {
-                    // Trigger change event to show/hide appropriate content
                     const event = new Event('change');
                     trainingContentType.dispatchEvent(event);
                 }
@@ -330,7 +229,7 @@ const dashboardModule = {
                 circle.classList.add('completed');
             } else if (index + 1 === this.currentStep) {
                 circle.classList.add('active');
-                }
+            }
         });
     },
 
@@ -354,15 +253,10 @@ const dashboardModule = {
     },
 
     showNotification(message, type = 'info') {
-        // Create notification element
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
         notification.textContent = message;
-
-        // Add notification to the page
         document.body.appendChild(notification);
-
-        // Remove notification after 3 seconds
         setTimeout(() => {
             notification.remove();
         }, 3000);
@@ -370,4 +264,4 @@ const dashboardModule = {
 };
 
 // Initialize existing module
-    dashboardModule.init();
+dashboardModule.init();

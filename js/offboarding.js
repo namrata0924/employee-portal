@@ -40,8 +40,8 @@ const dashboardModule = {
         },
 
     canAccessStage(stageNumber) {
-        // Can only access current stage or completed stages
-        return stageNumber <= this.currentStep || this.stepCompleted[stageNumber - 1];
+        // Allow access to any stage
+        return true;
     },
 
     navigateToStage(stageNumber) {
@@ -66,15 +66,13 @@ const dashboardModule = {
         const indicators = document.querySelectorAll('.stage-indicator');
         indicators.forEach((indicator, index) => {
             indicator.classList.remove('active', 'completed');
-            if (index + 1 < stageNumber) {
-                indicator.classList.add('completed');
-            } else if (index + 1 === stageNumber) {
+            if (index + 1 === stageNumber) {
                 indicator.classList.add('active');
-                            }
+            }
         });
 
         // Update navigation buttons
-                        this.updateNavigationButtons();
+        this.updateNavigationButtons();
         
         // Update progress bar
         this.updateProgress();
@@ -97,9 +95,10 @@ const dashboardModule = {
         }
 
         if (nextButton) {
-            nextButton.disabled = !this.stepCompleted[this.currentStep];
+            // Always enable next button without validation
+            nextButton.disabled = false;
             nextButton.textContent = this.currentStep === this.totalSteps ? 'Finish' : 'Next';
-                }
+        }
     },
 
     setupEventListeners() {
@@ -217,10 +216,6 @@ const dashboardModule = {
 
     nextStage() {
         if (this.currentStep < this.totalSteps) {
-            if (!this.stepCompleted[this.currentStep]) {
-                this.showNotification('Please complete the current step before proceeding.', 'error');
-                return;
-            }
             this.navigateToStage(this.currentStep + 1);
         }
     },

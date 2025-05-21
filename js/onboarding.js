@@ -29,7 +29,16 @@ const onboardingModule = {
         
         this.bindEvents();
         this.initializeStageIndicatorClicks();
-        this.navigateToStage(this.currentStage); // Initialize view to current stage (Stage 1)
+        
+        // Force enable next button on initialization
+        const nextBtn = document.querySelector('.btn-next');
+        if (nextBtn) {
+            nextBtn.disabled = false;
+            nextBtn.style.display = 'flex'; // Ensure button is visible
+            nextBtn.style.opacity = '1';
+        }
+        
+        this.navigateToStage(this.currentStage);
         this.updateProgress();
     },
 
@@ -47,18 +56,12 @@ const onboardingModule = {
     },
 
     canAccessStage(stageNumber) {
-        if (stageNumber === 1) return true;
-        const previousStageNumber = stageNumber - 1;
-        return this.completedStages.has(previousStageNumber);
+        // Remove validation - allow access to all stages
+        return true;
     },
 
     navigateToStage(stageNumber) {
         console.log(`[navigateToStage] Attempting to navigate to Stage ${stageNumber}. Current list of completed stages:`, Array.from(this.completedStages));
-
-        if (stageNumber > this.currentStage && !this.canAccessStage(stageNumber)) {
-            console.warn(`[navigateToStage] Navigation to Stage ${stageNumber} denied. It's not yet accessible.`);
-            return;
-        }
 
         // Hide all stages first
         this.stages.forEach(stage => {
@@ -119,13 +122,14 @@ const onboardingModule = {
         }
         
         if (nextBtn) {
-            if (this.currentStage >= this.totalStages) {
-                nextBtn.disabled = true;
-                nextBtn.textContent = 'Finish';
-            } else {
-                nextBtn.disabled = !this.completedStages.has(this.currentStage);
-                nextBtn.textContent = 'Next';
-            }
+            // Force enable next button and ensure it's visible
+            nextBtn.disabled = false;
+            nextBtn.style.display = 'flex';
+            nextBtn.style.opacity = '1';
+            nextBtn.style.visibility = 'visible';
+            nextBtn.style.pointerEvents = 'auto';
+            nextBtn.style.cursor = 'pointer';
+            nextBtn.textContent = this.currentStage >= this.totalStages ? 'Finish' : 'Next';
         }
     },
 
@@ -135,21 +139,24 @@ const onboardingModule = {
         this.forms.forEach(form => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                this.handleFormSubmission(form);
+                // Remove validation and directly navigate
+                this.navigateToStage(this.currentStage + 1);
             });
         });
 
         // Video Progress
         this.videos.forEach(video => {
             video.addEventListener('ended', () => {
-                this.handleVideoCompletion(video);
+                // Remove validation and directly navigate
+                this.navigateToStage(this.currentStage + 1);
             });
         });
 
         // File Uploads
         this.fileInputs.forEach(input => {
             input.addEventListener('change', (e) => {
-                this.handleFileUpload(e.target);
+                // Remove validation and directly navigate
+                this.navigateToStage(this.currentStage + 1);
             });
         });
 
@@ -157,20 +164,37 @@ const onboardingModule = {
         this.quizForms.forEach(form => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                this.handleQuizSubmission(form);
+                // Remove validation and directly navigate
+                this.navigateToStage(this.currentStage + 1);
             });
         });
 
-        // Checkbox completion
+        // Checkbox completion - Modified to not affect button visibility
         document.querySelectorAll('.completion-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', (e) => {
-                if (e.target.checked) {
-                    this.handleStepCompletion(e.target.closest('.step'));
+                // Just update the status without affecting navigation
+                const step = e.target.closest('.step');
+                if (step) {
+                    const stepStatus = step.querySelector('.step-status');
+                    if (stepStatus) {
+                        stepStatus.textContent = e.target.checked ? 'Completed' : 'Pending';
+                        stepStatus.className = `step-status ${e.target.checked ? 'completed' : 'pending'}`;
+                    }
                 }
             });
         });
 
-        // Event listeners for dynamically added buttons will be attached here or delegated
+        // Ensure next button is always visible and enabled
+        const nextBtn = document.querySelector('.btn-next');
+        if (nextBtn) {
+            nextBtn.disabled = false;
+            nextBtn.style.display = 'flex';
+            nextBtn.style.opacity = '1';
+            nextBtn.style.visibility = 'visible';
+            nextBtn.style.pointerEvents = 'auto';
+        }
+
+        // Event listeners for dynamically added buttons
         document.addEventListener('click', (e) => {
             const addOrgButton = e.target.closest('#add-organization-btn');
             if (addOrgButton) {
@@ -240,72 +264,6 @@ const onboardingModule = {
                 });
             });
         }
-    },
-
-    handleStepCompletion(step) {
-        console.log(`handleStepCompletion called for step: ${step.dataset.step}, parent stage: ${step.closest('.stage').dataset.stage}`);
-        const stepStatus = step.querySelector('.step-status');
-        stepStatus.textContent = 'Completed';
-        stepStatus.classList.remove('pending');
-        stepStatus.classList.add('completed');
-
-        this.checkStageCompletion(step.closest('.stage'));
-    },
-
-    checkStageCompletion(stage) {
-        // Only select direct child steps of the stage
-        const steps = stage.querySelectorAll(':scope > .steps > .step');
-        const completedSteps = stage.querySelectorAll(':scope > .steps > .step > .step-header > .step-status.completed');
-        console.log(`checkStageCompletion for Stage ${stage.dataset.stage}: Total steps: ${steps.length}, Completed steps: ${completedSteps.length}`);
-
-        if (steps.length === completedSteps.length && steps.length > 0) {
-            this.completeStage(stage); // This will handle notification now
-        }
-    },
-    
-    completeStage(stageElement) {
-        const stageNumber = parseInt(stageElement.dataset.stage);
-        if (this.completedStages.has(stageNumber)) {
-            console.log(`Stage ${stageNumber} is already marked as completed.`);
-            return; // Optionally return if already processed
-        }
-        console.log(`completeStage called for Stage ${stageNumber}.`);
-
-        const stageStatusHeader = stageElement.querySelector('.stage-header .stage-status');
-        if (stageStatusHeader) {
-            stageStatusHeader.textContent = 'Completed';
-            stageStatusHeader.className = 'stage-status completed';
-        }
-
-        // Update stage indicator for the completed stage
-        if (this.stageIndicators[stageNumber - 1]) {
-            this.stageIndicators[stageNumber - 1].classList.remove('active', 'locked');
-            this.stageIndicators[stageNumber - 1].classList.add('completed');
-        }
-        this.completedStages.add(stageNumber);
-        console.log('Completed stages set:', Array.from(this.completedStages));
-        this.showNotification(`Stage ${stageNumber} completed successfully!`, 'success');
-
-        // Unlock and update status for the next stage, if it exists
-        if (stageNumber < this.totalStages) {
-            const nextStageNumber = stageNumber + 1;
-            const nextStageElement = document.querySelector(`.stage[data-stage="${nextStageNumber}"]`);
-            if (nextStageElement) {
-                const nextStageHeaderStatus = nextStageElement.querySelector('.stage-header .stage-status');
-                if (nextStageHeaderStatus && (nextStageHeaderStatus.textContent === 'Locked' || nextStageHeaderStatus.classList.contains('locked'))) {
-                    nextStageHeaderStatus.textContent = 'In Progress';
-                    nextStageHeaderStatus.className = 'stage-status in-progress';
-                    console.log(`Updated Stage ${nextStageNumber} header status to 'In Progress'.`);
-                }
-                // Update next stage indicator to remove 'locked' and make it clickable if conditions met
-                if (this.stageIndicators[nextStageNumber - 1]) {
-                    this.stageIndicators[nextStageNumber - 1].classList.remove('locked');
-                    console.log(`Unlocked stage indicator for Stage ${nextStageNumber}.`);
-                }
-            }
-        }
-        this.updateNavigationButtons(); // Update buttons on the *current* (now completed) stage
-        this.updateProgress();
     },
 
     handleFormSubmission(form) {
@@ -442,10 +400,7 @@ const onboardingModule = {
 
     nextStage() {
         if (this.currentStage < this.totalStages) {
-            if (!this.completedStages.has(this.currentStage)) {
-                this.showNotification('Please complete the current stage before proceeding.', 'error');
-                return;
-            }
+            // Directly navigate without any validation
             this.navigateToStage(this.currentStage + 1);
         }
     },
