@@ -52,6 +52,9 @@ const dashboardModule = {
             targetStep.style.display = 'block';
         }
 
+        // Scroll to top when changing stage
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
         // Update current step
         this.currentStep = stageNumber;
 

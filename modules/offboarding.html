@@ -10,7 +10,44 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar will be injected here -->
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Employee Self Help Portal</h2>
+                <div class="user-profile">
+                    <div class="user-info">
+                        <span id="userEmail" class="user-email">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="onboarding.html" class="nav-link">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Onboarding</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="existing.html" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>Existing Employee</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="offboarding.html" class="nav-link">
+                        <i class="fas fa-user-minus"></i>
+                        <span>Offboarding</span>
+                    </a>
+                </li>
+            
+            </ul>
+        </nav>
         <main class="main-content">
             <div class="module-container">
                 <h2>Employee Offboarding</h2>
@@ -621,7 +658,24 @@
             </div>
         </main>
     </div>
-    <script src="../js/components/sidebar.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    logout();
+                });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const userEmail = localStorage.getItem('employeeEmail');
+            document.getElementById('userEmail').textContent = userEmail || '';
+            document.getElementById('welcomeName').textContent = localStorage.getItem('employeeName') || 'Employee';
+        });
+    </script>
     <script src="../js/offboarding.js"></script>
 </body>
 </html> 

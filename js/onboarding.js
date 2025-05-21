@@ -80,6 +80,9 @@ const onboardingModule = {
         newStageElement.classList.add('active');
         this.currentStage = stageNumber;
         
+        // Scroll to top when changing stage
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
         // Update stage indicators
         this.stageIndicators.forEach((indicator, index) => {
             const indicatorStageNum = index + 1;
