@@ -68,7 +68,7 @@
 }
 
 .circle.active {
-    background: #2196F3;
+    background: #7e57c2;
     color: #fff;
     transform: scale(1.1);
 }
@@ -114,7 +114,7 @@
 .step-number {
     width: 32px;
     height: 32px;
-    background: #2196F3;
+    background: #7e57c2;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -188,7 +188,7 @@
 .form-group input[type="text"]:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: #2196F3;
+    border-color: #7e57c2;
     outline: none;
 }
 
@@ -199,7 +199,7 @@
 
 /* Button Styles */
 .btn-primary {
-    background: #2196F3;
+    background: #7e57c2;
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -213,7 +213,7 @@
 }
 
 .btn-primary:hover {
-    background: #1976D2;
+    background: #4a327d;
 }
 
 .btn-secondary {
@@ -351,7 +351,7 @@
 
 .status-item i,
 .access-item i {
-    color: #2196F3;
+    color: #7e57c2;
     font-size: 1.25rem;
 }
 
@@ -545,20 +545,20 @@ input[type="datetime-local"] {
 }
 
 .checkbox-label:hover {
-    color: #2196F3;
+    color: #7e57c2;
 }
 
 .checkbox-label input[type="checkbox"] {
     width: 20px;
     height: 20px;
     cursor: pointer;
-    accent-color: #2196F3;
+    accent-color: #7e57c2;
 }
 
 /* Base Styles */
 :root {
-    --primary-color: #2196F3;
-    --primary-dark: #1976D2;
+--primary-color: #7e57c2;
+    --primary-dark: #675aa9;
     --success-color: #4CAF50;
     --warning-color: #FFC107;
     --error-color: #F44336;
@@ -753,3 +753,25 @@ input[type="datetime-local"] {
         justify-content: center;
     }
 } 
+
+
+.smartwizard .nav .nav-link {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px;
+  background: #f5f5f5;
+  margin: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.smartwizard .nav .nav-link.done {
+  background-color: #28a745 !important;
+  color: white !important;
+}

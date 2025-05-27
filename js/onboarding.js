@@ -151,7 +151,7 @@ const onboardingModule = {
         this.videos.forEach(video => {
             video.addEventListener('ended', () => {
                 // Remove validation and directly navigate
-                this.navigateToStage(this.currentStage + 1);
+                this.navigateToStage(this.currentStage );
             });
         });
 

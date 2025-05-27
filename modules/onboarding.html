@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,11 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/onboarding.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 </head>
+
 <body>
     <div class="app-container">
         <!-- Sidebar Navigation -->
@@ -45,7 +50,7 @@
                         <span>Offboarding</span>
                     </a>
                 </li>
-               
+
             </ul>
         </nav>
         <main class="main-content">
@@ -99,6 +104,7 @@
                         </div>
                         <div class="steps">
                             <!-- Step 1.1 -->
+
                             <div class="step" data-step="1">
                                 <div class="step-header">
                                     <div class="step-number">1.1</div>
@@ -106,20 +112,31 @@
                                     <div class="step-status pending">Pending</div>
                                 </div>
                                 <div class="step-content">
-                                    <div class="video-container">
-                                        <video id="company-video" controls>
-                                            <source src="../assets/video.mp4" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
+                                    <div class="video-trigger-container">
+                                        <button class="btn btn-primary open-video-btn"
+                                            data-video-url="../assets/video.mp4" data-step="1.1">
+                                            Watch Video
+                                        </button>
                                     </div>
                                     <div class="completion-status">
                                         <label>
-                                            <input type="checkbox" class="completion-checkbox" data-step="1.1">
+                                            <input type="checkbox" class="completion-checkbox" data-step="1.1"
+                                                disabled />
                                             I have watched the complete video
                                         </label>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Modal -->
+                            <div id="videoModal" class="modal">
+                                <div class="modal-content">
+                                    <span id="videoCloseBtn" class="close">&times;</span>
+                                    <video id="videoPlayer" class="plyr" controls width="100%" height="400"></video>
+                                </div>
+                            </div>
+
+
 
                             <!-- Step 1.2 -->
                             <div class="step" data-step="2">
@@ -129,8 +146,24 @@
                                     <div class="step-status pending">Pending</div>
                                 </div>
                                 <div class="step-content">
-                                    <div class="document-viewer">
-                                        <iframe src="../assets/sample.pdf" width="100%" height="400px"></iframe>
+                                    <div class="document-viewer pdf-center">
+
+                                        <!-- Multiple PDF buttons under same step -->
+                                        <button class="pdf-icon-button openPdfBtn" data-pdf="../assets/sample.pdf"
+                                            data-pdfid="policy1" data-step="1.2">
+                                            <i class="fas fa-file-pdf"></i> View Policy 1
+                                        </button>
+
+                                        <button class="pdf-icon-button openPdfBtn" data-pdf="../assets/bd.pdf"
+                                            data-pdfid="policy2" data-step="1.2">
+                                            <i class="fas fa-file-pdf"></i> View Policy 2
+                                        </button>
+
+                                        <button class="pdf-icon-button openPdfBtn" data-pdf="../assets/sample.pdf"
+                                            data-pdfid="policy3" data-step="1.2">
+                                            <i class="fas fa-file-pdf"></i> View Policy 3
+                                        </button>
+
                                     </div>
                                     <div class="completion-status">
                                         <label>
@@ -141,6 +174,16 @@
                                 </div>
                             </div>
 
+                            <!-- Modal -->
+                            <div id="pdfModal" class="modal" style="display:none;">
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <iframe id="pdfViewer" src="" width="100%" height="500px"></iframe>
+                                </div>
+                            </div>
+
+
+
                             <!-- Step 1.3 -->
                             <div class="step" data-step="3">
                                 <div class="step-header">
@@ -149,29 +192,47 @@
                                     <div class="step-status pending">Pending</div>
                                 </div>
                                 <div class="step-content">
-                                    <div class="document-viewer">
-                                        <iframe src="../assets/sample.pdf" width="100%" height="400px"></iframe>
+                                    <div class="document-viewer pdf-center">
+
+                                        <!-- Multiple PDF buttons under same step -->
+                                        <button class="pdf-icon-button openPdfBtn" data-pdf="../assets/sample.pdf"
+                                            data-pdfid="policy1" data-step="1.2">
+                                            <i class="fas fa-file-pdf"></i> Employee Handbook-HR
+                                        </button>
+
+                                        <button class="pdf-icon-button openPdfBtn" data-pdf="../assets/bd.pdf"
+                                            data-pdfid="policy2" data-step="1.2">
+                                            <i class="fas fa-file-pdf"></i> View Policy 2
+                                        </button>
+
+
+
                                     </div>
                                     <div class="completion-status">
                                         <label>
-                                            <input type="checkbox" class="completion-checkbox" data-step="1.3">
+                                            <input type="checkbox" class="completion-checkbox" data-step="1.2">
                                             I have read and understood the employee handbook
                                         </label>
                                     </div>
                                 </div>
                             </div>
+
+                          
+
                         </div>
-                        <div class="navigation-buttons">
-                            <button class="btn-prev" onclick="onboardingModule.previousStage()">
-                                <i class="fas fa-arrow-left"></i>
-                                Previous
-                            </button>
-                            <button class="btn-next" onclick="onboardingModule.nextStage()">
-                                Next
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
+                          <div class="navigation-buttons">
+                        <button class="btn-prev" onclick="onboardingModule.previousStage()">
+                            <i class="fas fa-arrow-left"></i>
+                            Previous
+                        </button>
+                        <button class="btn-next" onclick="onboardingModule.nextStage()">
+                            Next
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
                     </div>
+
+                    </div>
+                  
 
                     <!-- Stage 2: Forms -->
                     <div class="stage" data-stage="2">
@@ -213,7 +274,8 @@
                                             <div class="form-row">
                                                 <div class="form-group required">
                                                     <label for="consultantName">Name of Consultant</label>
-                                                    <input type="text" id="consultantName" name="consultantName" required>
+                                                    <input type="text" id="consultantName" name="consultantName"
+                                                        required>
                                                 </div>
                                                 <div class="form-group required">
                                                     <label for="dateOfBirth">Date of Birth</label>
@@ -254,7 +316,8 @@
                                             <h5 class="form-section-title">Current Address</h5>
                                             <div class="form-group required">
                                                 <label for="currentAddress">Address</label>
-                                                <textarea id="currentAddress" name="currentAddress" rows="3" required></textarea>
+                                                <textarea id="currentAddress" name="currentAddress" rows="3"
+                                                    required></textarea>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group required">
@@ -267,7 +330,9 @@
                                                 </div>
                                                 <div class="form-group required">
                                                     <label for="currentPincode">Pin-code</label>
-                                                    <input type="text" id="currentPincode" name="currentPincode" pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode" required>
+                                                    <input type="text" id="currentPincode" name="currentPincode"
+                                                        pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode"
+                                                        required>
                                                 </div>
                                             </div>
                                             <div class="form-group checkbox-group">
@@ -283,12 +348,14 @@
                                             <h5 class="form-section-title">Permanent Address</h5>
                                             <div class="form-group required">
                                                 <label for="permanentAddress">Address</label>
-                                                <textarea id="permanentAddress" name="permanentAddress" rows="3" required></textarea>
+                                                <textarea id="permanentAddress" name="permanentAddress" rows="3"
+                                                    required></textarea>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group required">
                                                     <label for="permanentState">State</label>
-                                                    <input type="text" id="permanentState" name="permanentState" required>
+                                                    <input type="text" id="permanentState" name="permanentState"
+                                                        required>
                                                 </div>
                                                 <div class="form-group required">
                                                     <label for="permanentCity">City</label>
@@ -296,7 +363,9 @@
                                                 </div>
                                                 <div class="form-group required">
                                                     <label for="permanentPincode">Pin-code</label>
-                                                    <input type="text" id="permanentPincode" name="permanentPincode" pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode" required>
+                                                    <input type="text" id="permanentPincode" name="permanentPincode"
+                                                        pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode"
+                                                        required>
                                                 </div>
                                             </div>
                                         </div>
@@ -310,22 +379,28 @@
                                                 </div>
                                                 <div class="form-group required">
                                                     <label for="panCard">PAN Card No</label>
-                                                    <input type="text" id="panCard" name="panCard" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" title="Please enter a valid PAN number" required>
+                                                    <input type="text" id="panCard" name="panCard"
+                                                        pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+                                                        title="Please enter a valid PAN number" required>
                                                 </div>
                                                 <div class="form-group required">
                                                     <label for="aadhar">Aadhar No</label>
-                                                    <input type="text" id="aadhar" name="aadhar" pattern="[0-9]{12}" title="Please enter a valid 12-digit Aadhar number" required>
+                                                    <input type="text" id="aadhar" name="aadhar" pattern="[0-9]{12}"
+                                                        title="Please enter a valid 12-digit Aadhar number" required>
                                                 </div>
                                             </div>
 
                                             <div class="form-row">
                                                 <div class="form-group required">
                                                     <label for="mobile">Mobile Number</label>
-                                                    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" required>
+                                                    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}"
+                                                        title="Please enter a valid 10-digit mobile number" required>
                                                 </div>
                                                 <div class="form-group required">
-                                                    <label for="emergencyContact">Emergency Contact No & Relations</label>
-                                                    <input type="text" id="emergencyContact" name="emergencyContact" required>
+                                                    <label for="emergencyContact">Emergency Contact No &
+                                                        Relations</label>
+                                                    <input type="text" id="emergencyContact" name="emergencyContact"
+                                                        required>
                                                 </div>
                                             </div>
                                         </div>
@@ -362,7 +437,8 @@
                                                     </div>
                                                     <div class="form-group checkbox-group">
                                                         <label>
-                                                            <input type="checkbox" id="fatherResiding" name="fatherResiding">
+                                                            <input type="checkbox" id="fatherResiding"
+                                                                name="fatherResiding">
                                                             Residing with Self
                                                         </label>
                                                     </div>
@@ -383,7 +459,8 @@
                                                     </div>
                                                     <div class="form-group checkbox-group">
                                                         <label>
-                                                            <input type="checkbox" id="motherResiding" name="motherResiding">
+                                                            <input type="checkbox" id="motherResiding"
+                                                                name="motherResiding">
                                                             Residing with Self
                                                         </label>
                                                     </div>
@@ -404,12 +481,15 @@
                                                     </div>
                                                     <div class="form-group checkbox-group">
                                                         <label>
-                                                            <input type="checkbox" id="spouseResiding" name="spouseResiding">
+                                                            <input type="checkbox" id="spouseResiding"
+                                                                name="spouseResiding">
                                                             Residing with Self
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn-remove-family-member" style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Spouse</button>
+                                                <button type="button" class="btn-remove-family-member"
+                                                    style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove
+                                                    Spouse</button>
                                             </div>
 
                                             <!-- Children Information -->
@@ -426,12 +506,15 @@
                                                     </div>
                                                     <div class="form-group checkbox-group">
                                                         <label>
-                                                            <input type="checkbox" id="child1Residing" name="child1Residing">
+                                                            <input type="checkbox" id="child1Residing"
+                                                                name="child1Residing">
                                                             Residing with Self
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn-remove-family-member" style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Child 1</button>
+                                                <button type="button" class="btn-remove-family-member"
+                                                    style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove
+                                                    Child 1</button>
                                             </div>
 
                                             <div class="family-member-section">
@@ -447,12 +530,15 @@
                                                     </div>
                                                     <div class="form-group checkbox-group">
                                                         <label>
-                                                            <input type="checkbox" id="child2Residing" name="child2Residing">
+                                                            <input type="checkbox" id="child2Residing"
+                                                                name="child2Residing">
                                                             Residing with Self
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn-remove-family-member" style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Child 2</button>
+                                                <button type="button" class="btn-remove-family-member"
+                                                    style="margin-top: 10px; background-color: var(--warning-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove
+                                                    Child 2</button>
                                             </div>
                                         </div>
 
@@ -485,7 +571,8 @@
                                                     <div class="form-row">
                                                         <div class="form-group">
                                                             <label for="org1Designation1">Designation</label>
-                                                            <input type="text" id="org1Designation1" name="org1Designation1" required>
+                                                            <input type="text" id="org1Designation1"
+                                                                name="org1Designation1" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="org1From1">From</label>
@@ -501,19 +588,25 @@
                                                 <div class="form-row">
                                                     <div class="form-group">
                                                         <label for="org1ContactNo">Contact No.</label>
-                                                        <input type="tel" id="org1ContactNo" name="org1ContactNo" pattern="[0-9]{10}" title="Please enter a valid 10-digit contact number">
+                                                        <input type="tel" id="org1ContactNo" name="org1ContactNo"
+                                                            pattern="[0-9]{10}"
+                                                            title="Please enter a valid 10-digit contact number">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="org1JobDescription">Job Description</label>
-                                                    <textarea id="org1JobDescription" name="org1JobDescription" rows="3" required></textarea>
+                                                    <textarea id="org1JobDescription" name="org1JobDescription" rows="3"
+                                                        required></textarea>
                                                 </div>
-                                                <button type="button" class="btn-remove-organization" style="margin-top: 10px; background-color: var(--error-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove Organization</button>
+                                                <button type="button" class="btn-remove-organization"
+                                                    style="margin-top: 10px; background-color: var(--error-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: var(--border-radius); cursor: pointer;">Remove
+                                                    Organization</button>
                                             </div>
                                         </div>
 
-                                        <button type="button" id="add-organization-btn" class="btn-primary" style="margin-top: 1.5rem; background-color: var(--success-color)">
+                                        <button type="button" id="add-organization-btn" class="btn-primary"
+                                            style="margin-top: 1.5rem; background-color: var(--success-color)">
                                             <i class="fas fa-plus"></i> Add Another Organization
                                         </button>
 
@@ -562,6 +655,8 @@
                                             I have completed the Safety Training
                                         </label>
                                     </div>
+
+                                    
                                     <div class="quiz-section">
                                         <h6>Safety Training Quiz</h6>
                                         <form class="quiz-form">
@@ -620,8 +715,10 @@
                                     <!-- Process documentation content -->
                                     <p>Please review the following documents:</p>
                                     <ul>
-                                        <li>Document 1: <a href="../assets/sample.pdf" target="_blank">View Document</a></li>
-                                        <li>Document 2: <a href="../assets/sample.pdf" target="_blank">View Document</a></li>
+                                        <li>Document 1: <a href="../assets/sample.pdf" target="_blank">View Document</a>
+                                        </li>
+                                        <li>Document 2: <a href="../assets/sample.pdf" target="_blank">View Document</a>
+                                        </li>
                                     </ul>
                                     <div class="completion-status">
                                         <label>
@@ -699,10 +796,10 @@
                                     <!-- Access provisioning content -->
                                 </div>
                                 <div class="completion-status">
-                                        <label>
-                                            <input type="checkbox" class="completion-checkbox" data-step="4.1">
-                                            I have reviewed all things
-                                        </label>
+                                    <label>
+                                        <input type="checkbox" class="completion-checkbox" data-step="4.1">
+                                        I have reviewed all things
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -749,26 +846,99 @@
                     </div>
                 </div>
             </div>
+            
         </main>
     </div>
+    <!-- ✅ jQuery should come FIRST -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- ✅ Only include Bootstrap bundle (not both) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <!-- ✅ Other libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.8.162/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+    <script src="../js/helper.js"></script>
+    <script src="../js/onboarding.js"></script>
     <script src="../js/auth.js"></script>
+
+
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const logoutBtn = document.getElementById('logoutBtn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', function(e) {
+        $(document).ready(function () {
+            // Logout button handler
+            const $logoutBtn = $('#logoutBtn');
+            if ($logoutBtn.length) {
+                $logoutBtn.on('click', function (e) {
                     e.preventDefault();
                     logout();
                 });
             }
+
+            // Set user email and welcome name safely
+            const userEmail = localStorage.getItem('employeeEmail') || '';
+            const employeeName = localStorage.getItem('employeeName') || 'Employee';
+
+            if ($('#userEmail').length) {
+                $('#userEmail').text(userEmail);
+            }
+            if ($('#welcomeName').length) {
+                $('#welcomeName').text(employeeName);
+            }
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const userEmail = localStorage.getItem('employeeEmail');
-            document.getElementById('userEmail').textContent = userEmail || '';
-            document.getElementById('welcomeName').textContent = localStorage.getItem('employeeName') || 'Employee';
-        });
+
+$(document).ready(function () {
+    let currentPdfId = null;
+
+    $('.openPdfBtn').on('click', async function () {
+        const pdfUrl = $(this).data('pdf');
+        const pdfId = $(this).data('pdfid');
+        currentPdfId = pdfId;
+
+        // Load PDF into iframe
+       $('#pdfViewer').attr('src', pdfUrl + '#zoom=100');
+        $('#pdfModal').show();
+
+        // Start tracking time
+        await captureStartTime(pdfId, this, pdfUrl);
+    });
+
+    // Example: Close PDF viewer (you can trigger this from a close button)
+    $('.close').on('click', async function () {
+        if (!currentPdfId) return;
+
+        const allowClose = await checkReadingTime(currentPdfId);
+        if (allowClose) {
+            await captureStopTime(currentPdfId);
+            $('#pdfModal').hide();
+            currentPdfId = null;
+        }
+    });
+});
+
+
+$(document).on('click', '.open-video-btn', function () {
+    const videoUrl = $(this).data('video-url');
+
+    openTrackedVideoModal({
+        videoUrl: videoUrl,
+        modalId: 'videoModal',
+        videoElementId: 'videoPlayer',
+        closeBtnId: 'videoCloseBtn',
+        onComplete: function () {
+            console.log('User watched required video duration.');
+            // You can trigger AJAX, navigation, or marking completion here
+        }
+    });
+});
+
+
     </script>
-    <script src="../js/onboarding.js"></script>
+
+
 </body>
-</html> 
+
+</html>

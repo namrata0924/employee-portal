@@ -12,6 +12,22 @@
     --primary-800: #1565C0;
     --primary-900: #0D47A1;
 
+  
+    --purple-50:  #f3e8fd;
+    --purple-100: #e1cffe;
+    --purple-200: #ceaffd;
+    --purple-300: #b68cf8;
+    --purple-400: #9d6be3;
+    --purple-500: #7e57c2; /* Base color */
+    --purple-600: #8E44AD ;
+    --purple-700: #5a3d99;
+    --purple-800: #4a327d;
+    --purple-900: #311c52;
+
+
+
+   
+
     /* Neutral Colors */
     --neutral-50: #FAFAFA;
     --neutral-100: #F5F5F5;
@@ -109,7 +125,7 @@ body {
 /* Sidebar Styles */
 .sidebar {
     width: 280px;
-    background: linear-gradient(180deg, var(--primary-700) 0%, var(--neutral-800) 100%);
+    background: linear-gradient(180deg, var(--purple-500) 0%, var(--purple-900) 100%);
     color: white;
     padding: var(--spacing-6);
     position: fixed;
@@ -222,13 +238,13 @@ body {
 .module-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--primary-200);
+    border-color: var(--purple-200);
 }
 
 .card-icon {
     width: 64px;
     height: 64px;
-    background: var(--primary-50);
+    background: var(--purple-50);
     border-radius: var(--radius-full);
     display: flex;
     align-items: center;
@@ -238,13 +254,13 @@ body {
 }
 
 .module-card:hover .card-icon {
-    background: var(--primary-500);
+    background: var(--purple-500);
     transform: scale(1.1);
 }
 
 .card-icon i {
     font-size: var(--font-size-2xl);
-    color: var(--primary-500);
+    color: var(--purple-500);
     transition: var(--transition-colors);
 }
 
@@ -271,7 +287,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: var(--spacing-3) var(--spacing-6);
-    background: var(--primary-500);
+    background: var(--purple-500);
     color: white;
     border: none;
     border-radius: var(--radius-lg);
@@ -284,7 +300,7 @@ body {
 }
 
 .btn-primary:hover {
-    background: var(--primary-600);
+    background: var(--purple-800);
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
 }
@@ -414,3 +430,11 @@ body {
 .transition-all { transition: var(--transition-all); }
 .transition-colors { transition: var(--transition-colors); }
 .transition-transform { transition: var(--transition-transform); } 
+
+
+
+/* .custom-toast {
+    background-color: #37381e !important;
+    border-left: 5px solid #00bfff;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+} */

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Existing - Employee Lifecycle Management</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/existing.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 </head>
+
 <body>
     <div class="app-container">
         <!-- Sidebar Navigation -->
@@ -45,13 +49,13 @@
                         <span>Offboarding</span>
                     </a>
                 </li>
-            
+
             </ul>
         </nav>
         <main class="main-content">
             <div class="module-container">
                 <h2>Existing Employee</h2>
-
+                </br>
                 <!-- Multi-Step Section -->
                 <div class="multi-step-section">
                     <!-- Stage Progress Bar -->
@@ -127,48 +131,40 @@
 
                         <!-- Step 2 -->
                         <div class="step card" data-step="2" style="display: none;">
-                            <h4>Step 2: Department Training Videos</h4>
-                            <div class="training-section">
-                                <form class="modal-form" id="training-form">
-                                    <!-- <div class="form-group">
-                                        <label>Content Type</label>
-                                        <select name="contentType" id="training-content-type" required>
-                                            <option value="">Select Content Type</option>
-                                            <option value="pdf">PDF</option>
-                                            <option value="video">Video</option>
-                                        </select>
-                                    </div> -->
-                                    <!-- <div class="content-display pdf-content" style="display: none;"> -->
-                                        <div class="pdf-viewer">
-                                            <iframe src="../assets/sample.pdf" width="100%" height="500px" frameborder="0"></iframe>
-                                        </div>
-                                        <div class="content-info">
-                                            <h5>Employee Handbook</h5>
-                                            <p>Please review the complete employee handbook document.</p>
-                                        </div>
-                                    <!-- </div> -->
-                                    <!-- <div class="content-display video-content" style="display: none;"> -->
-                                        <div class="video-container">
-                                            <video width="100%" height="500px" controls>
-                                                <source src="../assets/video.mp4" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        </div>
-                                        <div class="content-info">
-                                            <h5>Department Training Video</h5>
-                                            <p>Please watch the complete training video.</p>
-                                        </div>
-                                    <!-- </div> -->
-                                    <div class="form-group video-completion">
-                                        <label class="checkbox-label">
-                                            <input type="checkbox" id="video-watched" name="videoWatched">
-                                            I confirm that I have reviewed the complete content
-                                        </label>
-                                    </div>
-                                </form>
+                            <div class="step-header">
+                                <div class="step-number"></div>
+                                <h4>Step 2: Department Training Videos</h4>
+
+                            </div>
+                            <div class="step-content training-section">
+                                <button class="btn btn-primary open-pdf-btn" data-pdf-url="../assets/sample.pdf"
+                                    data-step="2" data-pdfid="pdf1">
+                                    View Employee Handbook PDF
+                                </button>
+
+                                <button class="btn btn-primary open-pdf-btn" data-pdf-url="../assets/sample.pdf"
+                                    data-step="2" data-pdfid="pdf2">
+                                    View Employee Handbook PDF
+                                </button>
+
+
+
+                                <button class="btn btn-primary open-video-btn" data-video-url="../assets/video.mp4"
+                                    data-video-name="test" data-step="2" style="margin-left:10px;">
+                                    Watch Department Training Video
+                                </button>
+
+                                <div class="completion-status" style="margin-top: 15px;">
+                                    <label>
+                                        <input type="checkbox" id="step-completed" name="step-completed" disabled>
+                                        I confirm that I have reviewed the complete content
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                       
+
+
+
 
                         <!-- Step 3 -->
                         <div class="step card" data-step="3" style="display: none;">
@@ -198,7 +194,7 @@
                                 </div>
                             </form>
                         </div>
-                      
+
 
                         <!-- Step 4 -->
                         <div class="step card" data-step="4" style="display: none;">
@@ -226,7 +222,7 @@
                                 </div>
                             </form>
                         </div>
-                       
+
 
                         <!-- Step 5 -->
                         <div class="step card" data-step="5" style="display: none;">
@@ -252,7 +248,7 @@
                                 </div>
                             </form>
                         </div>
-                      
+
 
                         <!-- Step 6 -->
                         <div class="step card" data-step="6" style="display: none;">
@@ -270,7 +266,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea name="description" required placeholder="Please describe your grievance in detail"></textarea>
+                                    <textarea name="description" required
+                                        placeholder="Please describe your grievance in detail"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Would you like to remain anonymous?</label>
@@ -288,7 +285,7 @@
                                 </div>
                             </form>
                         </div>
-                        
+
 
                         <!-- Step 7 -->
                         <div class="step card" data-step="7" style="display: none;">
@@ -304,11 +301,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Description of Incident</label>
-                                    <textarea name="description" required placeholder="Please provide detailed information about the incident"></textarea>
+                                    <textarea name="description" required
+                                        placeholder="Please provide detailed information about the incident"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Witnesses (if any)</label>
-                                    <textarea name="witnesses" placeholder="Please list any witnesses to the incident"></textarea>
+                                    <textarea name="witnesses"
+                                        placeholder="Please list any witnesses to the incident"></textarea>
                                 </div>
                                 <div>
                                     <button type="submit" class="btn-primary">Submit</button>
@@ -317,21 +316,44 @@
                         </div>
                     </div>
 
-                    <div class="navigation-buttons">
-                        <button class="btn-prev" onclick="dashboardModule.previousStage()">Previous</button>
-                        <button class="btn-next" onclick="dashboardModule.nextStage()">Next</button>
-                    </div>
+
                 </div>
             </div>
+            <!-- Modal -->
+            <div id="pdfModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close" id="closePdfBtn">&times;</span>
+                    <iframe id="pdfViewer" src="" width="100%" height="500px"></iframe>
+                </div>
+            </div>
+
+
+            <!-- Video Modal -->
+
+            <div id="videoModal" class="modal">
+                <div class="modal-content">
+                    <span id="videoCloseBtn" class="close">&times;</span>
+                    <video id="videoPlayer" class="plyr" controls width="100%" height="400"></video>
+                </div>
+            </div>
+
         </main>
     </div>
+    <!-- ✅ jQuery should come FIRST -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <!-- ✅ Only include Bootstrap bundle (not both) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <!-- ✅ Other libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.8.162/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="../js/auth.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const logoutBtn = document.getElementById('logoutBtn');
             if (logoutBtn) {
-                logoutBtn.addEventListener('click', function(e) {
+                logoutBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     logout();
                 });
@@ -340,12 +362,299 @@
 
 
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const userEmail = localStorage.getItem('employeeEmail');
             document.getElementById('userEmail').textContent = userEmail || '';
-            document.getElementById('welcomeName').textContent = localStorage.getItem('employeeName') || 'Employee';
+            document.getElementById('welcomeName').textContent = localStorage.getItem('employeeName') ||
+                'Employee';
+        });
+
+        //step 1
+        $('.stage-indicator').on('click', function () {
+            const stage = parseInt($(this).data('stage'));
+            console.log("Stage clicked:", stage);
+
+            // Show only the selected step
+            $('.step').hide();
+            $(`.step[data-step="${stage}"]`).show();
+
+            // Set clicked indicator as active only
+            $('.stage-indicator').removeClass('active');
+            $(this).addClass('active');
+
+            // ❌ Do not auto-mark previous steps as completed here
+        });
+
+        $(document).ready(function () {
+            // Show/hide PDF or Video inputs based on selection
+            $('#process-doc-type').on('change', function () {
+                const selected = $(this).val();
+                $('.pdf-upload').toggle(selected === 'pdf');
+                $('.video-upload').toggle(selected === 'video');
+            });
+
+            // Form submit handler for Step 1 (adjust for other steps similarly)
+            $('#process-docs-form').on('submit', function (e) {
+                e.preventDefault();
+
+                const docType = $('#process-doc-type').val();
+                const isPdf = docType === 'pdf';
+                const isVideo = docType === 'video';
+                let isValid = true;
+
+                $('.file-input, input[name="videoLink"]').removeClass('input-error');
+
+                if (!docType) {
+                    alert('Please select a Document Type');
+                    isValid = false;
+                } else if (isPdf && $('.file-input').get(0).files.length === 0) {
+                    alert('Please upload a PDF file.');
+                    $('.file-input').addClass('input-error');
+                    isValid = false;
+                } else if (isVideo && !$('input[name="videoLink"]').val()) {
+                    alert('Please enter a video URL.');
+                    $('input[name="videoLink"]').addClass('input-error');
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    // Mark Step 1 box green (completed)
+                    $('.stage-indicator[data-stage="1"]').addClass('completed');
+                    alert('Step 1 submitted successfully!');
+                    // Do NOT move to next step; stay on this step
+                }
+            });
+        });
+
+
+
+        $(document).ready(function () {
+            let currentPdfId = null;
+
+            $('.open-pdf-btn').on('click', async function () {
+                const pdfUrl = $(this).data('pdf-url');
+                const pdfId = $(this).data('pdfid');
+                currentPdfId = pdfId;
+
+                // Load PDF into iframe
+                $('#pdfViewer').attr('src', pdfUrl + '#zoom=100');
+                $('#pdfModal').show();
+
+                // Start tracking time
+                await captureStartTime(pdfId, this, pdfUrl);
+            });
+
+            // Example: Close PDF viewer (you can trigger this from a close button)
+            $('.close').on('click', async function () {
+                if (!currentPdfId) return;
+
+                const allowClose = await checkReadingTime(currentPdfId);
+                if (allowClose) {
+                    const timeComplted = await captureStopTime(currentPdfId);
+                    if (!timeComplted) {
+                        console.log('PDF reading time completed:', timeComplted);
+
+                        $('#pdfModal').hide();
+                        currentPdfId = null;
+                    } else {
+                        console.log('PDF reading time completed:', timeComplted);
+
+                        $('#pdfModal').hide();
+                        // ✅ Mark the button as completed (green)
+                        $(`[data-pdfid="${currentPdfId}"]`).addClass('completed');
+
+                        // ✅ Run overall validation
+                        validateCompletion();
+
+                        currentPdfId = null;
+                    }
+                }
+            });
+        });
+
+
+        $(document).on('click', '.open-video-btn', function () {
+            const videoUrl = $(this).data('video-url');
+            const videoName = $(this).data('video-name');
+            openTrackedVideoModal({
+                videoUrl: videoUrl,
+                modalId: 'videoModal',
+                videoElementId: 'videoPlayer',
+                closeBtnId: 'videoCloseBtn',
+                onComplete: function () {
+                    console.log('User watched required video duration.');
+                    // Mark the specific video button as completed using videoUrl
+                    $(`[data-video-name="${videoName}"]`).addClass('completed');
+
+                    // Run your validation function to check overall status
+                    validateCompletion();
+                }
+            });
+        });
+
+
+        function validateCompletion() {
+            const pdf1Done = $('[data-pdfid="pdf1"]').hasClass('completed');
+            const pdf2Done = $('[data-pdfid="pdf2"]').hasClass('completed');
+            const videoDone = $('[data-video-name="test"]').hasClass('completed');
+            // const checkboxDone = $('#confirmCheck').is(':checked');
+
+            const isValid = pdf1Done && pdf2Done && videoDone;
+
+            if (isValid) {
+                $('#proceedBtn').prop('disabled', false);
+
+                // ✅ Additional success logic
+                $('.stage-indicator[data-stage="2"]').addClass('completed');
+                alert('Step 2 submitted successfully!');
+            } else {
+                $('#proceedBtn').prop('disabled', true);
+            }
+        }
+
+
+
+        //step 3
+        $(document).ready(function () {
+            $('#feedback-form').on('submit', function (e) {
+                e.preventDefault(); // Prevent actual form submission
+
+                // Basic client-side validation
+                const rating = $(this).find('select[name="rating"]').val();
+                const strengths = $(this).find('textarea[name="strengths"]').val().trim();
+                const improvements = $(this).find('textarea[name="improvements"]').val().trim();
+
+                if (rating && strengths !== '' && improvements !== '') {
+                    // All fields valid
+                    $('.stage-indicator[data-stage="3"]').addClass('completed');
+                    alert('Step 3 submitted successfully!');
+
+                    // Optional: disable form or move to next step
+                    $(this).find('button[type="submit"]').prop('disabled', true);
+                } else {
+                    alert('Please complete all fields before submitting.');
+                }
+            });
+        });
+
+
+        //step 4
+        $(document).ready(function () {
+            $(document).on('submit', '#kpi-form', function (e) {
+                e.preventDefault();
+                console.log('Step 4 form submit triggered');
+
+                let isValid = true;
+
+                const category = $(this).find('select[name="category"]').val();
+                const score = $(this).find('input[name="score"]').val();
+                const comments = $(this).find('textarea[name="comments"]').val();
+
+                $(this).find('select, input, textarea').removeClass('error');
+
+                if (!category) {
+                    isValid = false;
+                    $(this).find('select[name="category"]').addClass('error');
+                }
+
+                if (!score || score < 1 || score > 10) {
+                    isValid = false;
+                    $(this).find('input[name="score"]').addClass('error');
+                }
+
+                if (!comments.trim()) {
+                    isValid = false;
+                    $(this).find('textarea[name="comments"]').addClass('error');
+                }
+
+                if (isValid) {
+                    $('.stage-indicator[data-stage="4"]').addClass('completed');
+                    alert('Step 4 submitted successfully!');
+                }
+            });
+        });
+
+
+
+        //step 5
+
+        $(document).ready(function () {
+            $('#brand-survey-form').on('submit', function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                // Collect values
+                const rating = $(this).find('select[name="rating"]').val();
+                const improvements = $(this).find('textarea[name="improvements"]').val().trim();
+
+                // Validate all required fields
+                if (rating && improvements !== '') {
+                    // Mark the stage indicator as completed
+                    $('.stage-indicator[data-stage="5"]').addClass('completed');
+                    alert('Step 5 submitted successfully!');
+
+                    // Optional: disable submit to avoid duplicates
+                    $(this).find('button[type="submit"]').prop('disabled', true);
+                } else {
+                    alert('Please complete all fields before submitting.');
+                }
+            });
+        });
+
+
+
+        //step 6
+        $(document).ready(function () {
+            $('#grievance-form').on('submit', function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                // Get field values
+                const type = $(this).find('select[name="type"]').val();
+                const description = $(this).find('textarea[name="description"]').val().trim();
+                const anonymous = $(this).find('input[name="anonymous"]:checked').val();
+
+                // Validation check
+                if (type && description !== '' && anonymous) {
+                    // Mark Step 6 as completed
+                    $('.stage-indicator[data-stage="6"]').addClass('completed');
+                    alert('Step 6 submitted successfully!');
+
+                    // Optional: disable submit to prevent re-submission
+                    $(this).find('button[type="submit"]').prop('disabled', true);
+                } else {
+                    alert('Please complete all fields before submitting.');
+                }
+            });
+        });
+
+
+        //step 7
+
+        $(document).ready(function () {
+            $('#posh-form').on('submit', function (e) {
+                e.preventDefault(); // Prevent default submission
+
+                // Fetch form values
+                const date = $(this).find('input[name="date"]').val();
+                const location = $(this).find('input[name="location"]').val().trim();
+                const description = $(this).find('textarea[name="description"]').val().trim();
+                // Witnesses field is optional
+
+                // Check required fields
+                if (date && location !== '' && description !== '') {
+                    // Mark step as completed
+                    $('.stage-indicator[data-stage="7"]').addClass('completed');
+                    alert('Step 7 submitted successfully!');
+
+                    // Optionally disable submit to prevent re-submission
+                    $(this).find('button[type="submit"]').prop('disabled', true);
+                } else {
+                    alert('Please complete all required fields before submitting.');
+                }
+            });
         });
     </script>
+    <script src="../js/helper.js"></script>
     <script src="../js/existing.js"></script>
 </body>
+
 </html>

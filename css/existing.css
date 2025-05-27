@@ -60,7 +60,7 @@
 }
 
 .circle.active {
-    background: #2196F3;
+    background: #7e57c2;
     color: #fff;
     transform: scale(1.1);
 }
@@ -116,7 +116,7 @@
 /* Button Styles */
 .btn-primary {
     display: inline-block;
-    background: #2196F3;
+    background: #7e57c2;
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -130,7 +130,7 @@
 }
 
 .btn-primary:hover {
-    background: #1976D2;
+    background: #5a3d99;
 }
 
 .btn-secondary {
@@ -230,7 +230,7 @@
 
 .card-header i {
     font-size: 1.5rem;
-    color: #2196F3;
+    color: #7e57c2;
     margin-right: 1rem;
 }
 
@@ -258,7 +258,7 @@
 
 .progress-indicator .progress {
     height: 100%;
-    background: #2196F3;
+    background: #7e57c2;
     transition: width 0.3s ease;
 }
 
@@ -328,12 +328,12 @@
 }
 
 .file-input:hover {
-    border-color: #2196F3;
+    border-color: #7e57c2;
     background: #f0f7ff;
 }
 
 .file-input::-webkit-file-upload-button {
-    background: #2196F3;
+    background: #7e57c2;
     color: white;
     padding: 0.5rem 1rem;
     border: none;
@@ -344,7 +344,7 @@
 }
 
 .file-input::-webkit-file-upload-button:hover {
-    background: #1976D2;
+    background: #5a3d99;
 }
 
 /* Document Upload Section */
@@ -367,8 +367,8 @@
 
 /* Base Styles */
 :root {
-    --primary-color: #2196F3;
-    --primary-dark: #1976D2;
+     --primary-color: #7e57c2;
+    --primary-dark: #675aa9;
     --success-color: #4CAF50;
     --warning-color: #FFC107;
     --error-color: #F44336;
@@ -384,92 +384,56 @@
     --stage-indicator-size: 40px;
     --stage-indicator-spacing: 2rem;
 }
-
-/* Stage Progress Bar */
-.stage-progress {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
-    margin-bottom: 2rem;
-    position: relative;
+.stage-indicator {
+  display: inline-block;
+  padding: 12px 20px;
+  margin: 0 8px;
+    height: auto;  /* or a fixed consistent value like 110px */
+  /* border: 2px solid #ccc; */
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+   border: 2px solid gray;
+  transition: background-color 0.3s, border-color 0.3s;
+  text-align: center;
+  width: 120px;
+  margin-right: 10px;
+    box-sizing: border-box; /* Include padding and border in width */
 }
 
+.stage-indicator .stage-number {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+/* Ensure flexbox container stretches items */
 .stage-indicators {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--spacing-xl);
-    position: relative;
+    align-items: stretch; /* or center, if you prefer */
 }
 
-/* Progress Line */
-.stage-indicators::before {
-    content: '';
-    position: absolute;
-    top: calc(var(--stage-indicator-size) / 2);
-    left: calc(var(--stage-indicator-size) + var(--stage-indicator-spacing));
-    right: calc(var(--stage-indicator-size) + var(--stage-indicator-spacing));
-    height: 2px;
-    background: var(--gray-medium);
-    z-index: 1;
-    transform: translateY(-50%);
+.stage-indicator.active {
+  border-color: #5a3d99;
+  background-color:#7e57c2 ;
+  color:#ffffff
 }
 
-.stage-indicator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-    cursor: pointer;
-    transition: var(--transition);
+.stage-indicator.completed {
+  border-color: rgb(26, 79, 26);
+  background-color: green;
+    color: #ffffff;
 }
 
-.stage-indicator.locked {
-    cursor: not-allowed;
-    opacity: 0.7;
+
+@media (max-width: 768px) {
+  .stage-indicator {
+    /* display: block; */
+    width: 100%;
+    margin: 10px 0;
+  }
 }
 
-.stage-number {
-    width: var(--stage-indicator-size);
-    height: var(--stage-indicator-size);
-    background: var(--gray-medium);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-light);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    transition: var(--transition);
-    border: 2px solid var(--white);
-    box-shadow: var(--shadow-sm);
-}
-
-.stage-indicator span {
-    font-size: 0.875rem;
-    color: var(--text-light);
-    text-align: center;
-    max-width: 100px;
-    transition: var(--transition);
-}
-
-.stage-indicator.active .stage-number {
-    background: var(--primary-color);
-    color: var(--white);
-    transform: scale(1.1);
-}
-
-.stage-indicator.completed .stage-number {
-    background: var(--success-color);
-    color: var(--white);
-}
-
-.stage-indicator.active span,
-.stage-indicator.completed span {
-    color: var(--text-dark);
-    font-weight: 500;
-}
 
 /* Navigation Buttons */
 .navigation-buttons {
@@ -538,20 +502,20 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .stage-indicators {
+    /* .stage-indicators {
         overflow-x: auto;
         padding-bottom: 1rem;
     }
 
     .stage-indicator {
         min-width: 100px;
-    }
+    } */
 
-    .stage-header {
+    /* .stage-header {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
-    }
+    } */
 
     .navigation-buttons {
         flex-direction: column;
@@ -572,14 +536,14 @@
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-
+/* 
 .pdf-viewer {
     width: 100%;
     background: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     overflow: hidden;
-}
+} */
 
 .content-info {
     padding: 1rem;
@@ -612,3 +576,193 @@
     border: none;
 }
 
+/* Modal Overlay */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(4px); /* Optional: adds a blur effect */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 1000px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Responsive iframe */
+#pdfViewer {
+  width: 100%;
+  height: 500px;
+  border: none;
+}
+
+/* PDF Button */
+.pdf-icon-button {
+  background: var(--primary-color, #2196F3);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(33, 150, 243, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+  min-width: 160px;
+  justify-content: center;
+}
+
+.pdf-icon-button:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+
+.pdf-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .modal-content {
+    width: 98vw;
+    max-width: 98vw;
+    border-radius: 10px;
+  }
+
+  .modal-content iframe {
+    height: 55vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .pdf-icon-button {
+    width: 100%;
+    min-width: 0;
+    font-size: 1rem;
+    padding: 0.9rem 0;
+  }
+
+  .modal-content {
+    width: 95vw;
+    max-width: 95vw;
+    border-radius: 10px;
+  }
+}
+
+
+/* Full screen overlay modal */
+#videoModal.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1050; /* bootstrap modals are usually 1050+ */
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* dark semi-transparent background */
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Show modal when active */
+#videoModal.modal.show {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal content container */
+#videoModal .modal-content {
+  background: #ffffff;
+  width: 90vw;
+  max-width: 900px;
+  max-height: 90vh;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0,0,0,0.7);
+}
+
+/* Close button line at top */
+#videoModal .close {
+  color: rgb(0, 0, 0);
+  font-size: 28px;
+  font-weight: bold;
+  padding: 12px 16px;
+  cursor: pointer;
+  user-select: none;
+  background-color: #ffffff;
+  border-bottom: 1px solid #444;
+  align-self: flex-end; /* aligns close button to right */
+  width: 100%;
+  text-align: right;
+}
+
+/* Hover effect for close button */
+#videoModal .close:hover {
+  color: #ff4444;
+}
+
+/* Video fills the rest of the modal */
+#videoModal video#videoPlayer {
+  flex: 1 1 auto;
+  width: 100%;
+  height: auto;
+  background: black;
+  outline: none;
+  display: block;
+}
+.error {
+    border: 1px solid red;
+}
+
+
+.completed {
+    background-color: #28a745 !important; /* Bootstrap success green */
+    color: white !important;
+    border: none;
+    box-shadow: 0 0 5px #28a745;
+    transition: background-color 0.3s ease;
+}
