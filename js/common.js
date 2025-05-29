@@ -4,11 +4,11 @@ function loadScriptWithNoCache(src) {
   script.src = src + '?v=' + new Date().getTime();
 
   script.onload = () => {
-    console.log(`Script loaded successfully: ${script.src}`);
+    // console.log(`Script loaded successfully: ${script.src}`);
   };
 
   script.onerror = () => {
-    console.error(`Failed to load script: ${script.src}`);
+    // console.error(`Failed to load script: ${script.src}`);
   };
 
   document.head.appendChild(script);
