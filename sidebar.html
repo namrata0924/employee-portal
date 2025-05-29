@@ -1,0 +1,33 @@
+<!-- sidebar.html -->
+
+
+
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <h2>Employee Self Help Portal</h2>
+        <div class="user-profile">
+            <div class="user-info">
+                <span id="userEmail" class="user-email">Loading...</span>
+            </div>
+        </div>
+    </div>
+   <ul class="nav-links">
+  <li><a href="/employee-portal/index.html" class="nav-link"><i class="fas fa-home"></i><span>Home</span></a></li>
+  <li><a href="/employee-portal/modules/onboarding.html" class="nav-link"><i class="fas fa-user-plus"></i><span>Onboarding</span></a></li>
+  <li><a href="/employee-portal/modules/existing.html" class="nav-link"><i class="fas fa-user"></i><span>Existing Employee</span></a></li>
+  <li><a href="/employee-portal/modules/offboarding.html" class="nav-link"><i class="fas fa-user-minus"></i><span>Offboarding</span></a></li>
+   <!-- <li><a href="/" class="nav-link"><i class="fas fa-user-minus"></i><span>tesing</span></a></li> -->
+</ul>
+
+    <div class="logout-section">
+        <a href="#" id="logoutBtn" class="nav-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+    </div>
+</nav>
+
+<script>
+  $(document).ready(function () {
+    $('#hamburgerBtn').on('click', function () {
+      $('.sidebar').toggleClass('active');
+    });
+  });
+</script>

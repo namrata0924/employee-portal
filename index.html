@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,53 +9,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="js/auth.js"></script>
 </head>
+
 <body>
+
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h2>Employee Self Help Portal</h2>
-                <div class="user-profile">
-                    <!-- <i class="fas fa-user-circle"></i> -->
-                    <div class="user-info">
-                        <span id="userEmail" class="user-email">Loading...</span>
-                    </div>
-                </div>
-            </div>
-            <ul class="nav-links">
-                <li>
-                    <a href="index.html" class="nav-link">
-                        <i class="fas fa-home"></i>
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="modules/onboarding.html" class="nav-link">
-                        <i class="fas fa-user-plus"></i>
-                        <span>Onboarding</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="modules/existing.html" class="nav-link">
-                        <i class="fas fa-user"></i>
-                        <span>Existing Employee</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="modules/offboarding.html" class="nav-link">
-                        <i class="fas fa-user-minus"></i>
-                        <span>Offboarding</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+     <div class="mobile-header">
+  <button class="hamburger" id="hamburgerBtn">
+    <i class="fas fa-bars"></i>
+  </button>
+</div>
+
+        <div id="sidebar-container"></div>
 
         <!-- Main Content Area -->
         <main class="main-content">
             <div class="welcome-section">
-                <h1>Welcome, <span id="welcomeName">Employee</span>!</h1>
+                <h1>
+                    Welcome, <span id="welcomeName">Employee</span>, to Divergent Insights!
+                </h1>
+                <p class="tagline">Where Collaboration Creates Value.</p>
                 <p>Select a module from the sidebar to get started</p>
-                
+
                 <div class="module-cards">
                     <!-- Onboarding Card -->
                     <div class="module-card">
@@ -62,7 +38,8 @@
                             <i class="fas fa-user-plus"></i>
                         </div>
                         <h3>Onboarding</h3>
-                        <p>Complete the employee onboarding process including induction, forms, training, and document submission.</p>
+                        <p>Complete the employee onboarding process including induction, forms, training, and document
+                            submission.</p>
                         <a href="modules/onboarding.html" class="btn-primary">Start Onboarding</a>
                     </div>
 
@@ -90,13 +67,29 @@
         </main>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Update user information on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const userEmail = localStorage.getItem('employeeEmail');
-            document.getElementById('userEmail').textContent = userEmail || '';
-            document.getElementById('welcomeName').textContent = localStorage.getItem('employeeName') || 'Employee';
+        $(function () {
+            $("#sidebar-container").load("sidebar.html", function () {
+                // Set user email and name
+                const userEmail = localStorage.getItem('employeeEmail');
+                const employeeName = localStorage.getItem('employeeName') || 'Employee';
+
+                $("#userEmail").text(userEmail || '');
+                $("#welcomeName").text(employeeName);
+
+                // Attach logout event
+                const logoutBtn = document.getElementById('logoutBtn'); {
+                    logoutBtn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        logout();
+                    });
+                }
+            });
         });
     </script>
+
+
 </body>
-</html> 
+
+</html>

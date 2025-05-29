@@ -1,6 +1,6 @@
 /* existing Module Styles */
 .module-container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 2rem;
 }
@@ -17,7 +17,7 @@
     margin-bottom: 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     width: 100%;
-    max-width: 1200px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -94,7 +94,7 @@
     width: 100%;
     box-sizing: border-box;
     min-height: 400px;
-    max-width: 1200px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -122,11 +122,13 @@
     padding: 0.75rem 1.5rem;
     border-radius: 4px;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-decoration: none;
     text-align: center;
+      margin-bottom: 1rem; 
+      margin-right: 1rem;
 }
 
 .btn-primary:hover {
@@ -150,7 +152,7 @@
 
 /* Form Styles */
 .modal-form {
-    max-width: 600px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -385,20 +387,19 @@
     --stage-indicator-spacing: 2rem;
 }
 .stage-indicator {
-  display: inline-block;
-  padding: 12px 20px;
-  margin: 0 8px;
-    height: auto;  /* or a fixed consistent value like 110px */
-  /* border: 2px solid #ccc; */
-  border-radius: 8px;
-  cursor: pointer;
-  user-select: none;
-   border: 2px solid gray;
-  transition: background-color 0.3s, border-color 0.3s;
-  text-align: center;
-  width: 120px;
-  margin-right: 10px;
-    box-sizing: border-box; /* Include padding and border in width */
+    flex: 1 1 0;
+    min-width: 100px; /* Optional: minimum width for each indicator */
+    padding: 12px 20px;
+    margin: 0 8px;
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    border: 2px solid gray;
+    transition: background-color 0.3s, border-color 0.3s;
+    text-align: center;
+    box-sizing: border-box;
+    /* Remove width: 120px; */
 }
 
 .stage-indicator .stage-number {
@@ -411,6 +412,7 @@
 .stage-indicators {
     display: flex;
     align-items: stretch; /* or center, if you prefer */
+     width: 100%;
 }
 
 .stage-indicator.active {
@@ -420,8 +422,8 @@
 }
 
 .stage-indicator.completed {
-  border-color: rgb(26, 79, 26);
-  background-color: green;
+  border-color: rgb(20, 31, 20);
+  background-color: rgb(0, 83, 0);
     color: #ffffff;
 }
 
@@ -430,7 +432,7 @@
   .stage-indicator {
     /* display: block; */
     width: 100%;
-    margin: 10px 0;
+    /* margin: 10px 0; */
   }
 }
 
@@ -502,20 +504,20 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* .stage-indicators {
+    .stage-indicators {
         overflow-x: auto;
         padding-bottom: 1rem;
     }
 
     .stage-indicator {
         min-width: 100px;
-    } */
+    }
 
-    /* .stage-header {
+    .stage-header {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
-    } */
+    }
 
     .navigation-buttons {
         flex-direction: column;
@@ -765,4 +767,37 @@
     border: none;
     box-shadow: 0 0 5px #28a745;
     transition: background-color 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .stage-indicator span {
+    font-size: 0.7rem;
+    max-width: 50px;
+  }
+
+  .form-group {
+    min-width: 100%;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .navigation-buttons button {
+    width: 100%;
+  }
+
+  .step-content {
+    padding: 1rem;
+  }
+
+  .stage-header h3 {
+    font-size: 1.2rem;
+  }
 }

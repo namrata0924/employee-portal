@@ -16,47 +16,16 @@
 <body>
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h2>Employee Self Help Portal</h2>
-                <div class="user-profile">
-                    <div class="user-info">
-                        <span id="userEmail" class="user-email">Loading...</span>
-                    </div>
-                </div>
-            </div>
-            <ul class="nav-links">
-                <li>
-                    <a href="../index.html" class="nav-link">
-                        <i class="fas fa-home"></i>
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="onboarding.html" class="nav-link">
-                        <i class="fas fa-user-plus"></i>
-                        <span>Onboarding</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="existing.html" class="nav-link">
-                        <i class="fas fa-user"></i>
-                        <span>Existing Employee</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="offboarding.html" class="nav-link">
-                        <i class="fas fa-user-minus"></i>
-                        <span>Offboarding</span>
-                    </a>
-                </li>
-
-            </ul>
-        </nav>
+        <div class="mobile-header">
+            <button class="hamburger" id="hamburgerBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="sidebar-container"></div>
         <main class="main-content">
             <div class="module-container">
                 <h2>Employee Onboarding</h2>
-
+                <br />
                 <!-- Stage Progress Bar -->
                 <div class="stage-progress">
                     <div class="stage-indicators">
@@ -149,17 +118,17 @@
                                     <div class="document-viewer pdf-center">
 
                                         <!-- Multiple PDF buttons under same step -->
-                                        <button class="pdf-icon-button openPdfBtn" data-pdf="../assets/sample.pdf"
+                                        <button class="btn btn-primary openPdfBtn" data-pdf="../assets/sample.pdf"
                                             data-pdfid="policy1" data-step="1.2">
                                             <i class="fas fa-file-pdf"></i> View Policy 1
                                         </button>
 
-                                        <button class="pdf-icon-button openPdfBtn" data-pdf="../assets/bd.pdf"
+                                        <button class="btn btn-primary openPdfBtn" data-pdf="../assets/bd.pdf"
                                             data-pdfid="policy2" data-step="1.2">
                                             <i class="fas fa-file-pdf"></i> View Policy 2
                                         </button>
 
-                                        <button class="pdf-icon-button openPdfBtn" data-pdf="../assets/sample.pdf"
+                                        <button class="btn btn-primary openPdfBtn" data-pdf="../assets/sample.pdf"
                                             data-pdfid="policy3" data-step="1.2">
                                             <i class="fas fa-file-pdf"></i> View Policy 3
                                         </button>
@@ -195,12 +164,12 @@
                                     <div class="document-viewer pdf-center">
 
                                         <!-- Multiple PDF buttons under same step -->
-                                        <button class="pdf-icon-button openPdfBtn" data-pdf="../assets/sample.pdf"
+                                        <button class="btn btn-primary openPdfBtn" data-pdf="../assets/sample.pdf"
                                             data-pdfid="policy1" data-step="1.2">
                                             <i class="fas fa-file-pdf"></i> Employee Handbook-HR
                                         </button>
 
-                                        <button class="pdf-icon-button openPdfBtn" data-pdf="../assets/bd.pdf"
+                                        <button class="btn btn-primary openPdfBtn" data-pdf="../assets/bd.pdf"
                                             data-pdfid="policy2" data-step="1.2">
                                             <i class="fas fa-file-pdf"></i> View Policy 2
                                         </button>
@@ -217,22 +186,22 @@
                                 </div>
                             </div>
 
-                          
+
 
                         </div>
-                          <div class="navigation-buttons">
-                        <button class="btn-prev" onclick="onboardingModule.previousStage()">
-                            <i class="fas fa-arrow-left"></i>
-                            Previous
-                        </button>
-                        <button class="btn-next" onclick="onboardingModule.nextStage()">
-                            Next
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
+                        <div class="navigation-buttons">
+                            <button class="btn-prev" onclick="onboardingModule.previousStage()">
+                                <i class="fas fa-arrow-left"></i>
+                                Previous
+                            </button>
+                            <button class="btn-next" onclick="onboardingModule.nextStage()">
+                                Next
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
 
                     </div>
-                  
+
 
                     <!-- Stage 2: Forms -->
                     <div class="stage" data-stage="2">
@@ -656,7 +625,7 @@
                                         </label>
                                     </div>
 
-                                    
+
                                     <div class="quiz-section">
                                         <h6>Safety Training Quiz</h6>
                                         <form class="quiz-form">
@@ -846,7 +815,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </main>
     </div>
     <!-- ✅ jQuery should come FIRST -->
@@ -867,75 +836,69 @@
 
 
     <script>
+        $(function () {
+            $("#sidebar-container").load("../sidebar.html", function () {
+                // Set user email and name
+                const userEmail = localStorage.getItem('employeeEmail');
+                const employeeName = localStorage.getItem('employeeName') || 'Employee';
+
+                $("#userEmail").text(userEmail || '');
+                $("#welcomeName").text(employeeName);
+
+                // Attach logout event
+                const logoutBtn = document.getElementById('logoutBtn'); {
+                    logoutBtn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        logout();
+                    });
+                }
+            });
+        });
+
         $(document).ready(function () {
-            // Logout button handler
-            const $logoutBtn = $('#logoutBtn');
-            if ($logoutBtn.length) {
-                $logoutBtn.on('click', function (e) {
-                    e.preventDefault();
-                    logout();
-                });
-            }
+            let currentPdfId = null;
 
-            // Set user email and welcome name safely
-            const userEmail = localStorage.getItem('employeeEmail') || '';
-            const employeeName = localStorage.getItem('employeeName') || 'Employee';
+            $('.openPdfBtn').on('click', async function () {
+                const pdfUrl = $(this).data('pdf');
+                const pdfId = $(this).data('pdfid');
+                currentPdfId = pdfId;
 
-            if ($('#userEmail').length) {
-                $('#userEmail').text(userEmail);
-            }
-            if ($('#welcomeName').length) {
-                $('#welcomeName').text(employeeName);
-            }
+                // Load PDF into iframe
+                $('#pdfViewer').attr('src', pdfUrl + '#zoom=100');
+                $('#pdfModal').show();
+
+                // Start tracking time
+                await captureStartTime(pdfId, this, pdfUrl);
+            });
+
+            // Example: Close PDF viewer (you can trigger this from a close button)
+            $('.close').on('click', async function () {
+                if (!currentPdfId) return;
+
+                const allowClose = await checkReadingTime(currentPdfId);
+                if (allowClose) {
+                    await captureStopTime(currentPdfId);
+                    $('#pdfModal').hide();
+                    currentPdfId = null;
+                }
+            });
         });
 
 
-$(document).ready(function () {
-    let currentPdfId = null;
+        $(document).on('click', '.open-video-btn', function () {
+            const videoUrl = $(this).data('video-url');
 
-    $('.openPdfBtn').on('click', async function () {
-        const pdfUrl = $(this).data('pdf');
-        const pdfId = $(this).data('pdfid');
-        currentPdfId = pdfId;
-
-        // Load PDF into iframe
-       $('#pdfViewer').attr('src', pdfUrl + '#zoom=100');
-        $('#pdfModal').show();
-
-        // Start tracking time
-        await captureStartTime(pdfId, this, pdfUrl);
-    });
-
-    // Example: Close PDF viewer (you can trigger this from a close button)
-    $('.close').on('click', async function () {
-        if (!currentPdfId) return;
-
-        const allowClose = await checkReadingTime(currentPdfId);
-        if (allowClose) {
-            await captureStopTime(currentPdfId);
-            $('#pdfModal').hide();
-            currentPdfId = null;
-        }
-    });
-});
-
-
-$(document).on('click', '.open-video-btn', function () {
-    const videoUrl = $(this).data('video-url');
-
-    openTrackedVideoModal({
-        videoUrl: videoUrl,
-        modalId: 'videoModal',
-        videoElementId: 'videoPlayer',
-        closeBtnId: 'videoCloseBtn',
-        onComplete: function () {
-            console.log('User watched required video duration.');
-            // You can trigger AJAX, navigation, or marking completion here
-        }
-    });
-});
-
-
+            openTrackedVideoModal({
+                videoUrl: videoUrl,
+                modalId: 'videoModal',
+                videoElementId: 'videoPlayer',
+                closeBtnId: 'videoCloseBtn',
+                onComplete: function () {
+                    console.log('User watched required video duration.');
+                    // You can trigger AJAX, navigation, or marking completion here
+                }
+            });
+        });
     </script>
 
 

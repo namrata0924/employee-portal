@@ -1,6 +1,5 @@
 /* Login Page Styles */
 :root {
-    /* Using existing portal theme variables */
     --primary-color: #7e57c2;
     --primary-dark: #675aa9;
     --success-color: #4CAF50;
@@ -18,19 +17,19 @@
 }
 
 .login-page {
-    min-height: 100vh;
+    min-height: 100dvh; /* Updated for better mobile support */
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     padding: 2rem;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto; /* Enables scrolling */
 }
-
 .login-container {
-    width: 100%;
-    max-width: 420px;
+    width: auto;
+    max-width: 440px; /* Reduced from 480px */
+    flex-shrink: 1;
     position: relative;
     z-index: 1;
 }
@@ -38,7 +37,7 @@
 .login-card {
     background: var(--white);
     border-radius: var(--border-radius);
-    padding: 2.5rem;
+    padding: 2.25rem 1.75rem; /* Reduced padding */
     box-shadow: var(--shadow-md);
     animation: fadeIn 0.5s ease;
 }
@@ -62,7 +61,7 @@
 }
 
 .logo h1 {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     color: var(--text-dark);
     margin: 0;
     font-weight: 600;
@@ -89,7 +88,7 @@
 .form-group label {
     color: var(--text-dark);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
 }
 
 .input-group {
@@ -110,7 +109,7 @@
     padding: 0.875rem 1rem 0.875rem 2.75rem;
     border: 2px solid var(--gray-medium);
     border-radius: var(--border-radius);
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: var(--transition);
     background-color: var(--white);
 }
@@ -295,13 +294,6 @@
     pointer-events: none;
     z-index: 0;
 }
-/* 
-.decoration-circle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-}*/
 
 .decoration-circle:nth-child(1) {
     width: 300px;
@@ -336,14 +328,17 @@
     }
 }
 
-/* Responsive Adjustments */
 @media (max-width: 480px) {
+    .login-page {
+        padding: 1rem;
+    }
+
     .login-card {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem 1rem;
     }
 
     .logo h1 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
     .form-options {
@@ -374,7 +369,6 @@
     position: relative;
     color: transparent;
 }
-
 .btn-login.loading::after {
     content: '';
     position: absolute;
@@ -384,13 +378,31 @@
     border-radius: 50%;
     border-top-color: transparent;
     animation: spin 0.8s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 @keyframes spin {
     to {
         transform: rotate(360deg);
     }
-} 
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 24px;
+   
+}
+
+.logo-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+}
+
 .login-logo {
     text-align: center;
     margin-bottom: 24px;

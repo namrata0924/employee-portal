@@ -770,8 +770,3 @@ input[type="datetime-local"] {
   justify-content: center;
   align-items: center;
 }
-
-.smartwizard .nav .nav-link.done {
-  background-color: #28a745 !important;
-  color: white !important;
-}

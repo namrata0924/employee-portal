@@ -14,44 +14,12 @@
 
 <body>
     <div class="app-container">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h2>Employee Self Help Portal</h2>
-                <div class="user-profile">
-                    <div class="user-info">
-                        <span id="userEmail" class="user-email">Loading...</span>
-                    </div>
-                </div>
-            </div>
-            <ul class="nav-links">
-                <li>
-                    <a href="../index.html" class="nav-link">
-                        <i class="fas fa-home"></i>
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="onboarding.html" class="nav-link">
-                        <i class="fas fa-user-plus"></i>
-                        <span>Onboarding</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="existing.html" class="nav-link">
-                        <i class="fas fa-user"></i>
-                        <span>Existing Employee</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="offboarding.html" class="nav-link">
-                        <i class="fas fa-user-minus"></i>
-                        <span>Offboarding</span>
-                    </a>
-                </li>
-
-            </ul>
-        </nav>
+          <div class="mobile-header">
+  <button class="hamburger" id="hamburgerBtn">
+    <i class="fas fa-bars"></i>
+  </button>
+</div>
+      <div id="sidebar-container"></div>
         <main class="main-content">
             <div class="module-container">
                 <h2>Existing Employee</h2>
@@ -62,31 +30,31 @@
                     <div class="stage-progress">
                         <div class="stage-indicators">
                             <div class="stage-indicator active" data-stage="1">
-                                <div class="stage-number">1</div>
+                                <div class="stage-number"></div>
                                 <span>Process Documents</span>
                             </div>
                             <div class="stage-indicator" data-stage="2">
-                                <div class="stage-number">2</div>
+                                <div class="stage-number"></div>
                                 <span>Training Videos</span>
                             </div>
                             <div class="stage-indicator" data-stage="3">
-                                <div class="stage-number">3</div>
+                                <div class="stage-number"></div>
                                 <span>Feedback Form</span>
                             </div>
                             <div class="stage-indicator" data-stage="4">
-                                <div class="stage-number">4</div>
+                                <div class="stage-number"></div>
                                 <span>KPI, KRI</span>
                             </div>
                             <div class="stage-indicator" data-stage="5">
-                                <div class="stage-number">5</div>
+                                <div class="stage-number"></div>
                                 <span>Brand Survey</span>
                             </div>
                             <div class="stage-indicator" data-stage="6">
-                                <div class="stage-number">6</div>
+                                <div class="stage-number"></div>
                                 <span>Grievance Form</span>
                             </div>
                             <div class="stage-indicator" data-stage="7">
-                                <div class="stage-number">7</div>
+                                <div class="stage-number"></div>
                                 <span>POSH Complaint</span>
                             </div>
                         </div>
@@ -99,7 +67,7 @@
                     <div class="stages-container">
                         <!-- Step 1 -->
                         <div class="step card" data-step="1">
-                            <h4>Step 1: View Process Documents</h4>
+                            <h4> View Process Documents</h4>
                             <div class="step-content">
                                 <form class="modal-form" id="process-docs-form">
                                     <div class="form-group">
@@ -133,7 +101,7 @@
                         <div class="step card" data-step="2" style="display: none;">
                             <div class="step-header">
                                 <div class="step-number"></div>
-                                <h4>Step 2: Department Training Videos</h4>
+                                <h4> Department Training Videos</h4>
 
                             </div>
                             <div class="step-content training-section">
@@ -150,7 +118,7 @@
 
 
                                 <button class="btn btn-primary open-video-btn" data-video-url="../assets/video.mp4"
-                                    data-video-name="test" data-step="2" style="margin-left:10px;">
+                                    data-video-name="test" data-step="2" >
                                     Watch Department Training Video
                                 </button>
 
@@ -168,7 +136,7 @@
 
                         <!-- Step 3 -->
                         <div class="step card" data-step="3" style="display: none;">
-                            <h4>Step 3: 360 Degree Feedback Form</h4>
+                            <h4>360 Degree Feedback Form</h4>
                             <form class="modal-form" id="feedback-form">
                                 <div class="form-group">
                                     <label>How would you rate your team collaboration?</label>
@@ -198,7 +166,7 @@
 
                         <!-- Step 4 -->
                         <div class="step card" data-step="4" style="display: none;">
-                            <h4>Step 4: KPI, KRI</h4>
+                            <h4>KPI, KRI</h4>
                             <form class="modal-form" id="kpi-form">
                                 <div class="form-group">
                                     <label>Select KPI Category</label>
@@ -226,7 +194,7 @@
 
                         <!-- Step 5 -->
                         <div class="step card" data-step="5" style="display: none;">
-                            <h4>Step 5: Brand Survey</h4>
+                            <h4>Brand Survey</h4>
                             <form class="modal-form" id="brand-survey-form">
                                 <div class="form-group">
                                     <label>How would you rate our brand reputation?</label>
@@ -252,7 +220,7 @@
 
                         <!-- Step 6 -->
                         <div class="step card" data-step="6" style="display: none;">
-                            <h4>Step 6: Grievance Form</h4>
+                            <h4>Grievance Form</h4>
                             <form class="modal-form" id="grievance-form">
                                 <div class="form-group">
                                     <label>Grievance Type</label>
@@ -289,7 +257,7 @@
 
                         <!-- Step 7 -->
                         <div class="step card" data-step="7" style="display: none;">
-                            <h4>Step 7: POSH Complaint</h4>
+                            <h4>POSH Complaint</h4>
                             <form class="modal-form" id="posh-form">
                                 <div class="form-group">
                                     <label>Incident Date</label>
@@ -350,24 +318,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="../js/auth.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const logoutBtn = document.getElementById('logoutBtn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    logout();
-                });
-            }
+        
+        $(function () {
+            $("#sidebar-container").load("../sidebar.html", function () {
+                // Set user email and name
+                const userEmail = localStorage.getItem('employeeEmail');
+                const employeeName = localStorage.getItem('employeeName') || 'Employee';
+
+                $("#userEmail").text(userEmail || '');
+                $("#welcomeName").text(employeeName);
+
+                // Attach logout event
+                const logoutBtn = document.getElementById('logoutBtn'); {
+                    logoutBtn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        logout();
+                    });
+                }
+            });
         });
-
-
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const userEmail = localStorage.getItem('employeeEmail');
-            document.getElementById('userEmail').textContent = userEmail || '';
-            document.getElementById('welcomeName').textContent = localStorage.getItem('employeeName') ||
-                'Employee';
-        });
+    
 
         //step 1
         $('.stage-indicator').on('click', function () {
