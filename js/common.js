@@ -1,5 +1,5 @@
 function loadScriptWithNoCache(src) {
-  console.log(`Loading script: ${src} with cache busting`);
+//   console.log(`Loading script: ${src} with cache busting`);
   const script = document.createElement('script');
   script.src = src + '?v=' + new Date().getTime();
 
@@ -15,7 +15,7 @@ function loadScriptWithNoCache(src) {
 }
 
 function loadCssWithNoCache(href) {
-  console.log(`Loading CSS: ${href} with cache busting`);
+//   console.log(`Loading CSS: ${href} with cache busting`);
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = href + '?v=' + new Date().getTime();
